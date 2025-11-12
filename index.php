@@ -1,5 +1,5 @@
 <?php
-include_once 'controller/EquipoController.php';
+include_once 'controller/UserController.php';
 
 $wrong = false;
 $msg = "";

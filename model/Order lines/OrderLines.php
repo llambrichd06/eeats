@@ -3,23 +3,23 @@
 class OrderLines
 {
     private $id;
-    private $line_num;
-    private $order_id;
-    private $product_id;
+    private $lineNum;
+    private $orderId;
+    private $productId;
     private $price;
     private $quantity;
 
     public function __construct(
-        $line_num = null,
-        $order_id = null,
-        $product_id = null,
+        $lineNum = null,
+        $orderId = null,
+        $productId = null,
         $price = null,
         $quantity = null,
         $id = null
     ) {
-        $this->line_num = $line_num;
-        $this->order_id = $order_id;
-        $this->product_id = $product_id;
+        $this->lineNum = $lineNum;
+        $this->orderId = $orderId;
+        $this->productId = $productId;
         $this->price = $price;
         $this->quantity = $quantity;
         $this->id = $id;
@@ -35,29 +35,29 @@ class OrderLines
     }
 
     public function getLineNum() {
-        return $this->line_num;
+        return $this->lineNum;
     }
 
-    public function setLineNum($line_num) {
-        $this->line_num = $line_num;
+    public function setLineNum($lineNum) {
+        $this->lineNum = $lineNum;
         return $this;
     }
 
     public function getOrderId() {
-        return $this->order_id;
+        return $this->orderId;
     }
 
-    public function setOrderId($order_id) {
-        $this->order_id = $order_id;
+    public function setOrderId($orderId) {
+        $this->orderId = $orderId;
         return $this;
     }
 
     public function getProductId() {
-        return $this->product_id;
+        return $this->productId;
     }
 
-    public function setProductId($product_id) {
-        $this->product_id = $product_id;
+    public function setProductId($productId) {
+        $this->productId = $productId;
         return $this;
     }
 
