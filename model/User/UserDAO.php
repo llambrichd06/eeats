@@ -1,6 +1,7 @@
 <?php
-include_once 'DB/DB.php';
-include_once 'model/User.php';
+include_once 'database/DB.php';
+include_once 'model/User/User.php';
+include_once 'model/DAO.php';
 
 class UserDAO implements DAO {
     public static function insertObject($object, $types) {

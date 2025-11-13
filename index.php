@@ -1,4 +1,5 @@
 <?php
+include_once 'controller/HomeController.php';
 include_once 'controller/UserController.php';
 
 $wrong = false;

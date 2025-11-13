@@ -1,5 +1,5 @@
 <?php
-include_once 'database/database.php';
+include_once 'database/DB.php';
 
 interface DAO {
     static function insertObject($object, $types); //{ //Might be better to make this abstract and link it to every DAO

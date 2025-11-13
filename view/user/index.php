@@ -3,7 +3,7 @@
         <td>ID</td>
         <td>Name</td>
         <td>Email</td>
-        <td>Profile Picture file name</td>
+        <td>PFP</td>
         <td>Password</td>
         <td>Role</td>
         <td>Is Premium?</td>
@@ -13,6 +13,7 @@
         <tr>
             <td><?=$user->getId()?></td>
             <td><?=$user->getName()?></td>
+            <td><?=$user->getEmail()?></td>
             <td><?=$user->getProfilePicture()?></td>
             <td><?=$user->getPassword()?></td>
             <td><?=$user->getRole()?></td>
