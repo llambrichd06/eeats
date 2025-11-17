@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+}
+div, header, nav, section, footer {
+    border: 0.1px solid rgb(131, 131, 131);
+}
+body>.marge{
+    padding: 0% 12%;
+}
+ul {
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+}
+.text-right{
+    text-align: end;
+}
+a {
+    text-decoration: none;
+    color: #000000;
+    font-size: calc(1vw + 0.4em);
+}
+footer img {
+    width: 5rem;
+    object-fit: contain;
+}
+
