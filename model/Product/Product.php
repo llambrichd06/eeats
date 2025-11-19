@@ -1,103 +1,63 @@
 <?php
-
-class Product
+class Product 
 {
 
     private $id;
-    private $userId;
+    private $name;
+    private $description;
+    private $price;
     private $createdAt;
-    private $address;
-    private $deliveryType;
-    private $total;
-    private $subtotal;
-    private $deliveryDate;
+    private $stock;
+    private $img;
+    private $premium;
     private $discountId;
-    private $discountApplied;
 
     public function __construct(
-        $userId = null,
+        $name = null,
+        $description = null,
+        $price = null,
         $createdAt = null,
-        $address = null,
-        $deliveryType = null,
-        $total = null,
-        $subtotal = null,
-        $deliveryDate = null,
+        $stock = null,
+        $img = null,
+        $premium = null,
         $discountId = null,
-        $discountApplied = null,
         $id = null
     ) {
-        $this->userId = $userId;
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
         $this->createdAt = $createdAt;
-        $this->address = $address;
-        $this->deliveryType = $deliveryType;
-        $this->total = $total;
-        $this->subtotal = $subtotal;
-        $this->deliveryDate = $deliveryDate;
+        $this->stock = $stock;
+        $this->img = $img;
+        $this->premium = $premium;
         $this->discountId = $discountId;
-        $this->discountApplied = $discountApplied;
         $this->id = $id;
     }
 
-   public function getDiscountApplied(){
-    return $this->discountApplied;
+public function getName(){
+    return $this->name;
 }
 
-public function setDiscountApplied($discountApplied){
-    $this->discountApplied = $discountApplied;
+public function setName($name){
+    $this->name = $name;
     return $this;
 }
 
-public function getDiscountId(){
-    return $this->discountId;
+public function getDescription(){
+    return $this->description;
 }
 
-public function setDiscountId($discountId){
-    $this->discountId = $discountId;
+public function setDescription($description){
+    $this->description = $description;
     return $this;
 }
 
-public function getDeliveryDate(){
-    return $this->deliveryDate;
+public function getPrice(){
+    return $this->price;
 }
 
-public function setDeliveryDate($deliveryDate){
-    $this->deliveryDate = $deliveryDate;
-    return $this;
-}
-
-public function getSubtotal(){
-    return $this->subtotal;
-}
-
-public function setSubtotal($subtotal){
-    $this->subtotal = $subtotal;
-    return $this;
-}
-
-public function getTotal(){
-    return $this->total;
-}
-
-public function setTotal($total){
-    $this->total = $total;
-    return $this;
-}
-
-public function getDeliveryType(){
-    return $this->deliveryType;
-}
-
-public function setDeliveryType($deliveryType){
-    $this->deliveryType = $deliveryType;
-    return $this;
-}
-
-public function getAddress(){
-    return $this->address;
-}
-
-public function setAddress($address){
-    $this->address = $address;
+public function setPrice($price){
+    $this->price = $price;
     return $this;
 }
 
@@ -110,12 +70,39 @@ public function setCreatedAt($createdAt){
     return $this;
 }
 
-public function getUserId(){
-    return $this->userId;
+public function getStock(){
+    return $this->stock;
 }
 
-public function setUserId($userId){
-    $this->userId = $userId;
+public function setStock($stock){
+    $this->stock = $stock;
+    return $this;
+}
+
+public function getImg(){
+    return $this->img;
+}
+
+public function setImg($img){
+    $this->img = $img;
+    return $this;
+}
+
+public function getPremium(){
+    return $this->premium;
+}
+
+public function setPremium($premium){
+    $this->premium = $premium;
+    return $this;
+}
+
+public function getDiscountId(){
+    return $this->discountId;
+}
+
+public function setDiscountId($discountId){
+    $this->discountId = $discountId;
     return $this;
 }
 

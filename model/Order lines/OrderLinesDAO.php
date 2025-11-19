@@ -3,7 +3,7 @@ include_once 'DB/DB.php';
 include_once 'model/OrderLines.php';
 
 class OrderLinesDAO implements DAO {
-    public static function insertObject($object, $types) {
+    public static function insertObject($object, $types) { 
         $con = DB::connect();
 
         $columns = array_keys(get_object_vars($object));
@@ -27,10 +27,10 @@ class OrderLinesDAO implements DAO {
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $user = $results->fetch_object('OrderLines'); //"OrderLines" es la classe que tenemos de order lines, esto nos transforma automaticamente a objeto
+        $orderLines = $results->fetch_object('OrderLines'); //"OrderLines" es la classe que tenemos de order lines, esto nos transforma automaticamente a objeto
         $con->close();
 
-        return $user;
+        return $orderLines;
     }
 
     public static function getOrderLines() {
@@ -41,8 +41,8 @@ class OrderLinesDAO implements DAO {
 
         $orderLineList = [];
 
-        while ($orderLine = $results->fetch_object('OrderLines')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
-            $orderLineList[]=$orderLine;
+        while ($orderLines = $results->fetch_object('OrderLines')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $orderLineList[]=$orderLines;
         }
         $con->close();
 

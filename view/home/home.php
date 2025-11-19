@@ -1,4 +1,5 @@
-    <section>
+    <!-- TODO: Completar pagina home. Tener cuidado con responsive, que es importante en esta pagina. -->
+    <section> 
         <div></div>
     </section>
 

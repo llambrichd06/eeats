@@ -1,8 +1,8 @@
 <?php
 include_once 'database/DB.php';
-include_once 'model/User/User.php';
+include_once 'model/Order/Order.php';
 
-class UserDAO implements DAO {
+class OrderDAO implements DAO {
     public static function insertObject($object, $types) {
         $con = DB::connect();
 
@@ -11,7 +11,7 @@ class UserDAO implements DAO {
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
-        $stmt = $con->prepare("INSERT INTO users ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
+        $stmt = $con->prepare("INSERT INTO orders ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
         $stmt->bind_param($types, ...$values); //three dots mean that we just put the array values like this: 'val1, val2, val3...'
         $stmt->execute();
         $results = $stmt->get_result();
@@ -20,37 +20,37 @@ class UserDAO implements DAO {
         return $results;
     }
 
-    public static function getUserByID($id){
+    public static function getOrderByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users where id = ?");
+        $stmt = $con->prepare("SELECT * FROM orders where id = ?");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $user = $results->fetch_object('User'); //"User" es la classe que tenemos de user, esto nos transforma automaticamente a objeto
+        $order = $results->fetch_object('Order'); //"Order" es la classe que tenemos de order, esto nos transforma automaticamente a objeto
         $con->close();
 
-        return $user;
+        return $order;
     }
 
-    public static function getUsers() {
+    public static function getOrders() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users");
+        $stmt = $con->prepare("SELECT * FROM orders");
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $userList = [];
+        $orderList = [];
 
-        while ($user = $results->fetch_object('User')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
-            $userList[]=$user;
+        while ($order = $results->fetch_object('Order')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $orderList[]=$order;
         }
         $con->close();
 
-        return $userList;
+        return $orderList;
     }
     
-    public static function saveUser(User $user) {
-        $result = UserDAO::insertObject($user, 'isssssi');
+    public static function saveOrder(Order $order) {
+        $result = OrderDAO::insertObject($order, 'iissiiisii');
     }
 }
     

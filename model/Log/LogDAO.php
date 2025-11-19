@@ -1,8 +1,8 @@
 <?php
 include_once 'database/DB.php';
-include_once 'model/User/User.php';
+include_once 'model/Log/Log.php';
 
-class UserDAO implements DAO {
+class LogDAO implements DAO {
     public static function insertObject($object, $types) {
         $con = DB::connect();
 
@@ -11,7 +11,7 @@ class UserDAO implements DAO {
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
-        $stmt = $con->prepare("INSERT INTO users ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
+        $stmt = $con->prepare("INSERT INTO logs ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
         $stmt->bind_param($types, ...$values); //three dots mean that we just put the array values like this: 'val1, val2, val3...'
         $stmt->execute();
         $results = $stmt->get_result();
@@ -20,37 +20,37 @@ class UserDAO implements DAO {
         return $results;
     }
 
-    public static function getUserByID($id){
+    public static function getLogByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users where id = ?");
+        $stmt = $con->prepare("SELECT * FROM logs where id = ?");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $user = $results->fetch_object('User'); //"User" es la classe que tenemos de user, esto nos transforma automaticamente a objeto
+        $log = $results->fetch_object('Log'); //"Log" es la classe que tenemos de log, esto nos transforma automaticamente a objeto
         $con->close();
 
-        return $user;
+        return $log;
     }
 
-    public static function getUsers() {
+    public static function getLogs() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users");
+        $stmt = $con->prepare("SELECT * FROM logs");
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $userList = [];
+        $logList = [];
 
-        while ($user = $results->fetch_object('User')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
-            $userList[]=$user;
+        while ($log = $results->fetch_object('Log')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $logList[]=$log;
         }
         $con->close();
 
-        return $userList;
+        return $logList;
     }
     
-    public static function saveUser(User $user) {
-        $result = UserDAO::insertObject($user, 'isssssi');
+    public static function saveLog(Log $log) {
+        $result = LogDAO::insertObject($log, 'iiss');
     }
 }
     
