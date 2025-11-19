@@ -16,8 +16,8 @@
             </div>
             <div class="col-6 d-flex align-items-center">
                 <ul class="d-flex align-items-center gap-2">
-                    <li><a href="" class="fs-6">FOODS</a></li>
-                    <li><a href="">DISCOUNTS</a></li>
+                    <li><a href="" class="">FOODS <img src="resources/images/downArrowIcon.svg" alt=""></a></li>
+                    <li><a href="">DISCOUNTS <img src="resources/images/downArrowIcon.svg" alt=""></a></li>
                 </ul>
             </div>
             <div class="col-3 d-flex align-items-center justify-content-end gap-2">
@@ -32,7 +32,7 @@
     <footer class="container-fluid marge">
         <div class="row-2 d-flex justify-content-between">
             <nav>
-                <ul class="d-flex align-items-center gap-2">
+                <ul class="d-flex align-items-center gap-4">
                     <li><a href="?controller=Home&action=index&">Home</a></li>
                     <li><a href="">Foods</a></li>
                     <li><a href="">Cart</a></li>
@@ -54,11 +54,11 @@
             <div class="d-flex">
                 <img src="../resources/images/LogoEEats.png" alt="Logo EEats" class="img-fluid">
                 <div>
-                    <div>
-                        <a href="">Products</a>
-                        <a href="">Premium</a>
-                        <a href="">About</a>
-                        <a href="">Contact</a>
+                    <div class="d-flex justify-content-start align-items-center gap-4 ps-1">
+                        <a href="" class="fs-4">Products</a>
+                        <a href="" class="fs-4">Premium</a>
+                        <a href="" class="fs-4">About</a>
+                        <a href="" class="fs-4">Contact</a>
                     </div>
                     <div>
                         <a href="">Privacy Policy & Cookies</a>
