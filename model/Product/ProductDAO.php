@@ -1,6 +1,7 @@
 <?php
 include_once 'database/DB.php';
 include_once 'model/Product/Product.php';
+include_once 'model/DAO.php';
 
 class ProductDAO implements DAO {
     public static function insertObject($object, $types) {

@@ -1,6 +1,7 @@
 <?php
 include_once 'database/DB.php';
 include_once 'model/Log/Log.php';
+include_once 'model/DAO.php';
 
 class LogDAO implements DAO {
     public static function insertObject($object, $types) {

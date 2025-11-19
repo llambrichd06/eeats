@@ -1,6 +1,7 @@
 <?php
 include_once 'DB/DB.php';
 include_once 'model/OrderLines.php';
+include_once 'model/DAO.php';
 
 class OrderLinesDAO implements DAO {
     public static function insertObject($object, $types) { 
