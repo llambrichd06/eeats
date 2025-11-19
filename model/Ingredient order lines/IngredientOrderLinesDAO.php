@@ -20,7 +20,7 @@ class IngredientOrderLinesDAO implements DAO {
         return $results;
     }
 
-    public static function getIngredientOrderLinesByID($id){
+    public static function getIngredientOrderLinesByID($id){ //TODO: Remove or change, since this class has no ID attribute
         $con = DB::connect();
         $stmt = $con->prepare("SELECT * FROM order_line_ingredients where id = ?");
         $stmt->bind_param('i',$id);
