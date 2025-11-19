@@ -1,12 +1,40 @@
+@font-face {
+    font-family: EA-Text;
+    src: url('../fonts/ElectronicArtsText-Regular.ttf');
+}
+@font-face {
+    font-family: EA-Text;
+    src: url('../fonts/ElectronicArtsText-Bold.ttf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: EA-Display;
+    src: url('../fonts/ElectronicArtsDisplay-Regular.ttf');
+}
+@font-face {
+    font-family: EA-Display;
+    src: url('../fonts/ElectronicArtsDisplay-Bold.ttf');
+    font-weight: bold;
+}
 * {
     margin: 0;
+    font-family: EA-Text;
 }
 div, header, nav, section, footer {
     border: 0.1px solid rgb(131, 131, 131);
 }
-body>.marge{
-    padding: 0% 12%;
+
+p
+
+body .margin{
+    padding-right: 12%;
+    padding-left: 12%;
 }
+header {
+    background-color: #FFFFFF;
+}
+
+
 ul {
     list-style: none;
     padding-left: 0px;
@@ -20,8 +48,32 @@ a {
     color: #000000;
     font-size: calc(0.8vw + 0.4em);
 }
+main {
+    background-color: #F3F3F3;
+}
+.bigA {
+    font-size: calc(1.5vw + 0.4em);
+}
+footer {
+    background-color: #EAEAEA;
+}
+footer>div {
+    padding-top: calc(0.5vw + 0.4em);
+    padding-bottom: calc(0.5vw + 0.4em);
+}
+.downFooter {
+    background-color: #F3F3F3;
+}
 footer img {
     width: 5rem;
     object-fit: contain;
 }
-
+body .footerPad {
+    padding: 0 0;
+}
+@media (max-width: 600px) {
+    body>.margin{
+        padding-right: 3%;
+        padding-left: 3%;
+    }
+}

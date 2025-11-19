@@ -9,28 +9,34 @@
     <title>Document</title>
 </head>
 <body class="">
-    <header class="container-fluid text-center marge">
+
+    <!-------------- HEADER ----------------->
+    <header class="container-fluid text-center margin">
         <nav class="row d-flex">
             <div class="col-3">
-                <img src="resources/images/EENameLogo.png" alt="Logo and name of website, Electronic Eats" class="img-fluid">
+                <img src="../resources/images/EENameLogo.png" alt="Logo and name of website, Electronic Eats" class="img-fluid">
             </div>
             <div class="col-6 d-flex align-items-center">
                 <ul class="d-flex align-items-center gap-2">
-                    <li><a href="" class="">FOODS <img src="resources/images/downArrowIcon.svg" alt=""></a></li>
-                    <li><a href="">DISCOUNTS <img src="resources/images/downArrowIcon.svg" alt=""></a></li>
+                    <li><a href="" class="">FOODS <img src="../resources/images/downArrowIcon.svg" alt=""></a></li>
+                    <li><a href="">DISCOUNTS <img src="../resources/images/downArrowIcon.svg" alt=""></a></li>
                 </ul>
             </div>
             <div class="col-3 d-flex align-items-center justify-content-end gap-2">
-                <img src="resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid">
-                <img src="resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid">
+                <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid">
+                <img src="../resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid">
             </div>
         </nav>
     </header>
-    <main class="container-fluid text-center marge">
-        <?php //include_once $view?>
+
+    <!-------------- MAIN CONTENT ----------------->
+    <main class="container-fluid text-center margin">
+        <?php //include_once $view?> 
     </main>
-    <footer class="container-fluid marge">
-        <div class="row-2 d-flex justify-content-between">
+
+    <!-------------- FOOTER ----------------->
+    <footer class="container-fluid footerPad">
+        <div class="row-2 d-flex justify-content-between margin">
             <nav>
                 <ul class="d-flex align-items-center gap-4">
                     <li><a href="?controller=Home&action=index&">Home</a></li>
@@ -50,25 +56,27 @@
                 </div>
             </div>
         </div>
-        <div class="row-2 d-flex justify-content-between">
+        <div class="row-2 d-flex justify-content-between margin downFooter">
             <div class="d-flex">
                 <img src="../resources/images/LogoEEats.png" alt="Logo EEats" class="img-fluid">
                 <div>
                     <div class="d-flex justify-content-start align-items-center gap-4 ps-1">
-                        <a href="" class="fs-4">Products</a>
-                        <a href="" class="fs-4">Premium</a>
-                        <a href="" class="fs-4">About</a>
-                        <a href="" class="fs-4">Contact</a>
+                        <a href="" class="bigA">Products</a>
+                        <a href="" class="bigA">Premium</a>
+                        <a href="" class="bigA">About</a>
+                        <a href="" class="bigA">Contact</a>
                     </div>
                     <div>
                         <a href="">Privacy Policy & Cookies</a>
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="px-3">
                 <p>Regional Pricing</p>
                 <div class="d-flex">
-                    <select name="" id=""></select>
+                    <select name="" id="" class="w-100">
+
+                    </select>
                 </div>
             </div>
         </div>
