@@ -9,7 +9,7 @@ class OrderLines
     private $price;
     private $quantity;
 
-    public function __construct(
+    public function setData(
         $lineNum = null,
         $orderId = null,
         $productId = null,

@@ -6,31 +6,31 @@ class Product
     private $name;
     private $description;
     private $price;
-    private $createdAt;
+    private $created_at;
     private $stock;
     private $img;
     private $premium;
-    private $discountId;
+    private $discount_id;
 
-    public function __construct(
+    public function setData(
         $name = null,
         $description = null,
         $price = null,
-        $createdAt = null,
+        $created_at = null,
         $stock = null,
         $img = null,
         $premium = null,
-        $discountId = null,
+        $discount_id = null,
         $id = null
     ) {
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
         $this->stock = $stock;
         $this->img = $img;
         $this->premium = $premium;
-        $this->discountId = $discountId;
+        $this->discount_id = $discount_id;
         $this->id = $id;
     }
 
@@ -62,11 +62,11 @@ public function setPrice($price){
 }
 
 public function getCreatedAt(){
-    return $this->createdAt;
+    return $this->created_at;
 }
 
-public function setCreatedAt($createdAt){
-    $this->createdAt = $createdAt;
+public function setCreatedAt($created_at){
+    $this->created_at = $created_at;
     return $this;
 }
 
@@ -98,11 +98,11 @@ public function setPremium($premium){
 }
 
 public function getDiscountId(){
-    return $this->discountId;
+    return $this->discount_id;
 }
 
-public function setDiscountId($discountId){
-    $this->discountId = $discountId;
+public function setDiscountId($discount_id){
+    $this->discount_id = $discount_id;
     return $this;
 }
 

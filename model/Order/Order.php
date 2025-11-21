@@ -14,7 +14,7 @@ class Order
     private $discountId;
     private $discountApplied;
 
-    public function __construct(
+    public function setData(
         $userId = null,
         $createdAt = null,
         $address = null,

@@ -4,7 +4,7 @@ include_once 'model/Product/Product.php';
 include_once 'model/DAO.php';
 
 class ProductDAO implements DAO {
-    public static function insertObject($object, $types) {
+    public static function insertObject($object, $types) { //TODO/TOASK: make this not public somehow, ask teachers when avalible
         $con = DB::connect();
 
         $columns = array_keys(get_object_vars($object));
@@ -37,6 +37,28 @@ class ProductDAO implements DAO {
     public static function getProducts() {
         $con = DB::connect();
         $stmt = $con->prepare("SELECT * FROM products");
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $productList = [];
+
+        while ($product = $results->fetch_object('Product')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $productList[]=$product;
+        }
+        $con->close();
+
+        return $productList;
+    }
+
+    public static function getFeaturedProducts() {
+        $con = DB::connect();
+        $stmt = $con->prepare("
+            select p.id AS id, p.name AS name, p.description AS description, p.price AS price, p.created_at AS created_at, p.stock AS stock, p.img AS img, p.premium AS premium, p.discount_id AS discount_id
+            from products p 
+            left join order_lines ol on(p.id = ol.product_id)
+            group by p.id
+            order by COUNT(ol.id) desc
+            limit 6");
         $stmt->execute();
         $results = $stmt->get_result();
 

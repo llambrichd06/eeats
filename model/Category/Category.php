@@ -6,7 +6,7 @@ class Category {
     private $name;
 
 
-    public function __construct( $name = null, $id = null) {
+    public function setData( $name = null, $id = null) {
         $this->name = $name;
         $this->id = $id;
     }

@@ -9,7 +9,7 @@ class User {
     private $role;
     private $premium;
 
-    public function __construct($name = null, $email = null, $profilePicture = null, $password = null, $role = null, $premium = null, $id = null) {
+    public function setData($name = null, $email = null, $profilePicture = null, $password = null, $role = null, $premium = null, $id = null) {
         $this->$name = $name;
         $this->$email = $email;
         $this->$profilePicture = $profilePicture;

@@ -7,7 +7,7 @@ class Log
     private $logDate;
     private $action;
 
-    public function __construct(
+    public function setData(
         $userId = null,
         $logDate = null,
         $action = null,

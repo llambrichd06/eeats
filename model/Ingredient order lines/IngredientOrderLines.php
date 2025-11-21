@@ -4,11 +4,16 @@ class IngredientOrderLines
 {
     private $ingredientId;
     private $orderLineId;
+    /*POSSIBLE STATUSES:
+     *   added   -> An ingredient that wasn't originally in the product, but was added
+     *   default -> An ingredient that is on the product by default.
+     *   removed -> A default ingredient, that was removed from the product.
+    */
     private $status;
     private $price;
     private $cookPointId;
 
-    public function __construct(
+    public function setData(
         $ingredientId = null,
         $orderLineId = null,
         $status = null,

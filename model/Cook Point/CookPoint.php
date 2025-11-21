@@ -6,7 +6,7 @@ class CookPoint
     private $id;
     private $cookPoint;
 
-    public function __construct($cookPoint = null, $id = null) {
+    public function setData($cookPoint = null, $id = null) {
         $this->cookPoint = $cookPoint;
         $this->id = $id;
     }

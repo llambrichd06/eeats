@@ -23,9 +23,6 @@
 div, header, nav, section, footer {
     border: 0.1px solid rgb(131, 131, 131);
 }
-
-p
-
 body .margin{
     padding-right: 12%;
     padding-left: 12%;

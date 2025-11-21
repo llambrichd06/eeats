@@ -31,7 +31,7 @@
 
     <!-------------- MAIN CONTENT ----------------->
     <main class="container-fluid text-center margin">
-        <?php //include_once $view?> 
+        <?php include_once $view?> 
     </main>
 
     <!-------------- FOOTER ----------------->

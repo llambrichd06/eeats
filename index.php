@@ -2,7 +2,7 @@
 include_once 'controller/HomeController.php';
 include_once 'controller/UserController.php';
 
-$wrong = false;
+$home = false;
 $msg = "";
 if (isset($_GET['controller'])) {
     $nombreController = $_GET['controller'].'Controller';
@@ -15,13 +15,12 @@ if (isset($_GET['controller'])) {
             header('Location: view/404.php');
         }
     } else {
-        $wrong = true;
-        $msg = 'class doesent exist';
+        $home = true;
     }
 } else {
-    $wrong = true;
-    $msg =  'class not found as get parameter';
+    $home = true;
 }
-if ($wrong) {
-    echo $msg;
+if ($home) {
+    $homeCon = new HomeController();
+    $homeCon->index();
 }

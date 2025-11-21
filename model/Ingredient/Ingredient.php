@@ -6,7 +6,7 @@ class Ingredient {
     private $img;
     private $cookPointId;
 
-    public function __construct($name = null, $img = null, $cookPointId = null, $id = null) {
+    public function setData($name = null, $img = null, $cookPointId = null, $id = null) {
         $this->name = $name;
         $this->img = $img;
         $this->cookPointId = $cookPointId;

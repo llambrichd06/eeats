@@ -5,13 +5,18 @@ class Discount
 
     private $id;
     private $code;
+    /*POSSIBLE TYPES:
+        0   -> A discount that is assigned to a code that can be applied on checkout
+        1   -> A discount that is applied by itself on a product.
+        
+    */
     private $type;
     private $percent;
     private $uses;
     private $endsAt;
     private $beginsAt;
 
-    public function __construct(
+    public function setData(
         $code = null,
         $type = null,
         $percent = null,
