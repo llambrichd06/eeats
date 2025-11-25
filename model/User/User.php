@@ -10,13 +10,13 @@ class User {
     private $premium;
 
     public function setData($name = null, $email = null, $profilePicture = null, $password = null, $role = null, $premium = null, $id = null) {
-        $this->$name = $name;
-        $this->$email = $email;
-        $this->$profilePicture = $profilePicture;
-        $this->$password = $password;
-        $this->$role = $role;
-        $this->$premium;
-        $this->$id = $id;
+        $this->name = $name;
+        $this->email = $email;
+        $this->profilePicture = $profilePicture;
+        $this->password = $password;
+        $this->role = $role;
+        $this->premium;
+        $this->id = $id;
     }
 
     public function getId() {

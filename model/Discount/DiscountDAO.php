@@ -49,6 +49,22 @@ class DiscountDAO implements DAO {
 
         return $discountList;
     }
+
+    public static function getLastDiscounts() {
+        $con = DB::connect();
+        $stmt = $con->prepare("SELECT * FROM discounts");
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $discountList = [];
+
+        while ($discount = $results->fetch_object('Discount')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $discountList[]=$discount;
+        }
+        $con->close();
+
+        return $discountList;
+    }
     
     public static function saveDiscount(Discount $discount) {
         $result = DiscountDAO::insertObject($discount, 'iissiiisii');

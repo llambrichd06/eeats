@@ -8,14 +8,18 @@
         <div><p>test</p></div>
     </section>
 
-    <!-- estaria bien hacer que los featured foods sean las comidas con mas order lines relacionados. -->
-    <section class="container-fluid" id="featuredFoods"> 
-        <div class="row">
+    <section class="container-fluid d-flex flex-column align-items-center text-center px-0" id="featuredFoods"> 
+        <h2>Featured Foods</h2>
+        <div class="row w-100">
             <?php foreach ($featuredProds as $product) { ?>
-                <div class="col-4">
-                    <?=$product->getName()?>
-                    <?=$product->getDescription()?>
-                    <img src="/resources/images/<?=$product->getImg()?>" alt="">
+                <div class="col-lg-4 col-sm-12 p-2">
+                    <a href="" class="">
+                        <div class="d-flex flex-column prodCard justify-content-center h-100 py-5" style="background-image: url('/resources/images/<?=$product->getImg()?>');">
+                            <p><?=$product->getName() ?? "Name"?></p>
+                            <p><?=$product->getDescription() ?? "Description"?></p>
+                            <div class="cardHomeHover"></div>
+                        </div>
+                    </a>
                 </div>
             <?php } ?>
             

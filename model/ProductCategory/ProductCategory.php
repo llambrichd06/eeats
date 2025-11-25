@@ -5,7 +5,7 @@ class ProductCategory
     private $productId;
     private $categoryId;
 
-    public function __construct(
+    public function setData(
         $productId = null,
         $categoryId = null
     ) {

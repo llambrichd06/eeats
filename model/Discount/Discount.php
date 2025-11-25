@@ -8,7 +8,6 @@ class Discount
     /*POSSIBLE TYPES:
         0   -> A discount that is assigned to a code that can be applied on checkout
         1   -> A discount that is applied by itself on a product.
-        
     */
     private $type;
     private $percent;

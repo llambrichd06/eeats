@@ -7,7 +7,7 @@ class ProductIngredient
     private $isDefault;
     private $price;
 
-    public function __construct(
+    public function setData(
         $productId = null,
         $ingredientId = null,
         $isDefault = null,
