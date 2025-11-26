@@ -13,6 +13,7 @@ class Order
     private $deliveryDate;
     private $discountId;
     private $discountApplied;
+    private $deleted;
 
     public function setData(
         $userId = null,
@@ -24,6 +25,7 @@ class Order
         $deliveryDate = null,
         $discountId = null,
         $discountApplied = null,
+        $deleted = null,
         $id = null
     ) {
         $this->userId = $userId;
@@ -35,6 +37,7 @@ class Order
         $this->deliveryDate = $deliveryDate;
         $this->discountId = $discountId;
         $this->discountApplied = $discountApplied;
+        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -128,4 +131,12 @@ public function setId($id){
     return $this;
 }
 
+    public function getDeleted(){
+        return $this->deleted;
+    }
+
+    public function setDeleted($deleted){
+        $this->deleted = $deleted;
+        return $this;
+    }
 }

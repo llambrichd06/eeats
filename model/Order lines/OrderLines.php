@@ -8,6 +8,7 @@ class OrderLines
     private $productId;
     private $price;
     private $quantity;
+    private $deleted;
 
     public function setData(
         $lineNum = null,
@@ -15,6 +16,7 @@ class OrderLines
         $productId = null,
         $price = null,
         $quantity = null,
+        $deleted = null,
         $id = null
     ) {
         $this->lineNum = $lineNum;
@@ -22,6 +24,7 @@ class OrderLines
         $this->productId = $productId;
         $this->price = $price;
         $this->quantity = $quantity;
+        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -76,6 +79,15 @@ class OrderLines
 
     public function setQuantity($quantity) {
         $this->quantity = $quantity;
+        return $this;
+    }
+
+    public function getDeleted(){
+        return $this->deleted;
+    }
+
+    public function setDeleted($deleted){
+        $this->deleted = $deleted;
         return $this;
     }
 }

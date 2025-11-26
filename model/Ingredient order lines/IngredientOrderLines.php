@@ -4,7 +4,7 @@ class IngredientOrderLines
 {
     private $ingredientId;
     private $orderLineId;
-    /*POSSIBLE STATUSES:
+    /**POSSIBLE STATUSES:
      *   added   -> An ingredient that wasn't originally in the product, but was added
      *   default -> An ingredient that is on the product by default.
      *   removed -> A default ingredient, that was removed from the product.
@@ -12,18 +12,21 @@ class IngredientOrderLines
     private $status;
     private $price;
     private $cookPointId;
+    private $deleted;
 
     public function setData(
         $ingredientId = null,
         $orderLineId = null,
         $status = null,
         $price = null,
+        $deleted = null,
         $cookPointId = null
     ) {
         $this->ingredientId = $ingredientId;
         $this->orderLineId = $orderLineId;
         $this->status = $status;
         $this->price = $price;
+        $this->deleted = $deleted;
         $this->cookPointId = $cookPointId;
     }
 
@@ -69,6 +72,15 @@ class IngredientOrderLines
 
     public function setCookPointId($cookPointId) {
         $this->cookPointId = $cookPointId;
+        return $this;
+    }
+
+    public function getDeleted(){
+        return $this->deleted;
+    }
+
+    public function setDeleted($deleted){
+        $this->deleted = $deleted;
         return $this;
     }
 }

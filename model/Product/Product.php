@@ -11,6 +11,7 @@ class Product
     private $img;
     private $premium;
     private $discount_id;
+    private $deleted;
 
     public function setData(
         $name = null,
@@ -21,6 +22,7 @@ class Product
         $img = null,
         $premium = null,
         $discount_id = null,
+        $deleted = null,
         $id = null
     ) {
         $this->name = $name;
@@ -31,6 +33,7 @@ class Product
         $this->img = $img;
         $this->premium = $premium;
         $this->discount_id = $discount_id;
+        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -114,5 +117,13 @@ public function setId($id){
     $this->id = $id;
     return $this;
 }
+ 
+public function getDeleted(){
+    return $this->deleted;
+}
 
+public function setDeleted($deleted){
+    $this->deleted = $deleted;
+    return $this;
+}
 }

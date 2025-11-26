@@ -14,6 +14,7 @@ class Discount
     private $uses;
     private $endsAt;
     private $beginsAt;
+    private $deleted;
 
     public function setData(
         $code = null,
@@ -22,6 +23,7 @@ class Discount
         $uses = null,
         $beginsAt = null,
         $endsAt = null,
+        $deleted = null,
         $id = null
     ) {
         $this->code = $code;
@@ -30,6 +32,7 @@ class Discount
         $this->uses = $uses;
         $this->beginsAt = $beginsAt;
         $this->endsAt = $endsAt;
+        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -96,4 +99,12 @@ class Discount
         return $this;
     }
 
+    public function getDeleted(){
+        return $this->deleted;
+    }
+
+    public function setDeleted($deleted){
+        $this->deleted = $deleted;
+        return $this;
+    }
 }

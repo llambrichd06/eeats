@@ -5,11 +5,19 @@ class Ingredient {
     private $name;
     private $img;
     private $cookPointId;
+    private $deleted;
 
-    public function setData($name = null, $img = null, $cookPointId = null, $id = null) {
+    public function setData(
+        $name = null, 
+        $img = null, 
+        $cookPointId = null, 
+        $deleted = null,
+        $id = null
+    ) {
         $this->name = $name;
         $this->img = $img;
         $this->cookPointId = $cookPointId;
+        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -43,5 +51,14 @@ class Ingredient {
     public function setCookPointId($cookPointId) {
         $this->cookPointId = $cookPointId; 
         return $this; 
+    }
+
+    public function getDeleted(){
+        return $this->deleted;
+    }
+
+    public function setDeleted($deleted){
+        $this->deleted = $deleted;
+        return $this;
     }
 }
