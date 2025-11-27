@@ -1,6 +1,6 @@
 <?php
 include_once 'database/DB.php';
-include_once 'model/CookPoint/CookPoint.php';
+include_once 'model/classes/CookPoint.php';
 include_once 'model/DAO.php';
 
 class CookPointDAO implements DAO {

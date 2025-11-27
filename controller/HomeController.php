@@ -1,6 +1,6 @@
 <?php
-include_once "model/Product/ProductDAO.php";
-include_once "model/Discount/DiscountDAO.php";
+include_once "model/dao/ProductDAO.php";
+include_once "model/dao/DiscountDAO.php";
 
  //La ruta real sera view/home/index.php
 

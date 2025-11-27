@@ -1,9 +1,9 @@
 <?php
 include_once 'database/DB.php';
-include_once 'model/Order/Order.php';
+include_once 'model/classes/Log.php';
 include_once 'model/DAO.php';
 
-class OrderDAO implements DAO {
+class LogDAO implements DAO {
     public static function insertObject($object, $types) {
         $con = DB::connect();
 
@@ -12,7 +12,7 @@ class OrderDAO implements DAO {
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
-        $stmt = $con->prepare("INSERT INTO orders ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
+        $stmt = $con->prepare("INSERT INTO logs ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
         $stmt->bind_param($types, ...$values); //three dots mean that we just put the array values like this: 'val1, val2, val3...'
         $stmt->execute();
         $results = $stmt->get_result();
@@ -21,37 +21,37 @@ class OrderDAO implements DAO {
         return $results;
     }
 
-    public static function getOrderByID($id){
+    public static function getLogByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM orders where id = ?");
+        $stmt = $con->prepare("SELECT * FROM logs where id = ?");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $order = $results->fetch_object('Order'); //"Order" es la classe que tenemos de order, esto nos transforma automaticamente a objeto
+        $log = $results->fetch_object('Log'); //"Log" es la classe que tenemos de log, esto nos transforma automaticamente a objeto
         $con->close();
 
-        return $order;
+        return $log;
     }
 
-    public static function getOrders() {
+    public static function getLogs() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM orders");
+        $stmt = $con->prepare("SELECT * FROM logs");
         $stmt->execute();
         $results = $stmt->get_result();
 
-        $orderList = [];
+        $logList = [];
 
-        while ($order = $results->fetch_object('Order')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
-            $orderList[]=$order;
+        while ($log = $results->fetch_object('Log')) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==
+            $logList[]=$log;
         }
         $con->close();
 
-        return $orderList;
+        return $logList;
     }
     
-    public static function saveOrder(Order $order) {
-        $result = OrderDAO::insertObject($order, 'iissiiisii');
+    public static function saveLog(Log $log) {
+        $result = LogDAO::insertObject($log, 'iiss');
     }
 }
     

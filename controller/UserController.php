@@ -1,5 +1,5 @@
 <?php
-include_once 'model/User/UserDAO.php';
+include_once 'model/dao/UserDAO.php';
 
 
 class UserController {
