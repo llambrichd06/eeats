@@ -30,7 +30,7 @@
     </header>
 
     <!-------------- MAIN CONTENT ----------------->
-    <main class="container-fluid text-center margin">
+    <main class="container-fluid px-0 text-center">
         <?php include_once $view?> 
     </main>
 
