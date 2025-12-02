@@ -4,7 +4,7 @@ class User {
     private $id;
     private $name;
     private $email;
-    private $profilePicture;
+    private $profile_picture;
     private $password;
     private $role;
     private $premium;
@@ -13,7 +13,7 @@ class User {
     public function setData(
         $name = null,
         $email = null,
-        $profilePicture = null, 
+        $profile_picture = null, 
         $password = null, 
         $role = null, 
         $premium = null, 
@@ -22,7 +22,7 @@ class User {
     ) {
         $this->name = $name;
         $this->email = $email;
-        $this->profilePicture = $profilePicture;
+        $this->profile_picture = $profile_picture;
         $this->password = $password;
         $this->role = $role;
         $this->premium = $premium;
@@ -61,11 +61,11 @@ class User {
     }
 
     public function getProfilePicture() {
-        return $this->profilePicture;
+        return $this->profile_picture;
     }
 
-    public function setProfilePicture($profilePicture) {
-        $this->profilePicture = $profilePicture;
+    public function setProfilePicture($profile_picture) {
+        $this->profile_picture = $profile_picture;
 
         return $this;
     }
@@ -108,6 +108,19 @@ class User {
     public function setDeleted($deleted){
         $this->deleted = $deleted;
         return $this;
+    }
+
+    public function toArray() {
+        return [
+            'id'              => $this->id,
+            'name'            => $this->name,
+            'email'           => $this->email,
+            'profile_picture' => $this->profile_picture,
+            'password'        => $this->password,
+            'role'            => $this->role,
+            'premium'         => $this->premium,
+            'deleted'         => $this->deleted
+        ];
     }
 }
     

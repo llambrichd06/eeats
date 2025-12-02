@@ -1,5 +1,5 @@
 <?php
-include_once 'DB/DB.php';
+include_once 'database/DB.php';
 include_once 'model/classes/OrderLines.php';
 include_once 'model/DAO.php';
 

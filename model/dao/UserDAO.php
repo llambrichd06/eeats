@@ -4,7 +4,7 @@ include_once 'model/classes/User.php';
 include_once 'model/DAO.php';
 
 class UserDAO implements DAO {
-    public static function insertObject($object, $types) {
+    static function insertObject($object, $types) {
         $con = DB::connect();
 
         $columns = array_keys(get_object_vars($object));
