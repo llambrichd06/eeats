@@ -111,16 +111,7 @@ class User {
     }
 
     public function toArray() {
-        return [
-            'id'              => $this->id,
-            'name'            => $this->name,
-            'email'           => $this->email,
-            'profile_picture' => $this->profile_picture,
-            'password'        => $this->password,
-            'role'            => $this->role,
-            'premium'         => $this->premium,
-            'deleted'         => $this->deleted
-        ];
+        return get_object_vars($this);
     }
 }
     

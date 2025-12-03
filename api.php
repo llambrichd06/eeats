@@ -60,12 +60,12 @@ if ($method == 'GET' && isset($_GET['endpoint'])) {
         case 'saveUser':
             if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
                 $user = new User();
-                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium']);
+                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted']);
+                UserDAO::saveUser($user);
             }
             echo json_encode([
                 'estado' => 'Exito',
-                'data' => 'Insertado correctamente',
-                'datos' => $data['name']
+                'data' => 'Insertado correctamente'
             ]);
         break;
         

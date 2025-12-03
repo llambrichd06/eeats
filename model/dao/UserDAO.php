@@ -4,12 +4,12 @@ include_once 'model/classes/User.php';
 include_once 'model/DAO.php';
 
 class UserDAO implements DAO {
-    static function insertObject($object, $types) {
+    static function insertObject($array, $types) {
         $con = DB::connect();
 
-        $columns = array_keys(get_object_vars($object));
-        $values = array_values(get_object_vars($object));
-
+        $columns = array_keys($array);
+        $values = array_values($array);
+        
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
         $stmt = $con->prepare("INSERT INTO users ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
@@ -51,7 +51,8 @@ class UserDAO implements DAO {
     }
     
     public static function saveUser(User $user) {
-        $result = UserDAO::insertObject($user, 'isssssi');
+        
+        $result = UserDAO::insertObject($user->toArray(), 'isssssii');
     }
 }
     
