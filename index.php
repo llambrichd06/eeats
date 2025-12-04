@@ -1,6 +1,6 @@
 <?php
-include_once 'controller/HomeController.php';
-include_once 'controller/UserController.php';
+include_once 'controller/app/HomeController.php';
+include_once 'controller/app/UserController.php';
 
 $home = false;
 $msg = "";

@@ -1,84 +1,42 @@
 <?php
-header("Access-Control-Allow-Origin: *"); //Los headers estos tienen que estar antes que cualquier tipo de output
+include_once 'controller/api/UserApiController.php';
+
+
+header("Access-Control-Allow-Origin: *"); //These headers have to execute before any type of output
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once "model/dao/CategoryDAO.php";
-include_once "model/dao/CookPointDAO.php";
-include_once "model/dao/DiscountDAO.php";
-include_once "model/dao/IngredientDAO.php";
-include_once "model/dao/IngredientOrderLinesDAO.php";
-include_once "model/dao/LogDAO.php";
-include_once "model/dao/OrderDAO.php";
-include_once "model/dao/OrderLinesDAO.php";
-include_once "model/dao/ProductCategoryDAO.php";
-include_once "model/dao/ProductDAO.php";
-include_once "model/dao/ProductIngredientDAO.php";
-include_once "model/dao/UserDAO.php";
-
-include_once "model/classes/Category.php";
-include_once "model/classes/CookPoint.php";
-include_once "model/classes/Discount.php";
-include_once "model/classes/Ingredient.php";
-include_once "model/classes/IngredientOrderLines.php";
-include_once "model/classes/Log.php";
-include_once "model/classes/Order.php";
-include_once "model/classes/OrderLines.php";
-include_once "model/classes/ProductCategory.php";
-include_once "model/classes/Product.php";
-include_once "model/classes/ProductIngredient.php";
-include_once "model/classes/User.php";
-
 $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($method == 'GET' && isset($_GET['endpoint'])) {
-    switch ($_GET['endpoint']) {
-        case 'testing':
-            echo json_encode([
-                'message' => 'good test'
-            ]);
-        break;
 
-        case 'getUserById':
-            if (isset($_GET['id'])) {
-                $user = UserDAO::getUserByID($_GET['id']);
-                echo json_encode($user->toArray());
+if (isset($_GET['controller'], $_GET['action'])) {
+    $controller = $_GET['controller'];
+    $action = $_GET['action'];
+    $nombreController = $_GET['controller'].'ApiController';
+    if (class_exists($nombreController)) {
+        $controller = new $nombreController();
+        $action = $_GET['action'];
+        if (isset($action) && method_exists($controller,$action)) {
+            if ($method == 'GET') {
+                $controller->$action(); 
+            } else {
+                $controller->$action($data); 
             }
-        break;
-        
-        default:
+            
+        } else {
             echo json_encode([
-                'message' => 'endpoint not configured'
+                'message' => 'unidentified method'
             ]);
-        break;
-    }
-    
-} elseif ($method == 'POST' && isset($data['endpoint'])) {
-    switch ($data['endpoint']) {
-        case 'saveUser':
-            if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
-                $user = new User();
-                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted']);
-                UserDAO::saveUser($user);
-            }
-            echo json_encode([
-                'estado' => 'Exito',
-                'data' => 'Insertado correctamente'
-            ]);
-        break;
-        
-        default:
-            echo json_encode([
-                'message' => 'endpoint not configured'
-            ]);
-            break;
+        }
+    } else {
+        echo json_encode([
+            'message' => 'unidentified class'
+        ]);
     }
 } else {
     echo json_encode([
-        'message' => 'endpoint or method not sent'
+        'message' => 'Controller or action not recieved.'
     ]);
 }
-
-

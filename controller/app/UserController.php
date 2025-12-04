@@ -4,6 +4,7 @@ include_once 'model/dao/UserDAO.php';
 
 class UserController {
     public function show() {
+        
         $view = 'view/user/show.php';
         $idUser = $_GET['iduser'];
         $user = UserDAO::getUserByID($idUser);

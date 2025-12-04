@@ -10,15 +10,13 @@
 
 
 <script>
-    fetch("http://eeats.com/api.php", {
-        method: "POST",
-        body: JSON.stringify({ name: "example", endpoint: "saveUser" })
+    fetch("http://eeats.com/api.php?endpoint=getUserById&id=1", {
+        method: "GET"
     })
     .then(r =>r.json())
     .then( r => {
         console.log(r);
-        console.log(r.datos)
-        })
+    })
 </script>
 </body>
 </html>
