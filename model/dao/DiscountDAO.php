@@ -23,7 +23,7 @@ class DiscountDAO implements DAO {
 
     public static function getDiscountByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM discounts where id = ?");
+        $stmt = $con->prepare("SELECT * FROM discounts where id = ? and deleted = 0");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -36,7 +36,7 @@ class DiscountDAO implements DAO {
 
     public static function getDiscounts() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM discounts");
+        $stmt = $con->prepare("SELECT * FROM discounts where deleted = 0");
         $stmt->execute();
         $results = $stmt->get_result();
 

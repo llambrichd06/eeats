@@ -27,10 +27,31 @@ class UserApiController {
             $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted']);
             UserDAO::saveUser($user);
             echo json_encode([
-                'estado' => 'Exito',
-                'data' => 'Usuario Insertado correctamente'
+                'estado' => 'Success',
+                'data' => 'User Inserted correctly'
             ]);
         }
+    }
+
+        public function editUser($data) {
+        if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
+            $user = new User();
+            $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'], $data['id']);
+            UserDAO::editUser($user);
+            echo json_encode([
+                'estado' => 'Success',
+                'data' => 'User edited correctly'
+            ]);
+        }
+    }
+
+    public function testing() {
+        $testArray = ["first" => 1, "second" => 2, "third" => 3 ];
+        $thing = [];
+        foreach ($testArray as $key => $value) {
+            array_push($thing, "$key = $value");
+        }
+        echo implode(", ",$thing);
     }
 
 }

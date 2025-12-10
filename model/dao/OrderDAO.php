@@ -23,7 +23,7 @@ class OrderDAO implements DAO {
 
     public static function getOrderByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM orders where id = ?");
+        $stmt = $con->prepare("SELECT * FROM orders where id = ? and deleted = 0");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -36,7 +36,7 @@ class OrderDAO implements DAO {
 
     public static function getOrders() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM orders");
+        $stmt = $con->prepare("SELECT * FROM orders where deleted = 0");
         $stmt->execute();
         $results = $stmt->get_result();
 

@@ -23,7 +23,7 @@ class ProductDAO implements DAO {
 
     public static function getProductByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM products where id = ?");
+        $stmt = $con->prepare("SELECT * FROM products where id = ? and deleted = 0");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -36,7 +36,7 @@ class ProductDAO implements DAO {
 
     public static function getProducts() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM products");
+        $stmt = $con->prepare("SELECT * FROM products where deleted = 0");
         $stmt->execute();
         $results = $stmt->get_result();
 

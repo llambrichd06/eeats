@@ -1,0 +1,25 @@
+.navbar-brand {
+    font-size: 40px;
+}
+
+.nav-link {
+    font-size: 30px;
+    padding: 10px 30px;
+}
+
+body .btn-class {
+    background-color: var(--bs-primary);
+    color: #FFFFFF ;
+}
+
+body .btn-class:hover, body .btn-class:focus {
+    color: #FFFFFF; 
+}
+
+.content-section {
+    display: none;
+}
+
+.show {
+    display: block;
+}

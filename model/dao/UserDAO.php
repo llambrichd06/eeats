@@ -21,9 +21,30 @@ class UserDAO implements DAO {
         return $results;
     }
 
+    static function UpdateObject($array, $types) {
+        $con = DB::connect();
+
+        $sqlArray = [];
+        $valuesArray = [];
+        foreach ($array as $key => $value) {
+            array_push($sqlArray, "$key = ?");
+            array_push($valuesArray, $value);
+        }
+        
+        $placeholders = implode(", ", $sqlArray); //prepare question marks so we dont have risk of sql injection
+        var_dump($valuesArray);
+        $stmt = $con->prepare("UPDATE users SET $placeholders WHERE id = ".$array["id"]);
+        $stmt->bind_param($types, ...$valuesArray); //three dots mean that we just put the array values like this: 'val1, val2, val3...', only when the values dont have actual keys
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $con->close();
+        return $results;
+    }
+
     public static function getUserByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users where id = ?");
+        $stmt = $con->prepare("SELECT * FROM users where id = ? and deleted = 0");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -36,7 +57,7 @@ class UserDAO implements DAO {
 
     public static function getUsers() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users");
+        $stmt = $con->prepare("SELECT * FROM users where deleted = 0");
         $stmt->execute();
         $results = $stmt->get_result();
 
@@ -51,8 +72,11 @@ class UserDAO implements DAO {
     }
     
     public static function saveUser(User $user) {
-        
         $result = UserDAO::insertObject($user->toArray(), 'isssssii');
+    }
+
+    public static function editUser(User $user) {
+        $result = UserDAO::UpdateObject($user->toArray(), 'isssssii');
     }
 }
     

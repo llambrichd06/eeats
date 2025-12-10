@@ -23,7 +23,7 @@ class IngredientDAO implements DAO {
 
     public static function getIngredientByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM ingredients where id = ?");
+        $stmt = $con->prepare("SELECT * FROM ingredients where id = ? and deleted = 0");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -36,7 +36,7 @@ class IngredientDAO implements DAO {
 
     public static function getIngredients() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM ingredients");
+        $stmt = $con->prepare("SELECT * FROM ingredients where deleted = 0");
         $stmt->execute();
         $results = $stmt->get_result();
 
