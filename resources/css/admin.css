@@ -21,5 +21,10 @@ body .btn-class:hover, body .btn-class:focus {
 }
 
 .show {
-    display: block;
+    display: flex;
+}
+
+td, th {
+    border: black solid 1px;
+
 }

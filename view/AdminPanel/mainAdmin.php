@@ -40,7 +40,7 @@
 
     <!-------------- MAIN CONTENT ----------------->
     <main class="container-fluid px-0 text-center">
-        <section id="Users" class="content-section show">
+        <section id="Users" class="content-section show flex-column justify-content-start">
             <table>
                 <thead>
                     <th>Id</th>
@@ -50,16 +50,20 @@
                     <th>Password</th>
                     <th>Role</th>
                     <th>Premium</th>
-                    <th>Deleted</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </thead>
                 <tbody id="userTableBody">
                     
                 </tbody>
             </table>
             <br>
+            <br>
             <form action="" class="dataForm">
+                <p>Submitting without an id selected will make a new user!</p>
                 <label for="">Id</label>
-                <p id="userId">numid</p>
+                <p id="userIdDisplay">No Id Selected</p>
+                <input type="hidden" name="" id="userId">
                 <label for="userName">Name</label><br>
                 <input type="text" name="userName" id="userName">
                 <br>
@@ -82,6 +86,7 @@
                 <input type="checkbox" name="" id="userIsPremium">
                 <br>
                 <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
             </form>
         </section>
         <section id="Orders" class="content-section">
@@ -111,4 +116,5 @@
     </main>
 </body>
 <script src="/resources/js/main.js"></script>
+<script src="/resources/js/user.js"></script>
 </html>

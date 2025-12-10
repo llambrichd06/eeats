@@ -32,7 +32,6 @@ class UserDAO implements DAO {
         }
         
         $placeholders = implode(", ", $sqlArray); //prepare question marks so we dont have risk of sql injection
-        var_dump($valuesArray);
         $stmt = $con->prepare("UPDATE users SET $placeholders WHERE id = ".$array["id"]);
         $stmt->bind_param($types, ...$valuesArray); //three dots mean that we just put the array values like this: 'val1, val2, val3...', only when the values dont have actual keys
         $stmt->execute();
@@ -77,6 +76,15 @@ class UserDAO implements DAO {
 
     public static function editUser(User $user) {
         $result = UserDAO::UpdateObject($user->toArray(), 'isssssii');
+    }
+    public static function deleteUser($id) {
+        $con = DB::connect();
+        $stmt = $con->prepare("UPDATE users SET deleted = 1 WHERE id = ?");
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        
+        return $results;
     }
 }
     

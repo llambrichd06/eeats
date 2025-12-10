@@ -22,25 +22,53 @@ class UserApiController {
     }
 
     public function saveUser($data) {
-        if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
+        try {
+            if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'])) {
             $user = new User();
             $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted']);
             UserDAO::saveUser($user);
             echo json_encode([
-                'estado' => 'Success',
-                'data' => 'User Inserted correctly'
+                'status' => 'Success',
+                'data' => 'User Inserted correctly',
             ]);
         }
+        } catch (\Throwable $th) {
+            //http_status_code(409); //i dont know why, but it says its undefined
+            echo json_encode([
+                'status' => 'Error',
+                'data' => 'Email already used by a user'
+            ]);
+        }
+
     }
 
-        public function editUser($data) {
-        if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
-            $user = new User();
-            $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'], $data['id']);
-            UserDAO::editUser($user);
+    public function editUser($data) {
+        try {
+            if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'])) {
+                $user = new User();
+                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'], $data['id']);
+                UserDAO::editUser($user);
+                echo json_encode([
+                    'status' => 'Success',
+                    'data' => 'User edited correctly'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            http_response_code(409); //i dont know why, but it says its undefined
             echo json_encode([
-                'estado' => 'Success',
-                'data' => 'User edited correctly'
+                'status' => 'Error',
+                'data' => 'Email already used by a user'
+            ]);
+        }
+
+    }
+
+    function deleteUser($data) {
+        if (isset($data['id'])) {
+            UserDAO::deleteUser($data['id']);
+            echo json_encode([
+                'status' => 'Success',
+                'data' => 'User deleted successfully'
             ]);
         }
     }
