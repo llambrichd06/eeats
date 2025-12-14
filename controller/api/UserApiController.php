@@ -33,7 +33,7 @@ class UserApiController {
             ]);
         }
         } catch (\Throwable $th) {
-            //http_status_code(409); //i dont know why, but it says its undefined
+            http_response_code(409);
             echo json_encode([
                 'status' => 'Error',
                 'data' => 'Email already used by a user'
@@ -54,7 +54,7 @@ class UserApiController {
                 ]);
             }
         } catch (\Throwable $th) {
-            http_response_code(409); //i dont know why, but it says its undefined
+            http_response_code(409);
             echo json_encode([
                 'status' => 'Error',
                 'data' => 'Email already used by a user'
@@ -72,14 +72,4 @@ class UserApiController {
             ]);
         }
     }
-
-    public function testing() {
-        $testArray = ["first" => 1, "second" => 2, "third" => 3 ];
-        $thing = [];
-        foreach ($testArray as $key => $value) {
-            array_push($thing, "$key = $value");
-        }
-        echo implode(", ",$thing);
-    }
-
 }

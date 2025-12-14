@@ -17,7 +17,6 @@ class Order
 
     public function setData(
         $userId = null,
-        $createdAt = null,
         $address = null,
         $deliveryType = null,
         $total = null,
@@ -25,6 +24,7 @@ class Order
         $deliveryDate = null,
         $discountId = null,
         $discountApplied = null,
+        $createdAt = null,
         $deleted = null,
         $id = null
     ) {

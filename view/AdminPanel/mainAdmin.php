@@ -59,25 +59,25 @@
             </table>
             <br>
             <br>
-            <form action="" class="dataForm">
+            <form action="" id="userForm">
                 <p>Submitting without an id selected will make a new user!</p>
                 <label for="">Id</label>
                 <p id="userIdDisplay">No Id Selected</p>
                 <input type="hidden" name="" id="userId">
                 <label for="userName">Name</label><br>
-                <input type="text" name="userName" id="userName">
+                <input type="text" name="userName" id="userName" required>
                 <br>
                 <label for="userEmail">Email</label><br>
-                <input type="email" name="" id="userEmail">
+                <input type="email" name="" id="userEmail" required>
                 <br>
                 <label for="userPFP">Profile Picture file name</label><br>
-                <input type="text" name="" id="userPFP">
+                <input type="text" name="" id="userPFP" >
                 <br>
                 <label for="userPass">Password</label><br>
-                <input type="password" name="" id="userPass">
+                <input type="password" name="" id="userPass" required>
                 <br>
                 <label for="userRole">Role</label><br>
-                <select name="" id="userRole">
+                <select name="" id="userRole" required>
                     <option value="user" id="userNormalRole">User</option>
                     <option value="admin" id="userAdminRole">Admin</option>
                 </select>
@@ -85,15 +85,114 @@
                 <label for="userIsPremium">Premium</label><br>
                 <input type="checkbox" name="" id="userIsPremium">
                 <br>
-                <button type="submit">Submit</button>
-                <button type="reset">Reset</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
             </form>
         </section>
-        <section id="Orders" class="content-section">
+        <section id="Orders" class="content-section flex-column justify-content-start">
             <p>Orders</p>
+            <table>
+                <thead>
+                    <th>Id</th>
+                    <th>UserId</th>
+                    <th>CreatedAt</th>
+                    <th>Address</th>
+                    <th>DeliveryType</th>
+                    <th>Total</th>
+                    <th>Subtotal</th>
+                    <th>DeliveryDate</th>
+                    <th>DiscountId</th>
+                    <th>DiscountApplied</th>
+                    <th>Deleted</th>
+                </thead>
+                <tbody id="orderTableBody">
+                    
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <form action="" class="dataForm">
+                <label for="">Id</label>
+                <p id="orderIdDisplay">No order Selected</p>
+                <input type="hidden" name="" id="orderId">
+                <label for="">User id</label>
+                <p id="orderUserIdDisplay">No order Selected</p>
+                <input type="hidden" name="" id="orderUserId">
+                <label for="">Created at</label>
+                <p id="orderCreatedAtDisplay">No order selected</p>
+                <input type="hidden" name="" id="orderCreatedAt">
+                <label for="orderAddress">Order Address</label><br>
+                <input type="text" name="" id="orderAddress">
+                <br>
+                <label for="orderDeliveryDate">Delivery Date</label><br>
+                <input type="datetime" name="" id="orderDeliveryDate">
+                <br>
+                <label for="orderRole">Role</label><br>
+                <select name="" id="orderRole">
+                    <option value="order" id="orderNormalRole">User</option>
+                    <option value="admin" id="orderAdminRole">Admin</option>
+                </select>
+                <br>
+                <label for="orderIsPremium">Premium</label><br>
+                <input type="checkbox" name="" id="orderIsPremium">
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
         </section>
-        <section id="Products" class="content-section">
-            <p>Products</p>
+        <section id="Products" class="content-section flex-column justify-content-start">
+            <table>
+                <thead>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Created_at</th>
+                    <th>Stock</th>
+                    <th>Img</th>
+                    <th>Premium</th>
+                    <th>Discount_id</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody id="prodTableBody">
+                    
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <form action="" id="prodForm">
+                <p>Submitting without an id selected will make a new prod!</p>
+                <label for="">Id</label>
+                <p id="prodIdDisplay">No Id Selected</p>
+                <input type="hidden" name="" id="prodId">
+                <label for="prodName">Name</label><br>
+                <input type="text" name="prodName" id="prodName" required>
+                <br>
+                <label for="prodDesc">Description</label><br>
+                <textarea name="" id="prodDesc" required></textarea>
+                <br>
+                <label for="prodPrice">Price</label><br>
+                <input type="number" name="" id="prodPrice" >
+                <br>
+                <label for="prodCreatedAt">Created at</label><br>
+                <input type="datetime" name="" id="prodCreatedAt" required disabled>
+                <br>
+                <label for="prodStock">Stock</label><br>
+                <input type="text" name="" id="prodStock" required>
+                <br>
+                <label for="prodImg">Image File Name</label><br>
+                <input type="text" name="" id="prodImg">
+                <br>
+                <label for="prodIsPremium">Premium</label><br>
+                <input type="checkbox" name="" id="prodIsPremium">
+                <br>
+                <label for="prodDiscountId">Related Discount Id</label><br>
+                <input type="number" name="" id="prodDiscountId">
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
         </section>
         <section id="Discounts" class="content-section">
             <p>Discounts</p>
@@ -117,4 +216,5 @@
 </body>
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/user.js"></script>
+<script src="/resources/js/products.js"></script>
 </html>
