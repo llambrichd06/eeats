@@ -33,7 +33,6 @@ function showSection(attrName) {
         section.classList.remove('show');
     })
     const selectedSection = document.getElementById(attrName)
-    console.log(selectedSection);
     selectedSection.classList.add('show')
 }
 

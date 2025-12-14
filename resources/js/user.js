@@ -79,7 +79,7 @@ userForm.addEventListener('submit', async f => {
     let profileValue = f.target[3].value;
     let passwordValue = f.target[4].value;
     let roleValue = f.target[5].value;
-    let premiumValue = f.target[6].value == 'on' ? 1 : 0;
+    let premiumValue = f.target[6].checked ? 1 : 0;
 
     if (f.target[0].value.length != 0) {
         let idValue = f.target[0].value;

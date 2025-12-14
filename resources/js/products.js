@@ -81,7 +81,7 @@ productForm.addEventListener('submit', async f => {
     let createdAtValue = f.target[4].value;
     let stockValue = f.target[5].value;
     let imgValue = f.target[6].value;
-    let premiumValue = f.target[7].value == 'on' ? 1 : 0;
+    let premiumValue = f.target[7].checked ? 1 : 0;
     let discountIdValue = f.target[8].value;
 
     if (f.target[0].value.length != 0) {
