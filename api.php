@@ -1,6 +1,7 @@
 <?php
 include_once 'controller/api/UserApiController.php';
 include_once 'controller/api/ProductApiController.php';
+include_once 'controller/api/OrderApiController.php';
 
 
 header("Access-Control-Allow-Origin: *"); //These headers have to execute before any type of output

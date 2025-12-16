@@ -34,7 +34,7 @@ async function showUsers() {
                 if (i == 0) {
                     button.classList.add('userEditButton', 'btn', 'btn-secondary');
                     button.innerHTML = 'Edit';
-                    button.addEventListener('click', btn => {
+                    button.addEventListener('click', () => {
                         userId.value = newUser.getId();
                         userIdDisplay.innerHTML = newUser.getId();
                         userName.value = newUser.getName();
@@ -48,7 +48,7 @@ async function showUsers() {
                 } else {
                     button.classList.add('userRemoveButton', 'btn', 'btn-danger');
                     button.innerHTML = 'Delete';
-                    button.addEventListener('click', btn => {
+                    button.addEventListener('click', () => {
                         let idRemoved = newUser.getId();
                         fetch(currentApiURL+"?controller=User&action=deleteUser", {
                             method: DELETE,

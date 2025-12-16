@@ -4,70 +4,75 @@ class Order
 {
 
     private $id;
-    private $userId;
-    private $createdAt;
+    private $user_id;
+    private $created_at;
     private $address;
-    private $deliveryType;
-    private $total;
+    /**
+     * This can have two values: pickup and delivery
+     * pickup: signifies that the order is to pickup at the restaurant. when this is the case, there will be no delivery date AND address.
+     * delivery: signifies that the order will be delivered to the client
+     */
+    private $delivery_type;
     private $subtotal;
-    private $deliveryDate;
-    private $discountId;
-    private $discountApplied;
+    private $total;
+    private $delivery_date;
+    private $discount_id;
+    private $discount_applied;
     private $deleted;
 
     public function setData(
-        $userId = null,
+        $user_id = null,
         $address = null,
-        $deliveryType = null,
-        $total = null,
+        $delivery_type = null,
         $subtotal = null,
-        $deliveryDate = null,
-        $discountId = null,
-        $discountApplied = null,
-        $createdAt = null,
+        $total = null,
+        $delivery_date = null,
+        $discount_id = null,
+        $discount_applied = null,
+        $created_at = null,
         $deleted = null,
         $id = null
     ) {
-        $this->userId = $userId;
-        $this->createdAt = $createdAt;
+        $this->user_id = $user_id;
+        $this->created_at = $created_at;
         $this->address = $address;
-        $this->deliveryType = $deliveryType;
+        $this->delivery_type = $delivery_type;
         $this->total = $total;
         $this->subtotal = $subtotal;
-        $this->deliveryDate = $deliveryDate;
-        $this->discountId = $discountId;
-        $this->discountApplied = $discountApplied;
+        $this->delivery_date = $delivery_date;
+        $this->discount_id = $discount_id;
+        $this->discount_applied = $discount_applied;
         $this->deleted = $deleted;
         $this->id = $id;
     }
 
     public function getDiscountApplied(){
-        return $this->discountApplied;
+        return $this->discount_applied;
     }
 
-    public function setDiscountApplied($discountApplied){
-        $this->discountApplied = $discountApplied;
+    public function setDiscountApplied($discount_applied){
+        $this->discount_applied = $discount_applied;
         return $this;
     }
 
     public function getDiscountId(){
-        return $this->discountId;
+        return $this->discount_id;
     }
 
-    public function setDiscountId($discountId){
-        $this->discountId = $discountId;
+    public function setDiscountId($discount_id){
+        $this->discount_id = $discount_id;
         return $this;
     }
 
     public function getDeliveryDate(){
-        return $this->deliveryDate;
+        return $this->delivery_date;
     }
 
-    public function setDeliveryDate($deliveryDate){
-        $this->deliveryDate = $deliveryDate;
+    public function setDeliveryDate($delivery_date){
+        $this->delivery_date = $delivery_date;
         return $this;
     }
-
+    
     public function getSubtotal(){
         return $this->subtotal;
     }
@@ -87,11 +92,11 @@ class Order
     }
 
     public function getDeliveryType(){
-        return $this->deliveryType;
+        return $this->delivery_type;
     }
 
-    public function setDeliveryType($deliveryType){
-        $this->deliveryType = $deliveryType;
+    public function setDeliveryType($delivery_type){
+        $this->delivery_type = $delivery_type;
         return $this;
     }
 
@@ -105,20 +110,20 @@ class Order
     }
 
     public function getCreatedAt(){
-        return $this->createdAt;
+        return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt){
-        $this->createdAt = $createdAt;
+    public function setCreatedAt($created_at){
+        $this->created_at = $created_at;
         return $this;
     }
 
     public function getUserId(){
-        return $this->userId;
+        return $this->user_id;
     }
 
-    public function setUserId($userId){
-        $this->userId = $userId;
+    public function setUserId($user_id){
+        $this->user_id = $user_id;
         return $this;
     }
 

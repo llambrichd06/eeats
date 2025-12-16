@@ -98,12 +98,13 @@
                     <th>CreatedAt</th>
                     <th>Address</th>
                     <th>DeliveryType</th>
-                    <th>Total</th>
                     <th>Subtotal</th>
+                    <th>Total</th>
                     <th>DeliveryDate</th>
                     <th>DiscountId</th>
                     <th>DiscountApplied</th>
-                    <th>Deleted</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </thead>
                 <tbody id="orderTableBody">
                     
@@ -111,30 +112,39 @@
             </table>
             <br>
             <br>
-            <form action="" class="dataForm">
+            <form action="" class="orderForm">
                 <label for="">Id</label>
                 <p id="orderIdDisplay">No order Selected</p>
                 <input type="hidden" name="" id="orderId">
-                <label for="">User id</label>
-                <p id="orderUserIdDisplay">No order Selected</p>
-                <input type="hidden" name="" id="orderUserId">
-                <label for="">Created at</label>
-                <p id="orderCreatedAtDisplay">No order selected</p>
-                <input type="hidden" name="" id="orderCreatedAt">
+                <label for="orderUserId">User id</label><br>
+                <input type="number" name="" id="orderUserId">
+                <br>
+                <label for="orderCreatedAt">Created at</label><br>
+                <input type="text" name="" id="orderCreatedAt" disabled>
+                <br>
                 <label for="orderAddress">Order Address</label><br>
                 <input type="text" name="" id="orderAddress">
                 <br>
-                <label for="orderDeliveryDate">Delivery Date</label><br>
-                <input type="datetime" name="" id="orderDeliveryDate">
-                <br>
-                <label for="orderRole">Role</label><br>
-                <select name="" id="orderRole">
-                    <option value="order" id="orderNormalRole">User</option>
-                    <option value="admin" id="orderAdminRole">Admin</option>
+                <label for="orderDeliveryType">Delivery Type</label><br>
+                <select name="" id="orderDeliveryType">
+                    <option value="pickup" id="orderPickupDeliveryType">Pickup</option>
+                    <option value="delivery" id="orderDeliveryDeliveryType">Delivery</option>
                 </select>
                 <br>
-                <label for="orderIsPremium">Premium</label><br>
-                <input type="checkbox" name="" id="orderIsPremium">
+                <label for="orderSubtotal">Subtotal</label><br>
+                <input type="number" name="" id="orderSubtotal" required>
+                <br>
+                <label for="orderTotal">Total</label><br>
+                <input type="number" name="" id="orderTotal">
+                <br>
+                <label for="orderDeliveryDate">Delivery Date</label><br>
+                <input type="datetime-local" name="" id="orderDeliveryDate" required>
+                <br>
+                <label for="orderIdDiscount">Related Discount Id</label><br>
+                <input type="number" name="" id="orderDiscountId">
+                <br>
+                <label for="orderDiscountAmount">Amount discounted</label><br>
+                <input type="number" name="" id="orderDiscountAmount">
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
@@ -173,7 +183,7 @@
                 <textarea name="" id="prodDesc" required></textarea>
                 <br>
                 <label for="prodPrice">Price</label><br>
-                <input type="number" name="" id="prodPrice" >
+                <input type="number" name="" id="prodPrice" required>
                 <br>
                 <label for="prodCreatedAt">Created at</label><br>
                 <input type="datetime" name="" id="prodCreatedAt" required disabled>
@@ -182,7 +192,7 @@
                 <input type="text" name="" id="prodStock" required>
                 <br>
                 <label for="prodImg">Image File Name</label><br>
-                <input type="text" name="" id="prodImg">
+                <input type="text" name="" id="prodImg" required>
                 <br>
                 <label for="prodIsPremium">Premium</label><br>
                 <input type="checkbox" name="" id="prodIsPremium">
@@ -217,4 +227,5 @@
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/user.js"></script>
 <script src="/resources/js/products.js"></script>
+<script src="/resources/js/orders.js"></script>
 </html>

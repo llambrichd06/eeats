@@ -34,7 +34,7 @@ async function showProducts() {
                 if (i == 0) {
                     button.classList.add('prodEditButton', 'btn', 'btn-secondary');
                     button.innerHTML = 'Edit';
-                    button.addEventListener('click', btn => {
+                    button.addEventListener('click', () => {
                         productId.value = newProduct.getId();
                         productIdDisplay.innerHTML = newProduct.getId();
                         productName.value = newProduct.getName();
@@ -49,7 +49,7 @@ async function showProducts() {
                 } else {
                     button.classList.add('prodRemoveButton', 'btn', 'btn-danger');
                     button.innerHTML = 'Delete';
-                    button.addEventListener('click', btn => {
+                    button.addEventListener('click', () => {
                         let idRemoved = newProduct.getId();
                         fetch(currentApiURL+"?controller=Product&action=deleteProduct", {
                             method: DELETE,

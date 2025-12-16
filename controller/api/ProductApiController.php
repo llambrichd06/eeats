@@ -34,7 +34,7 @@ class ProductApiController {
     }
 
     public function editProduct($data) {
-        if (isset($data['id'], $data['name'], $data['description'], $data['price'], $data['created_at'], $data['stock'], $data['img'], $data['premium'], $data['discount_id'], $data['deleted'])) {
+        if (isset($data['id'], $data['name'], $data['description'], $data['price'], $data['created_at'], $data['stock'], $data['img'], $data['premium'], $data['deleted'])) {
             $product = new Product();
             $product->setData($data['name'], $data['description'], $data['price'], $data['created_at'], $data['stock'], $data['img'], $data['premium'], $data['discount_id'], $data['deleted'], $data['id']);
             ProductDAO::editProduct($product);
