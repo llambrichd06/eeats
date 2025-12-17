@@ -11,6 +11,23 @@ const orderDeliveryDeliveryType = document.getElementById('orderDeliveryDelivery
 const orderSubtotal = document.getElementById('orderSubtotal');
 const orderTotal = document.getElementById('orderTotal');
 const orderDeliveryDate = document.getElementById('orderDeliveryDate');
+/**
+ * This makes it so we can't pick a date that is earlier than tomorrow
+ */
+const minDate = new Date();
+minDate.setDate(minDate.getDate() + 1);
+minDate.setHours(0, 0, 0, 0);
+minDate.setMinutes(minDate.getMinutes() - minDate.getTimezoneOffset());
+orderDeliveryDate.min = minDate.toISOString().slice(0, 16);
+/**
+ * And this makes it so we can't pick a date that is later than 5 days ahead
+ */
+const maxDate = new Date();
+maxDate.setDate(maxDate.getDate() + 5);
+maxDate.setHours(0, 0, 0, 0);
+maxDate.setMinutes(maxDate.getMinutes() - maxDate.getTimezoneOffset());
+orderDeliveryDate.max = maxDate.toISOString().slice(0, 16);
+
 const orderDiscountId = document.getElementById('orderDiscountId');
 const orderDiscountAmount = document.getElementById('orderDiscountAmount');
 
@@ -24,7 +41,7 @@ async function showOrders() {
     .then(r => {
         const tbody = document.getElementById('orderTableBody');
         tbody.innerHTML = "";
-
+        
         r.forEach(order => {
             const newOrder = new Order(
                 order.id,
@@ -46,11 +63,15 @@ async function showOrders() {
                 orderRow.append(block);
             });
 
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 3; i++) {
                 const buttonBlock = document.createElement('td');
                 const button = document.createElement('button');
-
+                
                 if (i === 0) {
+                    //HERE IS THE BUTTON TO SHOW ORDER LINES OF THAT ORDER :P
+                    button.classList.add('orderLinesButton', 'btn', 'btn-primary');
+                    button.innerHTML = 'Show Order Lines';
+                } else if (i === 1) {
                     button.classList.add('orderEditButton', 'btn', 'btn-secondary');
                     button.innerHTML = 'Edit';
                     button.addEventListener('click', () => {
