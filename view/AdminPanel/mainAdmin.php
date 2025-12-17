@@ -90,7 +90,29 @@
             </form>
         </section>
         <section id="Orders" class="content-section flex-column justify-content-start">
-            <p>Orders</p>
+            <div class="orderFilters">
+                <select name="" id="orderFilter">
+                    <option value="">Filter data by:</option>
+                    <option value="user">User Id</option>
+                    <option value="date">Delivery Date</option>
+                    <option value="price">Higher than Price</option>
+                </select>
+                <input type="number" name="" id="" class="filterInput">
+                <input type="datetime-local" name="" id="" class="filterInput">
+                <select name="" id="orderSort">
+                    <option value="">Sort data by:</option>
+                    <option value="user">User Id</option>
+                    <option value="date">Delivery Date</option>
+                    <option value="price">Price</option>
+                </select>
+                <select name="" id="sortingOrder">
+                    <option value="asc">ASC</option>
+                    <option value="desc">DESC</option>
+                </select>
+                <button id="filterButton" class="btn btn-secondary">Set filter settings</button>
+                <br>
+                <p>Set the filters to their default values to reset them!</p>
+            </div>
             <table>
                 <thead>
                     <th>Id</th>
@@ -103,6 +125,7 @@
                     <th>DeliveryDate</th>
                     <th>DiscountId</th>
                     <th>DiscountApplied</th>
+                    <th>Order Lines</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </thead>

@@ -16,7 +16,7 @@ body .btn-class:hover, body .btn-class:focus {
     color: #FFFFFF; 
 }
 
-.content-section {
+.content-section, .filterInput {
     display: none;
 }
 
@@ -24,7 +24,15 @@ body .btn-class:hover, body .btn-class:focus {
     display: flex;
 }
 
+.currentFilter {
+    display: inline;
+}
+
 td, th {
     border: black solid 1px;
 
+}
+
+.orderFilters {
+    padding: 30px 0;
 }

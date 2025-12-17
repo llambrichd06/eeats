@@ -30,10 +30,32 @@ orderDeliveryDate.max = maxDate.toISOString().slice(0, 16);
 
 const orderDiscountId = document.getElementById('orderDiscountId');
 const orderDiscountAmount = document.getElementById('orderDiscountAmount');
+/**
+ * Filter variables
+ */
+const orderFilter = document.getElementById('orderFilter');
+const filterInputs = document.getElementsByClassName('filterInput');
+const filters = Array.from(filterInputs)
+const orderSort = document.getElementById('orderSort');
+const sortingOrder = document.getElementById('sortingOrder');
+const filterButton = document.getElementById('filterButton');
 
+orderFilter.addEventListener("change", (filter) => {
+    filters.forEach(input => {
+        input.classList.remove('currentFilter')
+    });
+    if (filter.target.value == "date") {
+        filterInputs[1].classList.add('currentFilter');
+    } else if (filter.target.value) {
+        filterInputs[0].classList.add('currentFilter');
+    } 
+})
 
+filterButton.addEventListener('click', () => {
+    showOrders(orderFilter.value, orderSort.value, sortingOrder.value);
+})
 
-async function showOrders() {
+async function showOrders(filter = null, sort = null, sortingOrder = null) {
     fetch(currentApiURL + "?controller=Order&action=getOrders", {
         method: 'GET'
     })
@@ -41,7 +63,45 @@ async function showOrders() {
     .then(r => {
         const tbody = document.getElementById('orderTableBody');
         tbody.innerHTML = "";
-        
+
+        if (filter) {
+            r = r.filter((order)=>{
+                if (filter == "user") {
+                    return order.user_id == filterInputs[0].value;
+                } else if (filter == "price") {
+                    return order.total > filterInputs[0].value
+                } else if (filter == "date") {
+                    let date1 = new Date(order.delivery_date.replace(' ', 'T').slice(0, 16))
+                    let date2 = new Date(filterInputs[1].value)
+                    console.log(date2)
+                    return date1.getFullYear() === date2.getFullYear() &&
+                    date1.getMonth() === date2.getMonth() &&
+                    date1.getDate() === date2.getDate()
+                } 
+            })
+
+        }
+        if (sort) {
+            r = r.sort((a, b)=>{
+                let dataA;
+                let dataB;
+                if (sort == "date") {
+                    dataA = new Date(a.delivery_date.replace(' ', 'T').slice(0, 16))
+                    dataB = new Date(b.delivery_date.replace(' ', 'T').slice(0, 16)) //parse mysql datetime format into js date
+                } else if (sort == "user") {
+                    dataA = a.user_id
+                    dataB = b.user_id
+                } else {
+                    dataA = a.total
+                    dataB = b.total
+                }
+                if (sortingOrder == "asc") {
+                    return dataA - dataB
+                } else {
+                    return dataB - dataA
+                }
+            })
+        }
         r.forEach(order => {
             const newOrder = new Order(
                 order.id,
