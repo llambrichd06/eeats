@@ -11,6 +11,8 @@ const userNormalRole = document.getElementById('userNormalRole');
 const userAdminRole = document.getElementById('userAdminRole');
 const userPremium = document.getElementById('userIsPremium');
 
+showUsers();
+
 async function showUsers() {
     fetch(currentApiURL+"?controller=User&action=getUsers", {
         method: 'GET'
@@ -55,7 +57,7 @@ async function showUsers() {
                             body: JSON.stringify({
                                 id: idRemoved
                             })
-                        }).then(showUsers());
+                        }).then(setTimeout(showUsers(), 50));
                     })
                 }
                 buttonBlock.append(button);
@@ -66,7 +68,7 @@ async function showUsers() {
     })
 }
 
-showUsers();
+
 
 userForm.addEventListener('submit', async f => {
     f.preventDefault();
@@ -93,7 +95,6 @@ userForm.addEventListener('submit', async f => {
                 password: passwordValue, 
                 role: roleValue, 
                 premium: premiumValue,
-                deleted: 0
             })
         })
     } else {
@@ -106,7 +107,6 @@ userForm.addEventListener('submit', async f => {
                 password: passwordValue, 
                 role: roleValue, 
                 premium: premiumValue,
-                deleted: 0
             })
         })
     }

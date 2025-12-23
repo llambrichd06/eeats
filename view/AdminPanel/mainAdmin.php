@@ -136,6 +136,7 @@
             <br>
             <br>
             <form action="" class="orderForm">
+                <p>Submitting without an id selected will make a new order!</p>
                 <label for="">Id</label>
                 <p id="orderIdDisplay">No order Selected</p>
                 <input type="hidden" name="" id="orderId">

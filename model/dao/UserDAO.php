@@ -43,7 +43,7 @@ class UserDAO implements DAO {
 
     public static function getUserByID($id){
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users where id = ? and deleted = 0");
+        $stmt = $con->prepare("SELECT * FROM users where id = ?");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();
@@ -56,7 +56,7 @@ class UserDAO implements DAO {
 
     public static function getUsers() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT * FROM users where deleted = 0");
+        $stmt = $con->prepare("SELECT * FROM users");
         $stmt->execute();
         $results = $stmt->get_result();
 
@@ -71,15 +71,15 @@ class UserDAO implements DAO {
     }
     
     public static function saveUser(User $user) {
-        $result = UserDAO::insertObject($user->toArray(), 'isssssii');
+        $result = UserDAO::insertObject($user->toArray(), 'isssssi');
     }
 
     public static function editUser(User $user) {
-        $result = UserDAO::UpdateObject($user->toArray(), 'isssssii');
+        $result = UserDAO::UpdateObject($user->toArray(), 'isssssi');
     }
     public static function deleteUser($id) {
         $con = DB::connect();
-        $stmt = $con->prepare("UPDATE users SET deleted = 1 WHERE id = ?");
+        $stmt = $con->prepare("DELETE FROM users WHERE id = ?");
         $stmt->bind_param('i',$id);
         $stmt->execute();
         $results = $stmt->get_result();

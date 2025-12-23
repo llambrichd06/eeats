@@ -61,10 +61,10 @@
                 <img src="../resources/images/LogoEEats.png" alt="Logo EEats" class="img-fluid">
                 <div>
                     <div class="d-flex justify-content-start align-items-center gap-4 ps-1">
-                        <a href="" class="bigA">Products</a>
-                        <a href="" class="bigA">Premium</a>
-                        <a href="" class="bigA">About</a>
-                        <a href="" class="bigA">Contact</a>
+                        <a href="" class="footerMenu">Products</a>
+                        <a href="" class="footerMenu">Premium</a>
+                        <a href="" class="footerMenu">About</a>
+                        <a href="" class="footerMenu">Contact</a>
                     </div>
                     <div>
                         <a href="">Privacy Policy & Cookies</a>

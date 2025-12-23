@@ -23,9 +23,9 @@ class UserApiController {
 
     public function saveUser($data) {
         try {
-            if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'])) {
+            if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
             $user = new User();
-            $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted']);
+            $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium']);
             UserDAO::saveUser($user);
             echo json_encode([
                 'status' => 'Success',
@@ -44,9 +44,9 @@ class UserApiController {
 
     public function editUser($data) {
         try {
-            if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'])) {
+            if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
                 $user = new User();
-                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['deleted'], $data['id']);
+                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['id']);
                 UserDAO::editUser($user);
                 echo json_encode([
                     'status' => 'Success',

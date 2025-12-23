@@ -8,7 +8,6 @@ class User {
     private $password;
     private $role;
     private $premium;
-    private $deleted;
 
     public function setData(
         $name = null,
@@ -17,7 +16,6 @@ class User {
         $password = null, 
         $role = null, 
         $premium = null, 
-        $deleted = null,
         $id = null
     ) {
         $this->name = $name;
@@ -26,7 +24,6 @@ class User {
         $this->password = $password;
         $this->role = $role;
         $this->premium = $premium;
-        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -98,15 +95,6 @@ class User {
         // $return = false;
         // if ($premium == 1) $return = true;
         $this->premium = $premium;
-        return $this;
-    }
-
-    public function getDeleted(){
-        return $this->deleted;
-    }
-
-    public function setDeleted($deleted){
-        $this->deleted = $deleted;
         return $this;
     }
 
