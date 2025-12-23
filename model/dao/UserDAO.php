@@ -54,6 +54,19 @@ class UserDAO implements DAO {
         return $user;
     }
 
+        public static function getUserByEmail($email){
+        $con = DB::connect();
+        $stmt = $con->prepare("SELECT * FROM users where email = ?");
+        $stmt->bind_param('i',$email);
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $user = $results->fetch_object('User'); //"User" es la classe que tenemos de user, esto nos transforma automaticamente a objeto
+        $con->close();
+
+        return $user;
+    }
+
     public static function getUsers() {
         $con = DB::connect();
         $stmt = $con->prepare("SELECT * FROM users");

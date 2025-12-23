@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $userLoggedIn = isset($_SESSION['user']);
+    var_dump($_SESSION['user']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +23,17 @@
             </div>
             <div class="col-6 d-flex align-items-center">
                 <ul class="d-flex align-items-center gap-2">
-                    <li><a href="" class="">FOODS <img src="../resources/images/downArrowIcon.svg" alt=""></a></li>
-                    <li><a href="">DISCOUNTS <img src="../resources/images/downArrowIcon.svg" alt=""></a></li>
+                    <li><a href="" class="">FOODS</a></li>
+                    <li><a href="">DISCOUNTS</a></li>
                 </ul>
             </div>
             <div class="col-3 d-flex align-items-center justify-content-end gap-2">
+            <a href="<?= $userLoggedIn ? '' : '?controller=Session&action=showLogin'?>">
                 <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid">
+            </a>
+            <a href="">
                 <img src="../resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid">
+            </a>
             </div>
         </nav>
     </header>
@@ -39,7 +48,7 @@
         <div class="row-2 d-flex justify-content-between margin">
             <nav>
                 <ul class="d-flex align-items-center gap-4">
-                    <li><a href="?controller=Home&action=index&">Home</a></li>
+                    <li><a href="?controller=Home&action=index">Home</a></li>
                     <li><a href="">Foods</a></li>
                     <li><a href="">Cart</a></li>
                 </ul>
@@ -58,7 +67,7 @@
         </div>
         <div class="row-2 d-flex justify-content-between margin downFooter">
             <div class="d-flex">
-                <img src="../resources/images/LogoEEats.png" alt="Logo EEats" class="img-fluid">
+                <img src="../resources/images/LogoEEats.svg" alt="Logo EEats" class="img-fluid">
                 <div>
                     <div class="d-flex justify-content-start align-items-center gap-4 ps-1">
                         <a href="" class="footerMenu">Products</a>
