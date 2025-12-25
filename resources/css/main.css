@@ -193,3 +193,9 @@ body .footerPad {
     line-height: calc(1vw + 1em);
 }
 
+/*LOGIN/REGISTER PAGE*/
+
+.loginform {
+    width: calc(20vw + 5em);
+}
+

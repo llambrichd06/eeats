@@ -6,7 +6,17 @@ class User {
     private $email;
     private $profile_picture;
     private $password;
+    /**
+     * Role can have 2 values:
+     * user: A normal user with no permissons
+     * admin: A user that can access the administrator panel.
+     */
     private $role;
+    /**
+     * Premium can have 2 values:
+     * 0: Non premium user
+     * 1: Premium user
+     */
     private $premium;
 
     public function setData(

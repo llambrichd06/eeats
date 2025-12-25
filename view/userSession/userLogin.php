@@ -1,11 +1,11 @@
 <?php
     $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
-    $query = http_build_query([ //turn an object into get parameters, in this case this returns "controller=home&action=index"
-        'controller' => 'home',
+    $homeGetParams = http_build_query([ //turn an object into get parameters, in this case this returns "controller=Home&action=index"
+        'controller' => 'Home',
         'action' => 'index'
     ]);
     if ($userLoggedIn) {
-        header("Location: $currentUrl?$query");
+        header("Location: $currentUrl?$homeGetParams");
     }
     $loginResult = "";
     if (isset($_POST["logEmail"], $_POST["logPass"])) {
@@ -17,22 +17,28 @@
             if ($user->getPassword() == $pass) {
                 $_SESSION["user"] = $user->toArray();
                 $_SESSION["user"]["password"] = "";
-                header("Location: $currentUrl?$query");
+                header("Location: $currentUrl?$homeGetParams");
                 exit;
             }
         }
-        $loginResult = "The submitted email or password are incorrect.";
+        $loginResult = "The submitted email or password is incorrect.";
     }
 ?>
-<div class="d-flex flex-column align-items-center justify-content-center">
+<div class="d-flex flex-column align-items-center gap-5 justify-content-center">
     <h1>User Login</h1>
 
-    <form action="" method="post" class="d-flex flex-column align-items-center justify-content-center">
-        <label for="logEmail">User Email</label>
-        <input type="email" name="logEmail" id="logEmail" required>
-        <label for="logPass">Password</label>
-        <input type="password" name="logPass" id="logPass" required> 
-        <button type="submit" class="btn btn-primary">Login</button>
+    <form action="" method="post" class="d-flex flex-column align-items-center justify-content-center gap-5 loginform">
+        <div class="form-floating w-100">
+            <input type="email" class="form-control" id="logEmail" name="logEmail" placeholder="name@example.com" required>
+            <label for="logEmail">Email address *</label>
+        </div>
+        <div class="form-floating w-100">
+            <input type="password" class="form-control" id="logPass" name="logPass" placeholder="password1234" required>
+            <label for="logPass">Password *</label>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
+    <p>Don't have a user? Sign up <a href="?controller=Session&action=showSignUp"><b>here!</b></a></p>
     <p><?=$loginResult?></p>
+    
 </div>

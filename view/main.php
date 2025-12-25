@@ -1,7 +1,6 @@
 <?php
     session_start();
     $userLoggedIn = isset($_SESSION['user']);
-    var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -21,7 +21,7 @@ class UserDAO implements DAO {
         return $results;
     }
 
-    static function UpdateObject($array, $types) {
+    static function updateObject($array, $types) {
         $con = DB::connect();
 
         $sqlArray = [];
@@ -57,7 +57,7 @@ class UserDAO implements DAO {
         public static function getUserByEmail($email){
         $con = DB::connect();
         $stmt = $con->prepare("SELECT * FROM users where email = ?");
-        $stmt->bind_param('i',$email);
+        $stmt->bind_param('s',$email);
         $stmt->execute();
         $results = $stmt->get_result();
 
@@ -88,7 +88,7 @@ class UserDAO implements DAO {
     }
 
     public static function editUser(User $user) {
-        $result = UserDAO::UpdateObject($user->toArray(), 'isssssi');
+        $result = UserDAO::updateObject($user->toArray(), 'isssssi');
     }
     public static function deleteUser($id) {
         $con = DB::connect();
