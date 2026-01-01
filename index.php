@@ -1,5 +1,6 @@
 <?php
 include_once 'controller/app/HomeController.php';
+include_once 'controller/app/ProductController.php';
 include_once 'controller/app/UserController.php';
 include_once 'controller/app/SessionController.php';
 

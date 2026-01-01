@@ -35,7 +35,12 @@ h1, h2, h3, h4 {
 header {
     background-color: #FFFFFF;
 }
-
+header .logo {
+    width: calc(10vw + 5em);
+}
+header .icons {
+    width: calc(0.5vw + 1.5em);
+}
 
 ul {
     list-style: none;
@@ -87,7 +92,7 @@ body .footerPad {
     padding: 0 0;
 }
 @media (max-width: 600px) {
-    body>.margin{
+    body .margin{
         padding-right: 3%;
         padding-left: 3%;
     }
@@ -197,5 +202,14 @@ body .footerPad {
 
 .loginform {
     width: calc(20vw + 5em);
+}
+
+/*PRODUCT PAGE*/
+#prodBanner {
+    height: 10vw;
+}
+
+.cardProdHover {
+    background: #2E2851;
 }
 
