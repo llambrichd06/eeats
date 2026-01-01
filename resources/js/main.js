@@ -8,16 +8,7 @@ const submits = document.getElementsByClassName('submitButton');
 const submitList = Array.from(submits);
 
 
-
-const currentApiURL = 'http://eeats.com/api.php'; //If we want to edit the api URL for the server, we just have to touch this variable
-const PUT = 'PUT'; //IN CASE WE USE A HOSTING THAT DOESEN'T LET YOU USE PUT PATCH AND DELETE, JUST SET ALL OF THESE TO POST;
-const PATCH = 'PATCH';
-const DELETE = 'DELETE';
-
-
-
-
-buttonList.forEach(button => {
+buttonList.forEach(button => { //Nav buttons event listeners, in case of click, highlight the button and show the corresponding section, while hiding the others
     button.addEventListener('click', btn => {
         buttonList.forEach(b => {
             b.classList.remove('btn-primary', 'btn-class');

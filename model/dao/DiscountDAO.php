@@ -52,7 +52,7 @@ class DiscountDAO implements DAO {
 
     public static function getLastDiscounts() {
         $con = DB::connect();
-        $stmt = $con->prepare("SELECT d.id as discount_id, p.name as name, p.img as img, d.percent as percent, d.ends_at as ends_at
+        $stmt = $con->prepare("SELECT d.id as discount_id, p.id as product_id, p.name as name, p.img as img, d.percent as percent, d.ends_at as ends_at
         from discounts d join products p on(d.id = p.discount_id)
         where d.begins_at < sysdate()
         and d.ends_at > sysdate()
@@ -62,7 +62,6 @@ class DiscountDAO implements DAO {
         limit 3");
         $stmt->execute();
         $results = $stmt->get_result();
-
         $discountList = [];
 
         while ($discount = $results->fetch_assoc()) { //Recorre las filas de resultado, cuando se quede sin filas, da false i asi rompe el bucle, no es comparacion porque no es ==

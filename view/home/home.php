@@ -3,7 +3,7 @@
     
     <section id="banner" class="margin d-flex align-items-center justify-content-center flex-column"> 
         <h1>Your go-to place for amazing foods!</h1>
-        <a href="" class="btn btn-primary">BROWSE MENU</a>
+        <a href="?controller=Product&action=showProductPage" class="btn btn-primary">BROWSE MENU</a>
     </section>
     <div class="margin">
     <section class="container-fluid d-flex flex-column align-items-center text-center px-0" id="featuredFoods"> 
@@ -11,10 +11,10 @@
         <div class="row w-100">
             <?php foreach ($featuredProds as $product) { ?>
                 <div class="col-lg-4 col-sm-12 p-2">
-                    <a href="" class=""> <!-- TODO: Poner enlaces correctos una vez este la pagina de productos creada -->
+                    <a href="?controller=Product&action=showProduct&idProduct=<?=$product->getId()?>" class=""> <!-- TODO: Poner enlaces correctos una vez este la pagina de productos creada -->
                         <div class="d-flex flex-column prodCard justify-content-center h-100 py-5 align-items-center" style="background-image: url('/resources/images/<?=$product->getImg()?>');">
                             <p class="foodTitle"><?=$product->getName() ?? "Name"?></p>
-                            <p class="foodItem"><?=$product->getDescription() ?? "Description"?></p>
+                            <p class="foodItem">View product page</p>
                             <div class="cardHomeHover"></div>
                         </div>
                     </a>
@@ -34,7 +34,7 @@
                         </a>
                         <div class="card-body">
                             <p class="card-text">Product <?=$discount['name'] ?? "Name"?> is on <?=$discount['percent'] ?? "__"?>% discount untill <?=substr($discount['ends_at'], 0, 10) ?? "0000-00-00"?>!</p>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
+                            <a href="?controller=Product&action=showProduct&idProduct=<?=$discount['product_id']?>" class="btn btn-primary">View Product</a>
                         </div>
                     </div>  
                 </div>

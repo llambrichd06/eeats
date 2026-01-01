@@ -12,6 +12,7 @@ const userAdminRole = document.getElementById('userAdminRole');
 const userPremium = document.getElementById('userIsPremium');
 
 showUsers();
+//MAIN FUNCTION TO FETCH AND SHOW USERS
 
 async function showUsers() {
     fetch(currentApiURL+"?controller=User&action=getUsers", {

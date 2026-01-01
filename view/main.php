@@ -1,6 +1,9 @@
 <?php
     session_start();
     $userLoggedIn = isset($_SESSION['user']);
+    if ($userLoggedIn && !isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,30 +15,63 @@
     <link rel="stylesheet" href="../resources/css/main.css">
     <title>Document</title>
 </head>
+
 <body class="">
 
     <!-------------- HEADER ----------------->
-    <header class="container-fluid text-center margin">
-        <nav class="row d-flex">
-            <div class="col-3">
-                <img src="../resources/images/EENameLogo.png" alt="Logo and name of website, Electronic Eats" class="img-fluid">
-            </div>
-            <div class="col-6 d-flex align-items-center">
-                <ul class="d-flex align-items-center gap-2">
-                    <li><a href="" class="">FOODS</a></li>
-                    <li><a href="">DISCOUNTS</a></li>
+<header class="container-fluid text-center margin">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex align-items-center">
+
+            <!-- Logo  -->
+            <a class="navbar-brand" href="?controller=Home&action=index">
+                <img src="../resources/images/EENameLogo.png" alt="Logo and name of website, Electronic Eats" class="img-fluid logo">
+            </a>
+
+            <!-- Burger menu -->
+            <button class="navbar-toggler ms-auto"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- content inside burger menu -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <!-- navigation links -->
+                <ul class="navbar-nav mx-auto gap-2 text-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="?controller=Product&action=showProductPage">
+                            FOODS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            DISCOUNTS
+                        </a>
+                    </li>
                 </ul>
+
+                <!-- user icons -->
+                <div class="navbar-nav gap-3 text-center d-flex">
+                    <a class="nav-link" href="<?= $userLoggedIn ? '' : '?controller=Session&action=showLogin'?>">
+                        <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid icons">
+                    </a>
+
+                    <a class="nav-link" href="">
+                        <img src="../resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid icons">
+                    </a>
+                </div>
+
             </div>
-            <div class="col-3 d-flex align-items-center justify-content-end gap-2">
-            <a href="<?= $userLoggedIn ? '' : '?controller=Session&action=showLogin'?>">
-                <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid">
-            </a>
-            <a href="">
-                <img src="../resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid">
-            </a>
-            </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+
 
     <!-------------- MAIN CONTENT ----------------->
     <main class="container-fluid px-0 text-center">
@@ -90,4 +126,5 @@
         </div>
     </footer>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> 
 </html>

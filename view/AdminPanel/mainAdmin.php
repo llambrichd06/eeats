@@ -248,6 +248,7 @@
         </section>
     </main>
 </body>
+<script src="/resources/js/apiConfig.js"></script>
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/user.js"></script>
 <script src="/resources/js/products.js"></script>

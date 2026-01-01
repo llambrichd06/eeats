@@ -11,6 +11,9 @@ const productImg = document.getElementById('prodImg');
 const productPremium = document.getElementById('prodIsPremium');
 const productDiscountId = document.getElementById('prodDiscountId');
 
+showProducts();
+
+//MAIN FUNCTION TO FETCH AND SHOW PRODUCTS
 async function showProducts() {
     fetch(currentApiURL+"?controller=Product&action=getProducts", {
         method: 'GET'
@@ -67,7 +70,6 @@ async function showProducts() {
     })
 }
 
-showProducts();
 
 productForm.addEventListener('submit', async f => {
     f.preventDefault();

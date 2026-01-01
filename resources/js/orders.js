@@ -55,6 +55,8 @@ filterButton.addEventListener('click', () => {
     showOrders(orderFilter.value, orderSort.value, sortingOrder.value);
 })
 
+
+//MAIN FUNCTION TO FETCH AND SHOW ORDERS
 async function showOrders(filter = null, sort = null, sortingOrder = null) {
     fetch(currentApiURL + "?controller=Order&action=getOrders", {
         method: 'GET'
