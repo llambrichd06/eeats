@@ -22,13 +22,13 @@ class Order
 
     public function setData(
         $user_id = null,
-        $delivery_type = null,
         $subtotal = null,
         $total = null,
+        $delivery_type = null,
+        $address = null,
+        $delivery_date = null,
         $discount_id = null,
         $discount_applied = null,
-        $delivery_date = null,
-        $address = null,
         $created_at = null,
         $deleted = null,
         $id = null
