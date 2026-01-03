@@ -3,6 +3,8 @@ include_once 'controller/app/HomeController.php';
 include_once 'controller/app/ProductController.php';
 include_once 'controller/app/UserController.php';
 include_once 'controller/app/SessionController.php';
+include_once 'controller/app/CartController.php';
+include_once 'controller/app/PurchaseController.php';
 
 $home = false;
 $msg = "";

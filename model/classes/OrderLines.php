@@ -3,28 +3,26 @@
 class OrderLines
 {
     private $id;
-    private $lineNum;
-    private $orderId;
-    private $productId;
+    private $line_num;
+    private $order_id;
+    private $product_id;
     private $price;
     private $quantity;
-    private $deleted;
 
     public function setData(
-        $lineNum = null,
-        $orderId = null,
-        $productId = null,
+        $line_num = null,
+        $order_id = null,
+        $product_id = null,
         $price = null,
         $quantity = null,
         $deleted = null,
         $id = null
     ) {
-        $this->lineNum = $lineNum;
-        $this->orderId = $orderId;
-        $this->productId = $productId;
+        $this->line_num = $line_num;
+        $this->order_id = $order_id;
+        $this->product_id = $product_id;
         $this->price = $price;
         $this->quantity = $quantity;
-        $this->deleted = $deleted;
         $this->id = $id;
     }
 
@@ -37,30 +35,30 @@ class OrderLines
         return $this;
     }
 
-    public function getLineNum() {
-        return $this->lineNum;
+    public function getLine_num() {
+        return $this->line_num;
     }
 
-    public function setLineNum($lineNum) {
-        $this->lineNum = $lineNum;
+    public function setLine_num($line_num) {
+        $this->line_num = $line_num;
         return $this;
     }
 
-    public function getOrderId() {
-        return $this->orderId;
+    public function getOrder_id() {
+        return $this->order_id;
     }
 
-    public function setOrderId($orderId) {
-        $this->orderId = $orderId;
+    public function setOrder_id($order_id) {
+        $this->order_id = $order_id;
         return $this;
     }
 
-    public function getProductId() {
-        return $this->productId;
+    public function getProduct_id() {
+        return $this->product_id;
     }
 
-    public function setProductId($productId) {
-        $this->productId = $productId;
+    public function setProduct_id($product_id) {
+        $this->product_id = $product_id;
         return $this;
     }
 
@@ -79,15 +77,6 @@ class OrderLines
 
     public function setQuantity($quantity) {
         $this->quantity = $quantity;
-        return $this;
-    }
-
-    public function getDeleted(){
-        return $this->deleted;
-    }
-
-    public function setDeleted($deleted){
-        $this->deleted = $deleted;
         return $this;
     }
     

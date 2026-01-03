@@ -15,10 +15,10 @@ class OrderDAO implements DAO {
         $stmt = $con->prepare("INSERT INTO orders ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
         $stmt->bind_param($types, ...$values); //three dots mean that we just put the array values like this: 'val1, val2, val3...'
         $stmt->execute();
-        $results = $stmt->get_result();
+        $insertedId = $con->insert_id;
 
         $con->close();
-        return $results;
+        return $insertedId;
     }
 
         static function UpdateObject($array, $types) {
@@ -72,7 +72,10 @@ class OrderDAO implements DAO {
     
     public static function saveOrder(Order $order) {
         $order->setCreatedAt(date('Y-m-d H:i:s'));
-        $result = OrderDAO::insertObject($order->toArray(), 'iisssiisiii');
+        $order->setDeleted(0);
+        $insertedId = OrderDAO::insertObject($order->toArray(), 'iisssiisiii');
+        
+        return $insertedId;
     }
     public static function editOrder(Order $order) {
         $result = OrderDAO::UpdateObject($order->toArray(), 'iisssiisiii');

@@ -22,9 +22,9 @@
     margin: 0;
     font-family: EA-Text;
 }
-div, header, nav, section, footer {
-    border: 0.01px solid rgb(131, 131, 131);
-}
+/* div, header, nav, section, footer {
+    border: 0.01px solid #838383;
+} */
 body .margin{
     padding-right: 12%;
     padding-left: 12%;
@@ -56,6 +56,10 @@ a {
     font-size: calc(0.8vw + 0.4em);
 }
 main {
+    background-color: #ffffff;
+}
+
+.greyBg {
     background-color: #F3F3F3;
 }
 
@@ -97,6 +101,30 @@ body .footerPad {
         padding-left: 3%;
     }
 }
+
+.form-control {
+  height: 60px;
+  border-radius: 5px;
+  border: 1.5px solid #dcdcdc;
+  font-size: 0.95rem;
+}
+
+.form-floating > label {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #adb5bd;
+}
+
+button.btn-primary {
+  background-color: #2f5cf0;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+
 
 /* -----HOME----- */
 
@@ -213,3 +241,55 @@ body .footerPad {
     background: #2E2851;
 }
 
+/*SHOP PAGE*/
+.shopHeading {
+    font-size: calc(1.5vw + 0.5em);
+}
+
+.shopTxtWidth {
+    width: 65%;
+}
+
+.shopImgWidth {
+    width: 35%;
+}
+
+.shopDottedLine {
+        border-bottom: 1px dashed #999;
+    opacity: 0.6;
+}
+
+.noBg {
+    background-color: transparent;
+}
+
+.promoCodeInput {
+    border: 1.5px solid #838383;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+.promoCodeButton {
+    padding: 0.2rem 0.5rem;
+    display: inline-block;
+    font-size: calc(0.6vw + 0.4em);
+}
+
+.checkoutBtn {
+    padding: 0.3rem 1.5rem;
+    font-size: calc(1vw + 0.5em);
+}
+
+.checkoutBtn:hover {
+    transform: scale(1.02); /*changes the size without affecting the layout itself*/
+}
+
+/* CHECKOUT PAGE */
+
+.checkoutFormWidth {
+    width: 65%;
+}
+
+.checkoutProdsWidth {
+    width: 35%;
+}

@@ -10,6 +10,10 @@ class ProductController {
         $view = 'view/products/individualProduct.php';
         $idProduct = $_GET['idProduct'];
         $product = ProductDAO::getProductByID($idProduct);
+        $discount = 0;
+        if ($product->getDiscountId()) {
+            $discount = DiscountDAO::getDiscountById($product->getDiscountId());
+        }
         include_once 'view/main.php';
     }
 

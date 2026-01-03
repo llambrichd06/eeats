@@ -7,8 +7,8 @@ class OrderLinesDAO implements DAO {
     public static function insertObject($object, $types) { 
         $con = DB::connect();
 
-        $columns = array_keys(get_object_vars($object));
-        $values = array_values(get_object_vars($object));
+        $columns = array_keys($object);
+        $values = array_values($object);
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
@@ -49,8 +49,8 @@ class OrderLinesDAO implements DAO {
 
         return $orderLineList;
     }
-    public static function saveUser(OrderLines $orderLines) {
-        $result = UserDAO::insertObject($orderLines, 'iiiiii');
+    public static function saveOrderLines(OrderLines $orderLines) {
+        $result = OrderLinesDAO::insertObject($orderLines->toArray(), 'iiiiii');
     }
 }
     

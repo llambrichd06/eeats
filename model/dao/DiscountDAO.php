@@ -72,6 +72,19 @@ class DiscountDAO implements DAO {
         return $discountList;
     }
     
+    public static function getDiscountByCode($code){
+        $con = DB::connect();
+        $stmt = $con->prepare("SELECT * FROM discounts where code = ? and deleted = 0");
+        $stmt->bind_param('s',$code);
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $discount = $results->fetch_object('Discount'); //"Discount" es la classe que tenemos de discount, esto nos transforma automaticamente a objeto
+        $con->close();
+
+        return $discount;
+    }
+
     public static function saveDiscount(Discount $discount) {
         $result = DiscountDAO::insertObject($discount, 'iissiiisii');
     }

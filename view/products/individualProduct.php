@@ -1,11 +1,6 @@
 <?php
-$loginGetParams = http_build_query([ //turn an object into get parameters, in this case this returns "controller=Session&action=showLogin"
-    'controller' => 'Session',
-    'action' => 'showLogin'
-]);
-if (!$userLoggedIn) {
-    header("Location: $currentUrl?$loginGetParams");
-}
+include_once 'view/authenticator.php';
+
 if (isset($_POST['addedProdId'], $_POST['quantity'])) {
     $prodId = $_POST['addedProdId'];
     $quantity = $_POST['quantity'];
@@ -23,7 +18,7 @@ if (isset($_POST['addedProdId'], $_POST['quantity'])) {
 }
 ?>
 
-<section class="d-flex flex-column align-items-center margin pt-3">
+<section class="d-flex flex-column align-items-center margin pt-3 greyBg">
     <h1><?=$product->getName() ?? "Nameless Product" ?></h1>
     <div class="w-100 d-flex">
         <div class="w-50 d-flex justify-content-center align-items-center py-5">

@@ -62,7 +62,7 @@
                         <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid icons">
                     </a>
 
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="?controller=Cart&action=showShop">
                         <img src="../resources/images/cartIcon.svg" alt="Cart Icon" class="img-fluid icons">
                     </a>
                 </div>
@@ -84,8 +84,8 @@
             <nav>
                 <ul class="d-flex align-items-center gap-4">
                     <li><a href="?controller=Home&action=index">Home</a></li>
-                    <li><a href="">Foods</a></li>
-                    <li><a href="">Cart</a></li>
+                    <li><a href="?controller=Product&action=showProductPage">Foods</a></li>
+                    <li><a href="?controller=Cart&action=showShop">Cart</a></li>
                 </ul>
             </nav>
             <div class="d-flex flex-column align-items-end">
@@ -115,16 +115,16 @@
                     </div>
                 </div>
             </div>
-            <div class="px-3">
+            <!-- <div class="px-3">
                 <p>Regional Pricing</p>
                 <div class="d-flex">
                     <select name="" id="" class="w-100">
 
                     </select>
                 </div>
-            </div>
+            </div> -->
         </div>
     </footer>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap js for burger menu -->
 </html>
