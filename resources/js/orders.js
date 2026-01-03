@@ -68,12 +68,13 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
 
         if (filter) {
             r = r.filter((order)=>{
+                order.delivery_date = order.delivery_date ?? "0000-00-00 00:00";
                 if (filter == "user") {
                     return order.user_id == filterInputs[0].value;
                 } else if (filter == "price") {
                     return order.total > filterInputs[0].value
                 } else if (filter == "date") {
-                    let date1 = new Date(order.delivery_date.replace(' ', 'T').slice(0, 16))
+                    let date1 = new Date(order.delivery_date.replace(' ', 'T').slice(0, 16)) //parse mysql datetime format into js date
                     let date2 = new Date(filterInputs[1].value)
                     console.log(date2)
                     return date1.getFullYear() === date2.getFullYear() &&
@@ -87,6 +88,9 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
             r = r.sort((a, b)=>{
                 let dataA;
                 let dataB;
+                console.log(a.delivery_date);
+                a.delivery_date = a.delivery_date ?? "0000-00-00 00:00:00";
+                b.delivery_date = b.delivery_date ?? "0000-00-00 00:00:00";
                 if (sort == "date") {
                     dataA = new Date(a.delivery_date.replace(' ', 'T').slice(0, 16))
                     dataB = new Date(b.delivery_date.replace(' ', 'T').slice(0, 16)) //parse mysql datetime format into js date
@@ -174,6 +178,7 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
 showOrders();
 
 orderForm.addEventListener('submit', async f => {
+    console.log(f);
     f.preventDefault();
 
     const button = f.submitter;
