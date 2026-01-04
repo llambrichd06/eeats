@@ -18,94 +18,15 @@ $promoCode = $_SESSION['promoCode'] ?? null;
     <div class="d-flex gap-4 align-items-start">
         <form action="?controller=Purchase&action=processPurchase" method="post" class="container px-0 checkoutFormWidth">
 
-            <!-- Credit Card -->
-            <h2 class="fw-bold mb-3 text-start">Credit Card details</h2>
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Name on card" required>
-                        <label for="cardName">Name on card</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" required>
-                        <label for="cardNumber">Card number</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YYYY" required>
-                        <label for="expiry">Card expiration</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="cvc" name="cvc" placeholder="Code" required>
-                        <label for="cvc">Card security code</label>
-                    </div>
-                </div>
-            </div>
-
             <!-- Billing Address -->
             <h2 class="fw-bold mb-3 text-start">Billing address</h2>
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="country" name="country" placeholder="Country name" required>
-                        <label for="country">Country</label>
-                    </div>
-                </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 mb-5">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
                         <label for="address">Address</label>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="city" name="city" placeholder="City name" required>
-                        <label for="city">City</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="state" name="state" placeholder="State name" required>
-                        <label for="state">State</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="zip" name="zip" placeholder="00000" required>
-                        <label for="zip">Zip Code</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Info -->
-            <h2 class="fw-bold mb-3 text-start">Contact information</h2>
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" required>
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="123456789" required>
-                        <label for="phone">Phone</label>
-                    </div>
-                </div>
-            </div>
             <input type="hidden" name="subtotal" value="<?= $totalPrice ?>">
             <input type="hidden" name="total" value="<?= isset($discountedPrice) ? $discountedPrice : $totalPrice ?>">
             <input type="hidden" name="discountApplied" value="<?= $discountPercent ?>">
@@ -115,7 +36,7 @@ $promoCode = $_SESSION['promoCode'] ?? null;
 
         </form>
         <!-- Order Summary -->
-        <div class="greyBg px-3 checkoutProdsWidth">
+        <div class="greyBg px-3 checkoutProdsWidth mb-3">
             <?php foreach ($_SESSION['cart'] as $key => $value) {
                 $product = ProductDAO::getProductById($value['product_id']);
                 $price = $product->getPrice() * $value['quantity']; ?>
