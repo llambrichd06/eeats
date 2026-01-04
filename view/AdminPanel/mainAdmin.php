@@ -1,3 +1,8 @@
+<?php
+    if (!isset($_COOKIE['adminVerified'])) {
+        header('Location: ?controller=Admin&action=showLogin');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -109,6 +109,7 @@ $promoCode = $_SESSION['promoCode'] ?? null;
             <input type="hidden" name="subtotal" value="<?= $totalPrice ?>">
             <input type="hidden" name="total" value="<?= isset($discountedPrice) ? $discountedPrice : $totalPrice ?>">
             <input type="hidden" name="discountApplied" value="<?= $discountPercent ?>">
+            
             <!-- Submit -->
             <button class="btn btn-primary checkoutBtn w-100 py-2 text-uppercase mb-3" type="submit">Confirm and pay</button>
 

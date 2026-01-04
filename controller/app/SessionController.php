@@ -1,7 +1,6 @@
 <?php
 include_once "model/dao/UserDAO.php";
 
- //La ruta real sera view/home/index.php
 
 
 class SessionController {

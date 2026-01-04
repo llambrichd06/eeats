@@ -59,7 +59,7 @@ async function showProducts() {
                             body: JSON.stringify({
                                 id: idRemoved
                             })
-                        }).then(showProducts());
+                        }).then(setTimeout(showProducts(), 50));
                     })
                 }
                 buttonBlock.append(button);

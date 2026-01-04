@@ -1,6 +1,3 @@
-    <!-- TODO: Completar pagina home. Tener cuidado con responsive, que es importante en esta pagina. -->
-    <!-- RECORDAR QUE LA PAGINA CAMBIA BASTANTE CUANDO ESTA EN PANTALLA PEQUEÑA (header se comprime en un submenu, etc) -->
-    
     <section id="banner" class="margin d-flex align-items-center justify-content-center flex-column"> 
         <h1>Your go-to place for amazing foods!</h1>
         <a href="?controller=Product&action=showProductPage" class="btn btn-primary">BROWSE MENU</a>
@@ -11,7 +8,7 @@
         <div class="row w-100">
             <?php foreach ($featuredProds as $product) { ?>
                 <div class="col-md-4 col-sm-12 p-2">
-                    <a href="?controller=Product&action=showProduct&idProduct=<?=$product->getId()?>" class=""> <!-- TODO: Poner enlaces correctos una vez este la pagina de productos creada -->
+                    <a href="?controller=Product&action=showProduct&idProduct=<?=$product->getId()?>" class="">
                         <div class="d-flex flex-column prodCard justify-content-center h-100 py-5 align-items-center" style="background-image: url('/resources/images/<?=$product->getImg()?>');">
                             <p class="foodTitle"><?=$product->getName() ?? "Name"?></p>
                             <p class="foodItem">View product page</p>
@@ -34,7 +31,7 @@
                         </a>
                         <div class="card-body">
                             <p class="card-text">Product <?=$discount['name'] ?? "Name"?> is on <?=$discount['percent'] ?? "__"?>% discount untill <?=substr($discount['ends_at'], 0, 10) ?? "0000-00-00"?>!</p>
-                            <a href="?controller=Product&action=showProduct&idProduct=<?=$discount['product_id']?>" class="btn btn-primary">View Product</a>
+                            <a href="?controller=Product&action=showProduct&idProduct=<?=$discount['product_id']?>" class="btn btn-primary ">View Product</a>
                         </div>
                     </div>  
                 </div>

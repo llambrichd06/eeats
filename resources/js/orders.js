@@ -162,7 +162,7 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
                         fetch(currentApiURL + "?controller=Order&action=deleteOrder", {
                             method: DELETE,
                             body: JSON.stringify({ id: idRemoved })
-                        }).then(showOrders());
+                        }).then(setTimeout(showOrders(), 50));
                     });
                 }
 
