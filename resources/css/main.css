@@ -36,10 +36,10 @@ header {
     background-color: #FFFFFF;
 }
 header .logo {
-    width: calc(10vw + 5em);
+    width: 14rem;
 }
 header .icons {
-    width: calc(0.5vw + 1.5em);
+    width: 2rem;
 }
 
 ul {
@@ -53,7 +53,7 @@ ul {
 a {
     text-decoration: none;
     color: #000000;
-    font-size: calc(0.8vw + 0.4em);
+    font-size: 1rem;
 }
 main {
     background-color: #ffffff;
@@ -68,7 +68,7 @@ main {
 
     transition: transform 0.1s;
     display: inline-block;
-    font-size: calc(1vw + 0.4em);
+    font-size: 1.2rem;
 }
 
 .btn:hover {
@@ -76,18 +76,16 @@ main {
 }
 
 .footerMenu {
-    font-size: calc(1.5vw + 0.4em);
+    font-size: 1.2rem;
 }
 footer {
     background-color: #EAEAEA;
 }
 footer>div {
-    padding-top: calc(0.5vw + 0.4em);
-    padding-bottom: calc(0.5vw + 0.4em);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
-.downFooter {
-    background-color: #F3F3F3;
-}
+
 footer img {
     width: 5rem;
     object-fit: contain;
@@ -95,6 +93,38 @@ footer img {
 body .footerPad {
     padding: 0 0;
 }
+
+.footer-social img {
+    width: 1.6rem;
+}
+
+.social-icons img {
+    width: 1rem;
+}
+
+.admin-link {
+    padding-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* footer mobile */
+@media (max-width: 768px) {
+
+    footer nav ul {
+        justify-content: center;
+    }
+
+    footer img {
+        width: 4rem;
+    }
+
+    .admin-link {
+        border-top: 1px solid #d0d0d0;
+        text-align: center;
+        background-color: #f3f3f3;
+    }
+}
+
 @media (max-width: 600px) {
     body .margin{
         padding-right: 3%;
@@ -132,6 +162,9 @@ button.btn-primary {
 
 #banner {
     height: 40vw;
+    background-image: url("/resources/images/Web banner.webp");
+    background-size: cover;
+    color: white;
 }
 
 /* HOME CARDS */
@@ -155,8 +188,8 @@ button.btn-primary {
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 20vw;
-    max-height: 20vw;
+    min-height: 17rem;
+    max-height: 17rem;
 }
 
 .prodCard p {
@@ -173,23 +206,37 @@ button.btn-primary {
 
 .prodCard .foodItem {
     position: absolute;
-    padding: 0 calc(1vw + 0.5em);
+    padding: 0 0;
     opacity: 0;
     transition: opacity 0.7s;
     transition-timing-function: ease;
 }
 
 .prodCard:hover .foodTitle {
-    padding-bottom: calc(7vw);
+    padding-bottom: 5rem;
 }
 
 .prodCard:hover .foodItem {
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .prodCard {
+        min-height: 23rem;
+        max-height: 23rem;
+    }
+
+    .card-body a, #premiumAd .btn {
+        width: 100%;
+    }
+
+
+}
+
 /* HOME DISCOUNTS */
 
 #discounts .card-text {
-    font-size: calc(1vw + 0.5em);
+    font-size: 1.1rem;
 }
 
 /* HOME PREMIUM */
@@ -203,7 +250,7 @@ button.btn-primary {
 #premiumAd h2 {
     color: #FF4747;
     font-weight: bolder;
-    font-size: calc(3vw + 1em);
+    font-size: 4rem;
 }
 
 #premiumAd .btn {
@@ -212,18 +259,18 @@ button.btn-primary {
     color: #FFFFFF;
 }
 #premiumAd img {
-    width: calc(5vw + 5em);
+    width: 6rem;
     object-fit: contain;
 }
 
 #premiumAd h3 {
-    font-size: calc(1.5vw + 1em);
+    font-size: 2rem;
     padding-bottom: 1vw;
 }
 
 #premiumAd p {
-    font-size: calc(0.75vw + 1em);
-    line-height: calc(1vw + 1em);
+    font-size: 1.5rem;
+    line-height: 2rem;
 }
 
 /*LOGIN/REGISTER PAGE*/

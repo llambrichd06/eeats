@@ -37,7 +37,6 @@
     }
     unset($_SESSION['cart']); //clear cart after purchase
     
-    $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
     $purchaseGetParams = http_build_query([ //turn an object into get parameters
         'controller' => 'Purchase',
         'action' => 'showPurchase',
