@@ -78,6 +78,9 @@ class ProductDAO implements DAO {
             select p.id AS id, p.name AS name, p.description AS description, p.price AS price, p.created_at AS created_at, p.stock AS stock, p.img AS img, p.premium AS premium, p.discount_id AS discount_id
             from products p 
             left join order_lines ol on(p.id = ol.product_id)
+            left join orders o on(ol.order_id = o.id)
+            where p.deleted = 0
+            and o.deleted = 0
             group by p.id
             order by COUNT(ol.id) desc
             limit 6");

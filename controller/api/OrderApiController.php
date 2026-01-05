@@ -4,13 +4,13 @@ include_once 'model/dao/OrderDAO.php';
 
 class OrderApiController {
 
-    public function getOrderByID() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $order = OrderDAO::getOrderByID($id);  
-            echo json_encode($order->toArray()); 
-        }
-    }
+    // public function getOrderByID() {
+    //     if (isset($_GET['id'])) {
+    //         $id = $_GET['id'];
+    //         $order = OrderDAO::getOrderByID($id);  
+    //         echo json_encode($order->toArray()); 
+    //     }
+    // }
 
     public function getOrders() {
         $orders = OrderDAO::getOrders();

@@ -10,7 +10,7 @@
         if ($user) {
             if ($user->getPassword() == $pass) {
                 if ($user->getRole() == "admin") {
-                    setcookie("adminVerified", true, time() + 300); //set a cookie to know that the admin is logged in for 5 minutes
+                    setcookie("adminVerified", true, time() + 600); //set a cookie to know that the admin is logged in for 5 minutes
                     $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
                     $panelGetParams = http_build_query([ //turn an object into get parameters
                         'controller' => 'Admin',

@@ -4,13 +4,13 @@ include_once 'model/dao/UserDAO.php';
 
 class UserApiController {
 
-    public function getUserByID() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $user = UserDAO::getUserByID($id);  
-            echo json_encode($user->toArray()); 
-        }
-    }
+    // public function getUserByID() {
+    //     if (isset($_GET['id'])) {
+    //         $id = $_GET['id'];
+    //         $user = UserDAO::getUserByID($id);  
+    //         echo json_encode($user->toArray()); 
+    //     }
+    // }
 
     public function getUsers() {
         $users = UserDAO::getUsers();

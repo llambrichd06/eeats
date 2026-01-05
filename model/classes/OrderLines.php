@@ -15,7 +15,6 @@ class OrderLines
         $product_id = null,
         $price = null,
         $quantity = null,
-        $deleted = null,
         $id = null
     ) {
         $this->line_num = $line_num;

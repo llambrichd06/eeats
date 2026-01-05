@@ -21,7 +21,7 @@ class OrderDAO implements DAO {
         return $insertedId;
     }
 
-        static function UpdateObject($array, $types) {
+    static function UpdateObject($array, $types) {
         $con = DB::connect();
 
         $sqlArray = [];

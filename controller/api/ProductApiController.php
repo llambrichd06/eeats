@@ -4,13 +4,13 @@ include_once 'model/dao/ProductDAO.php';
 
 class ProductApiController {
 
-    public function getProductByID() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $product = ProductDAO::getProductByID($id);  
-            echo json_encode($product->toArray()); 
-        }
-    }
+    // public function getProductByID() {
+    //     if (isset($_GET['id'])) {
+    //         $id = $_GET['id'];
+    //         $product = ProductDAO::getProductByID($id);  
+    //         echo json_encode($product->toArray()); 
+    //     }
+    // }
 
     public function getProducts() {
         $products = ProductDAO::getProducts();

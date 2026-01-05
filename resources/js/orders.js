@@ -40,6 +40,13 @@ const orderSort = document.getElementById('orderSort');
 const sortingOrder = document.getElementById('sortingOrder');
 const filterButton = document.getElementById('filterButton');
 
+/**
+ * Order lines window
+ */
+const closeBtn = document.getElementById('closeOrderLinesBtn');
+const modal = document.getElementById('modal');
+const overlay = document.getElementById('overlay');
+
 orderFilter.addEventListener("change", (filter) => {
     filters.forEach(input => {
         input.classList.remove('currentFilter')
@@ -134,9 +141,26 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
                 const button = document.createElement('button');
                 
                 if (i === 0) {
-                    //HERE IS THE BUTTON TO SHOW ORDER LINES OF THAT ORDER :P
-                    button.classList.add('orderLinesButton', 'btn', 'btn-primary');
+                    //HERE IS THE BUTTON TO SHOW ORDER LINES OF THAT ORDER
+                    button.classList.add('btn', 'btn-primary');
+                    button.id = 'orderLinesButton';
                     button.innerHTML = 'Show Order Lines';
+                    button.addEventListener('click', () => {
+                        modal.style.display = 'flex';
+                        overlay.style.display = 'flex';
+                        showOrderLines(newOrder.getId());
+                    });
+
+                    closeBtn.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        overlay.style.display = 'none';
+                    });
+                
+                    overlay.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        overlay.style.display = 'none';
+                    });
+
                 } else if (i === 1) {
                     button.classList.add('orderEditButton', 'btn', 'btn-secondary');
                     button.innerHTML = 'Edit';
@@ -190,7 +214,7 @@ orderForm.addEventListener('submit', async f => {
     let deliveryTypeValue = f.target[4].value;
     let subtotalValue = f.target[5].value;
     let totalValue = f.target[6].value;
-    let deliveryDateValue = f.target[7].value.replace('T', ' ') + ':00';;
+    let deliveryDateValue = f.target[7].value.replace('T', ' ') + ':00';
     let discountIdValue = f.target[8].value;
     let discountAmountValue = f.target[9].value;
 
@@ -284,3 +308,149 @@ class Order {
         return this.discount_applied; 
     }
 }
+
+//ORDER LINES
+
+//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
+//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
+//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
+//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
+const orderLinesForm = document.getElementById('orderLinesForm');
+
+const orderLineId = document.getElementById('orderLineId');
+const orderLineIdDisplay = document.getElementById('orderLineIdDisplay');
+const orderLineNumber = document.getElementById('orderLineNumber');
+const orderLineOrderId = document.getElementById('orderLineOrderId');
+const orderLineOrderIdDisplay = document.getElementById('orderLineOrderIdDisplay');
+const orderLineProductId = document.getElementById('orderLineProductId');
+const orderLinePrice = document.getElementById('orderLinePrice');
+const orderLineQuantity = document.getElementById('orderLineQuantity');
+const orderLineIsEditing = document.getElementById('orderLineIsEditing');
+
+let orderIdForLines = null;
+/* FETCH & SHOW ORDER LINES */
+async function showOrderLines(orderId) {
+    
+    fetch(currentApiURL + "?controller=OrderLines&action=getOrderLinesByOrderId&order_id=" + orderId, { 
+        method: 'GET' })
+        .then(r => r.json())
+        .then(r => {
+            const tbody = document.getElementById('orderLinesTableBody');
+            tbody.innerHTML = "";
+            orderLineOrderId.value = orderId; //set the order id in the hidden input of the form
+            orderLineOrderIdDisplay.innerHTML = orderId; //and show it on the display
+            r.forEach(line => {
+                const newLine = new OrderLine(
+                    line.id,
+                    line.line_num,
+                    line.order_id,
+                    line.product_id,
+                    line.price,
+                    line.quantity
+                );
+                orderLineId.value = newLine.getId(); //set the order id in the input of the form
+                orderLineIdDisplay.innerHTML = newLine.getId(); //set the order id in the input of the form
+                orderIdForLines = orderId; //store the order id for when resetting
+                const row = document.createElement('tr');
+
+                Object.entries(newLine).forEach(([key, value]) => {
+                    const td = document.createElement('td');
+                    td.innerHTML = value;
+                    row.append(td);
+                });
+
+                // EDIT BUTTON
+                const editTd = document.createElement('td');
+                const editBtn = document.createElement('button');
+                editBtn.classList.add('btn', 'btn-secondary');
+                editBtn.innerHTML = 'Edit';
+
+                editBtn.addEventListener('click', () => {
+                    orderLineId.value = newLine.getId();
+                    orderLineIdDisplay.innerHTML = newLine.getId();
+                    orderLineNumber.value = newLine.getLineNum();
+                    orderLineOrderId.value = newLine.getOrderId();
+                    orderLineOrderIdDisplay.innerHTML = newLine.getOrderId();
+                    orderLineProductId.value = newLine.getProductId();
+                    orderLinePrice.value = newLine.getPrice();
+                    orderLineQuantity.value = newLine.getQuantity();
+                });
+
+                editTd.append(editBtn);
+                row.append(editTd);
+
+                tbody.append(row);
+            });
+        });
+}
+
+/* FORM SUBMIT (CREATE / EDIT) */
+orderLinesForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const submitBtn = e.submitter;
+    submitBtn.disabled = true;
+
+    const lineNumValue = orderLineNumber.value;
+    const orderIdValue = orderLineOrderId.value;
+    const productIdValue = orderLineProductId.value;
+    const priceValue = orderLinePrice.value;
+    const quantityValue = orderLineQuantity.value;
+
+    if (orderLineIsEditing.checked) {
+        // EDIT
+        await fetch(currentApiURL + "?controller=OrderLines&action=editOrderLine", {
+            method: PUT,
+            body: JSON.stringify({
+                id: orderLineId.value,
+                line_num: lineNumValue,
+                order_id: orderIdValue,
+                product_id: productIdValue,
+                price: priceValue,
+                quantity: quantityValue
+            })
+        });
+    } else {
+        // CREATE
+        await fetch(currentApiURL + "?controller=OrderLines&action=saveOrderLine", {
+            method: 'POST',
+            body: JSON.stringify({
+                id: orderLineId.value,
+                line_num: lineNumValue,
+                order_id: orderIdValue,
+                product_id: productIdValue,
+                price: priceValue,
+                quantity: quantityValue
+            })
+        });
+    }
+
+    await showOrderLines(orderIdValue);
+    submitBtn.disabled = false;
+});
+
+/* RESET FORM */
+orderLinesForm.addEventListener('reset', (e) => {
+    orderLineOrderId.value = orderIdForLines;
+    orderLineOrderIdDisplay.innerHTML = orderIdForLines;
+});
+
+/* ORDER LINE CLASS */
+class OrderLine {
+    constructor(id, line_num, order_id, product_id, price, quantity) {
+        this.id = id;
+        this.line_num = line_num;
+        this.order_id = order_id;
+        this.product_id = product_id;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    getId() { return this.id; }
+    getLineNum() { return this.line_num; }
+    getOrderId() { return this.order_id; }
+    getProductId() { return this.product_id; }
+    getPrice() { return this.price; }
+    getQuantity() { return this.quantity; }
+}
+

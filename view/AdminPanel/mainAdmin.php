@@ -1,7 +1,7 @@
 <?php
-    if (!isset($_COOKIE['adminVerified'])) {
-        header('Location: ?controller=Admin&action=showLogin');
-    }
+if (!isset($_COOKIE['adminVerified'])) {
+    header('Location: ?controller=Admin&action=showLogin');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +59,7 @@
                     <th>Delete</th>
                 </thead>
                 <tbody id="userTableBody">
-                    
+
                 </tbody>
             </table>
             <br>
@@ -76,7 +76,7 @@
                 <input type="email" name="" id="userEmail" required>
                 <br>
                 <label for="userPFP">Profile Picture file name</label><br>
-                <input type="text" name="" id="userPFP" >
+                <input type="text" name="" id="userPFP">
                 <br>
                 <label for="userPass">Password</label><br>
                 <input type="password" name="" id="userPass" required>
@@ -135,7 +135,7 @@
                     <th>Delete</th>
                 </thead>
                 <tbody id="orderTableBody">
-                    
+
                 </tbody>
             </table>
             <br>
@@ -195,7 +195,7 @@
                     <th>Delete</th>
                 </thead>
                 <tbody id="prodTableBody">
-                    
+
                 </tbody>
             </table>
             <br>
@@ -233,11 +233,73 @@
                 <button type="reset" class="btn btn-danger">Reset</button>
             </form>
         </section>
-        <section id="Discounts" class="content-section">
-            <p>Discounts</p>
+        <section id="Discounts" class="content-section flex-column justify-content-start">
+            <table>
+                <thead>
+                    <th>Id</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Percent</th>
+                    <th>Uses</th>
+                    <th>Begins At</th>
+                    <th>Ends At</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody id="discountTableBody">
+
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <form action="" id="discountForm">
+                <p>Submitting without an id selected will create a new discount!</p>
+
+                <!-- Discount ID (hidden) -->
+                <label for="">Id</label>
+                <p id="discountIdDisplay">No Id Selected</p>
+                <input type="hidden" name="" id="discountId">
+
+                <!-- Discount Code -->
+                <label for="discountCode">Code</label><br>
+                <input type="text" name="discountCode" id="discountCode">
+                <br>
+
+                <!-- Discount Type -->
+                <label for="discountType">Type</label><br>
+                <select name="discountType" id="discountType" required>
+                    <option value="0" id="discountCodeType">Code-based discount</option>
+                    <option value="1" id="discountProductType">Product automatic discount</option>
+                </select>
+                <br>
+
+                <!-- Discount Percent -->
+                <label for="discountPercent">Percent (%)</label><br>
+                <input type="number" name="discountPercent" id="discountPercent" min="0" max="100" required>
+                <br>
+
+                <!-- Discount Uses -->
+                <label for="discountUses">Uses</label><br>
+                <input type="number" name="discountUses" id="discountUses" min="0">
+                <br>
+
+                <!-- Begins At -->
+                <label for="discountBeginsAt">Begins At</label><br>
+                <input type="datetime-local" name="discountBeginsAt" id="discountBeginsAt" required>
+                <br>
+
+                <!-- Ends At -->
+                <label for="discountEndsAt">Ends At</label><br>
+                <input type="datetime-local" name="discountEndsAt" id="discountEndsAt" required>
+                <br>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
+
         </section>
-        <section id="Ingredients" class="content-section">
-            <p>Ingredients</p>
+        <section id="Logs" class="content-section">
+            <p>Logs</p>
         </section>
         <section id="" class="content-section">
             <p></p>
@@ -252,10 +314,78 @@
             <p></p>
         </section>
     </main>
+    <!-------------- ORDER LINES MODAL ----------------->
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="flex-column justify-content-center">
+        <div id="modal-header">
+            <h2>Order lines for the selected order</h2>
+        </div>
+
+        <div id="modal-body">
+            <table>
+            <thead>
+                <th>Id</th>
+                <th>Line #</th>
+                <th>Order Id</th>
+                <th>Product Id</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Edit</th>
+            </thead>
+            <tbody id="orderLinesTableBody">
+
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <form action="" id="orderLinesForm">
+            <p>Submitting while specifying a non existing line will create a new order line!</p>
+
+            <label for="">Id</label>
+            <p id="orderLineIdDisplay">No Id Selected</p>
+            <input type="hidden" id="orderLineId">
+
+            <label for="orderLineNumber">Line #</label><br>
+            <input type="number" id="orderLineNumber" required>
+            <br>
+
+            <label for="">Order Id</label><br>
+            <p id="orderLineOrderIdDisplay">No Id Selected</p>
+            <input type="hidden" id="orderLineOrderId">
+            <br>
+
+            <label for="orderLineProductId">Product Id</label><br>
+            <input type="number" id="orderLineProductId" required>
+            <br>
+
+            <label for="orderLinePrice">Price</label><br>
+            <input type="number" step="0.01" id="orderLinePrice" required>
+            <br>
+
+            <label for="orderLineQuantity">Quantity</label><br>
+            <input type="number" id="orderLineQuantity" required>
+            <br>
+            <label for="orderLineIsEditing">Edit existing line?</label>
+            <input type="checkbox" id="orderLineIsEditing">
+            <br>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+        <br>
+        <button id="closeOrderLinesBtn" class="btn btn-danger">Close</button>
+        </div>
+        
+    </div>
 </body>
 <script src="/resources/js/apiConfig.js"></script>
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/user.js"></script>
 <script src="/resources/js/products.js"></script>
 <script src="/resources/js/orders.js"></script>
+<script src="/resources/js/discount.js"></script>
+
 </html>

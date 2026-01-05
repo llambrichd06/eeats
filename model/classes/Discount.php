@@ -12,8 +12,8 @@ class Discount
     private $type;
     private $percent;
     private $uses;
-    private $endsAt;
-    private $beginsAt;
+    private $ends_at;
+    private $begins_at;
     private $deleted;
 
     public function setData(
@@ -21,8 +21,8 @@ class Discount
         $type = null,
         $percent = null,
         $uses = null,
-        $beginsAt = null,
-        $endsAt = null,
+        $begins_at = null,
+        $ends_at = null,
         $deleted = null,
         $id = null
     ) {
@@ -30,8 +30,8 @@ class Discount
         $this->type = $type;
         $this->percent = $percent;
         $this->uses = $uses;
-        $this->beginsAt = $beginsAt;
-        $this->endsAt = $endsAt;
+        $this->begins_at = $begins_at;
+        $this->ends_at = $ends_at;
         $this->deleted = $deleted;
         $this->id = $id;
     }
@@ -81,21 +81,21 @@ class Discount
         return $this;
     }
 
-    public function getBeginsAt(){
-        return $this->beginsAt;
+    public function getBegins_at(){
+        return $this->begins_at;
     }
 
-    public function setBeginsAt($beginsAt){
-        $this->beginsAt = $beginsAt;
+    public function setBegins_at($begins_at){
+        $this->begins_at = $begins_at;
         return $this;
     }
 
-    public function getEndsAt(){
-        return $this->endsAt;
+    public function getEnds_at(){
+        return $this->ends_at;
     }
 
-    public function setEndsAt($endsAt){
-        $this->endsAt = $endsAt;
+    public function setEnds_at($ends_at){
+        $this->ends_at = $ends_at;
         return $this;
     }
 
