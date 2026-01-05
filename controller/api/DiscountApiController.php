@@ -1,5 +1,6 @@
 <?php
 include_once 'model/dao/DiscountDAO.php';
+include_once 'model/dao/LogDAO.php';
 
 class DiscountApiController {
 
@@ -37,6 +38,9 @@ class DiscountApiController {
                 'status' => 'Success',
                 'data' => 'Discount inserted correctly',
             ]);
+            $log = new Log();
+            $log->setData($_SESSION['lastAdminLoginId'], 'Saved new discount ');
+            LogDAO::saveLog($log);
         }
     }
 
@@ -58,6 +62,9 @@ class DiscountApiController {
                 'status' => 'Success',
                 'data' => 'Discount edited correctly'
             ]);
+            $log = new Log();
+            $log->setData($_SESSION['lastAdminLoginId'], 'Edited discount with id ' . $data['id']);
+            LogDAO::saveLog($log);
         }
     }
 
@@ -68,6 +75,9 @@ class DiscountApiController {
                 'status' => 'Success',
                 'data' => 'Discount deleted successfully'
             ]);
+            $log = new Log();
+            $log->setData($_SESSION['lastAdminLoginId'], 'Deleted discount with id ' . $data['id']);
+            LogDAO::saveLog($log);
         }
     }
 }

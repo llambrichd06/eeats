@@ -12,7 +12,6 @@ class ProductDAO implements DAO {
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
-        var_dump($values);
 
         $stmt = $con->prepare("INSERT INTO products ($columnList) VALUES ($placeholders)"); //inserting nulls on autonincrements is as if we didn't insert anything
         $stmt->bind_param($types, ...$values); //three dots mean that we just put the array values like this: 'val1, val2, val3...'

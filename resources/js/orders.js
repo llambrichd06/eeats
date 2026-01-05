@@ -311,10 +311,6 @@ class Order {
 
 //ORDER LINES
 
-//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
-//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
-//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
-//UNCHECKED CHATGPT CODE GOTTA REVIEW AND TEST!!!!!
 const orderLinesForm = document.getElementById('orderLinesForm');
 
 const orderLineId = document.getElementById('orderLineId');
@@ -339,6 +335,10 @@ async function showOrderLines(orderId) {
             tbody.innerHTML = "";
             orderLineOrderId.value = orderId; //set the order id in the hidden input of the form
             orderLineOrderIdDisplay.innerHTML = orderId; //and show it on the display
+            if (r.length == 0) {
+                orderLineId.value = null; //if there is no lines, the id is set to null
+                orderLineIdDisplay.innerHTML = "No id available"; //set the order id in the input of the form
+            }
             r.forEach(line => {
                 const newLine = new OrderLine(
                     line.id,

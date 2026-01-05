@@ -1,6 +1,6 @@
 <?php
 include_once 'model/dao/UserDAO.php';
-
+include_once 'model/dao/LogDAO.php';
 
 class UserApiController {
 
@@ -31,6 +31,9 @@ class UserApiController {
                 'status' => 'Success',
                 'data' => 'User Inserted correctly',
             ]);
+            $log = new Log();
+            $log->setData($_SESSION['lastAdminLoginId'], 'Saved new user');
+            LogDAO::saveLog($log);
         }
         } catch (\Throwable $th) {
             http_response_code(409);
@@ -52,6 +55,9 @@ class UserApiController {
                     'status' => 'Success',
                     'data' => 'User edited correctly'
                 ]);
+                $log = new Log();
+                $log->setData($_SESSION['lastAdminLoginId'], 'Edited user with id ' . $data['id']);
+                LogDAO::saveLog($log);
             }
         } catch (\Throwable $th) {
             http_response_code(409);
@@ -70,6 +76,9 @@ class UserApiController {
                 'status' => 'Success',
                 'data' => 'User deleted successfully'
             ]);
+            $log = new Log();
+            $log->setData($_SESSION['lastAdminLoginId'], 'Deleted user with id ' . $data['id']);
+            LogDAO::saveLog($log);
         }
     }
 }

@@ -4,11 +4,11 @@ include_once 'model/classes/Log.php';
 include_once 'model/DAO.php';
 
 class LogDAO implements DAO {
-    public static function insertObject($object, $types) {
+    public static function insertObject($array, $types) {
         $con = DB::connect();
 
-        $columns = array_keys(get_object_vars($object));
-        $values = array_values(get_object_vars($object));
+        $columns = array_keys($array);
+        $values = array_values($array);
 
         $placeholders = implode(', ', array_fill(0, count($columns), '?')); //prepare question marks so we dont have risk of sql injection
         $columnList = implode(', ', $columns);
@@ -51,7 +51,8 @@ class LogDAO implements DAO {
     }
     
     public static function saveLog(Log $log) {
-        $result = LogDAO::insertObject($log, 'iiss');
+        $log->setLogDate(date('Y-m-d H:i:s')); //set current date and time
+        $result = LogDAO::insertObject($log->toArray(), 'iiss');
     }
 }
     

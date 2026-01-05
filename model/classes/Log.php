@@ -3,18 +3,18 @@
 class Log
 {
     private $id;
-    private $userId;
-    private $logDate;
+    private $user_id;
+    private $log_date;
     private $action;
 
     public function setData(
-        $userId = null,
-        $logDate = null,
+        $user_id = null,
         $action = null,
+        $log_date = null,
         $id = null
     ) {
-        $this->userId = $userId;
-        $this->logDate = $logDate;
+        $this->user_id = $user_id;
+        $this->log_date = $log_date;
         $this->action = $action;
         $this->id = $id;
     }
@@ -29,20 +29,20 @@ class Log
     }
 
     public function getUserId() {
-        return $this->userId;
+        return $this->user_id;
     }
 
-    public function setUserId($userId) {
-        $this->userId = $userId;
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
         return $this;
     }
 
     public function getLogDate() {
-        return $this->logDate;
+        return $this->log_date;
     }
 
-    public function setLogDate($logDate) {
-        $this->logDate = $logDate;
+    public function setLogDate($log_date) {
+        $this->log_date = $log_date;
         return $this;
     }
 

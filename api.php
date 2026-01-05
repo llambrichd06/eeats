@@ -1,9 +1,11 @@
 <?php
+session_start();
 include_once 'controller/api/UserApiController.php';
 include_once 'controller/api/ProductApiController.php';
 include_once 'controller/api/OrderApiController.php';
 include_once 'controller/api/DiscountApiController.php';
 include_once 'controller/api/OrderLinesApiController.php';
+include_once 'controller/api/LogApiController.php';
 
 header("Access-Control-Allow-Origin: *"); //These headers have to execute before any type of output
 header("Content-Type: application/json; charset=UTF-8");

@@ -8,7 +8,6 @@
             unset($_SESSION['promoCode']);
         }
     }
-    var_dump($discount_id);
     $order = new Order;
     $order->setData(
         $_SESSION['user']['id'],
@@ -21,7 +20,6 @@
         $_POST['discountApplied'] ?? null,
     );
     echo '<br>';
-    var_dump($order);
     $orderId = OrderDAO::saveOrder($order);
     $orderLineId = 0;
     foreach ($_SESSION['cart'] as $key => $item) {

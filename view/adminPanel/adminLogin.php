@@ -1,5 +1,4 @@
 <?php
-
     $loginResult = "";
     $adminMsg = false;
     if (isset($_POST["logEmail"], $_POST["logPass"])) {
@@ -11,6 +10,7 @@
             if ($user->getPassword() == $pass) {
                 if ($user->getRole() == "admin") {
                     setcookie("adminVerified", true, time() + 600); //set a cookie to know that the admin is logged in for 5 minutes
+                    $_SESSION['lastAdminLoginId'] = $user->getId(); //set a session variable to know the id of the last admin that logged in for the logs
                     $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
                     $panelGetParams = http_build_query([ //turn an object into get parameters
                         'controller' => 'Admin',
@@ -18,12 +18,12 @@
                     ]);
                     header("Location: $currentUrl?$panelGetParams");
                 } else {
-                    $loginResult = "You do not have admin privileges.";
+                    $loginResult = "The user doesen't have admin privileges.";
                     $adminMsg = true;
                 }
             }
         }
-        if ($adminMsg) {
+        if (!$adminMsg) {
             $loginResult = "The submitted email or password is incorrect.";
         }
     }

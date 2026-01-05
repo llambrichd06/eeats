@@ -36,7 +36,7 @@ if (!isset($_COOKIE['adminVerified'])) {
                         <a class="nav-link btn" for="Discounts" href="#">Discounts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn" for="Ingredients" href="#">Ingredients</a>
+                        <a class="nav-link btn" for="Logs" href="#">Logs</a>
                     </li>
                 </ul>
             </div>
@@ -298,8 +298,20 @@ if (!isset($_COOKIE['adminVerified'])) {
             </form>
 
         </section>
-        <section id="Logs" class="content-section">
-            <p>Logs</p>
+        <section id="Logs" class="content-section flex-column justify-content-start">
+            <table>
+                <thead>
+                    <th>Id</th>
+                    <th>User Id</th>
+                    <th>Log date</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="logTableBody">
+
+                </tbody>
+            </table>
+            <br>
+            <button id="logReload" class="btn btn-primary">Reload Logs</button>
         </section>
         <section id="" class="content-section">
             <p></p>
@@ -349,7 +361,7 @@ if (!isset($_COOKIE['adminVerified'])) {
             <input type="hidden" id="orderLineId">
 
             <label for="orderLineNumber">Line #</label><br>
-            <input type="number" id="orderLineNumber" required>
+            <input type="number" id="orderLineNumber" min="1" required>
             <br>
 
             <label for="">Order Id</label><br>
@@ -358,15 +370,15 @@ if (!isset($_COOKIE['adminVerified'])) {
             <br>
 
             <label for="orderLineProductId">Product Id</label><br>
-            <input type="number" id="orderLineProductId" required>
+            <input type="number" id="orderLineProductId" min="1" required>
             <br>
 
             <label for="orderLinePrice">Price</label><br>
-            <input type="number" step="0.01" id="orderLinePrice" required>
+            <input type="number" step="0.01" id="orderLinePrice" min="0" required>
             <br>
 
             <label for="orderLineQuantity">Quantity</label><br>
-            <input type="number" id="orderLineQuantity" required>
+            <input type="number" id="orderLineQuantity" min="1" required>
             <br>
             <label for="orderLineIsEditing">Edit existing line?</label>
             <input type="checkbox" id="orderLineIsEditing">
@@ -383,9 +395,10 @@ if (!isset($_COOKIE['adminVerified'])) {
 </body>
 <script src="/resources/js/apiConfig.js"></script>
 <script src="/resources/js/main.js"></script>
-<script src="/resources/js/user.js"></script>
+<script src="/resources/js/users.js"></script>
 <script src="/resources/js/products.js"></script>
 <script src="/resources/js/orders.js"></script>
-<script src="/resources/js/discount.js"></script>
+<script src="/resources/js/discounts.js"></script>
+<script src="/resources/js/logs.js"></script>
 
 </html>
