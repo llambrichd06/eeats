@@ -77,7 +77,8 @@ class DiscountDAO implements DAO {
         where d.begins_at < sysdate()
         and d.ends_at > sysdate()
         and d.`type` = 1
-        and d.deleted != 1
+        and d.deleted = 0
+        and p.deleted = 0
         order by d.begins_at desc
         limit 3");
         $stmt->execute();
