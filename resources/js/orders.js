@@ -40,6 +40,8 @@ const orderSort = document.getElementById('orderSort');
 const sortingOrder = document.getElementById('sortingOrder');
 const filterButton = document.getElementById('filterButton');
 
+const savedFiltersKey = "eeats_order_filters";
+
 /**
  * Order lines window
  */
@@ -53,153 +55,203 @@ orderFilter.addEventListener("change", (filter) => {
     });
     if (filter.target.value == "date") {
         filterInputs[1].classList.add('currentFilter');
-    } else if (filter.target.value) {
+    } else if (filter.target.value == "user" || filter.target.value == "price") {
         filterInputs[0].classList.add('currentFilter');
-    } 
+    }
 })
 
 filterButton.addEventListener('click', () => {
-    showOrders(orderFilter.value, orderSort.value, sortingOrder.value);
+    const filter = orderFilter.value;
+
+    const storedData = {
+        filter,
+        filterValue:
+            filter === "date"
+                ? filterInputs[1].value
+                : filter
+                    ? filterInputs[0].value
+                    : null,
+        sort: orderSort.value,
+        sortingOrder: sortingOrder.value
+    };
+
+    localStorage.setItem(
+        savedFiltersKey,
+        JSON.stringify(storedData)
+    );
+
+    showOrders(filter, orderSort.value, sortingOrder.value);
 })
 
+function normalizeDate(dateString) { //this function converts a mysql datetime string into a js date object and can handle invalid dates
+    if (!dateString) return null; // handles null, undefined, ""
+    const d = new Date(dateString.replace(' ', 'T'));
+    return isNaN(d) ? null : d;
+}
+
+
+
+restoreOrderFilters();
 
 //MAIN FUNCTION TO FETCH AND SHOW ORDERS
 async function showOrders(filter = null, sort = null, sortingOrder = null) {
     fetch(currentApiURL + "?controller=Order&action=getOrders", {
         method: 'GET'
     })
-    .then(r => r.json())
-    .then(r => {
-        const tbody = document.getElementById('orderTableBody');
-        tbody.innerHTML = "";
+        .then(r => r.json())
+        .then(r => {
+            const tbody = document.getElementById('orderTableBody');
+            tbody.innerHTML = "";
 
-        if (filter) {
-            r = r.filter((order)=>{
-                order.delivery_date = order.delivery_date ?? "0000-00-00 00:00";
-                if (filter == "user") {
-                    return order.user_id == filterInputs[0].value;
-                } else if (filter == "price") {
-                    return order.total > filterInputs[0].value
-                } else if (filter == "date") {
-                    let date1 = new Date(order.delivery_date.replace(' ', 'T').slice(0, 16)) //parse mysql datetime format into js date
-                    let date2 = new Date(filterInputs[1].value)
-                    console.log(date2)
-                    return date1.getFullYear() === date2.getFullYear() &&
-                    date1.getMonth() === date2.getMonth() &&
-                    date1.getDate() === date2.getDate()
-                } 
-            })
+            if (filter) {
+                r = r.filter((order) => {
+                    // order.delivery_date = order.delivery_date ?? "0000-00-00 00:00";
+                    if (filter == "user") {
+                        return order.user_id == filterInputs[0].value;
+                    } else if (filter == "price") {
+                        return order.total > filterInputs[0].value
+                    } else if (filter === "date") {
+                        const orderDate = normalizeDate(order.delivery_date);
+                        const filterDate = normalizeDate(filterInputs[1].value);
 
-        }
-        if (sort) {
-            r = r.sort((a, b)=>{
-                let dataA;
-                let dataB;
-                console.log(a.delivery_date);
-                a.delivery_date = a.delivery_date ?? "0000-00-00 00:00:00";
-                b.delivery_date = b.delivery_date ?? "0000-00-00 00:00:00";
-                if (sort == "date") {
-                    dataA = new Date(a.delivery_date.replace(' ', 'T').slice(0, 16))
-                    dataB = new Date(b.delivery_date.replace(' ', 'T').slice(0, 16)) //parse mysql datetime format into js date
-                } else if (sort == "user") {
-                    dataA = a.user_id
-                    dataB = b.user_id
-                } else {
-                    dataA = a.total
-                    dataB = b.total
-                }
-                if (sortingOrder == "asc") {
-                    return dataA - dataB
-                } else {
-                    return dataB - dataA
-                }
-            })
-        }
-        r.forEach(order => {
-            const newOrder = new Order(
-                order.id,
-                order.user_id,
-                order.created_at,
-                order.address,
-                order.delivery_type,
-                order.subtotal,
-                order.total,
-                order.delivery_date,
-                order.discount_id,
-                order.discount_applied
-            );
-            const orderRow = document.createElement('tr');
+                        // If user picked a date but order has none we exclude it
+                        if (!orderDate || !filterDate) return false;
 
-            Object.entries(newOrder).forEach(([key, orderData]) => {
-                const block = document.createElement('td');
-                block.innerHTML = orderData;
-                orderRow.append(block);
-            });
+                        return (
+                            orderDate.getFullYear() === filterDate.getFullYear() &&
+                            orderDate.getMonth() === filterDate.getMonth() &&
+                            orderDate.getDate() === filterDate.getDate()
+                        );
+                    } else if (filter === "no_date") {
+                        return !order.delivery_date;
+                    }
+                })
 
-            for (let i = 0; i < 3; i++) {
-                const buttonBlock = document.createElement('td');
-                const button = document.createElement('button');
-                
-                if (i === 0) {
-                    //HERE IS THE BUTTON TO SHOW ORDER LINES OF THAT ORDER
-                    button.classList.add('btn', 'btn-primary');
-                    button.id = 'orderLinesButton';
-                    button.innerHTML = 'Show Order Lines';
-                    button.addEventListener('click', () => {
-                        modal.style.display = 'flex';
-                        overlay.style.display = 'flex';
-                        showOrderLines(newOrder.getId());
-                    });
-
-                    closeBtn.addEventListener('click', () => {
-                        modal.style.display = 'none';
-                        overlay.style.display = 'none';
-                    });
-                
-                    overlay.addEventListener('click', () => {
-                        modal.style.display = 'none';
-                        overlay.style.display = 'none';
-                    });
-
-                } else if (i === 1) {
-                    button.classList.add('orderEditButton', 'btn', 'btn-secondary');
-                    button.innerHTML = 'Edit';
-                    button.addEventListener('click', () => {
-                        orderId.value = newOrder.getId();
-                        orderIdDisplay.innerHTML = newOrder.getId();
-                        orderUserId.value = newOrder.getUserId();
-                        orderCreatedAt.value = newOrder.getCreatedAt();
-                        orderAddress.value = newOrder.getAddress();
-                        if (newOrder.getDeliveryType() == 'pickup') orderPickupDeliveryType.selected = true;
-                        if (newOrder.getDeliveryType() == 'delivery') orderDeliveryDeliveryType.selected = true;
-                        orderSubtotal.value = newOrder.getSubtotal();
-                        orderTotal.value = newOrder.getTotal();
-                        orderDeliveryDate.value = newOrder.getDeliveryDate().replace(' ', 'T').slice(0, 16); //turn mysql datetime date into a datetime-local date
-                        orderDiscountId.value = newOrder.getDiscountId();
-                        orderDiscountAmount.value = newOrder.getDiscountApplied();
-                    });
-                } else {
-                    button.classList.add('orderRemoveButton', 'btn', 'btn-danger');
-                    button.innerHTML = 'Delete';
-                    button.addEventListener('click', () => {
-                        let idRemoved = newOrder.getId();
-                        fetch(currentApiURL + "?controller=Order&action=deleteOrder", {
-                            method: DELETE,
-                            body: JSON.stringify({ id: idRemoved })
-                        }).then(setTimeout(showOrders(), 50));
-                    });
-                }
-
-                buttonBlock.append(button);
-                orderRow.append(buttonBlock);
             }
+            if (sort) {
+                r = r.sort((a, b) => {
+                    let dataA;
+                    let dataB;
+                    console.log(a.delivery_date);
+                    // a.delivery_date = a.delivery_date ?? "0000-00-00 00:00:00";
+                    // b.delivery_date = b.delivery_date ?? "0000-00-00 00:00:00";
+                    if (sort === "date") {
+                        dataA = normalizeDate(a.delivery_date);
+                        dataB = normalizeDate(b.delivery_date);
 
-            tbody.append(orderRow);
+                        // Handle nulls FIRST
+                        if (!dataA && !dataB) return 0;
+                        if (!dataA) return sortingOrder === "asc" ? -1 : 1;
+                        if (!dataB) return sortingOrder === "asc" ? 1 : -1;
+
+                        // Both valid dates
+                        return sortingOrder === "asc"
+                            ? dataA - dataB
+                            : dataB - dataA;
+                    } else if (sort == "user") {
+                        dataA = a.user_id
+                        dataB = b.user_id
+                    } else {
+                        dataA = a.total
+                        dataB = b.total
+                    }
+                    if (sortingOrder == "asc") {
+                        return dataA - dataB
+                    } else {
+                        return dataB - dataA
+                    }
+                })
+            }
+            r.forEach(order => {
+                const newOrder = new Order(
+                    order.id,
+                    order.user_id,
+                    order.created_at,
+                    order.address,
+                    order.delivery_type,
+                    order.subtotal,
+                    order.total,
+                    order.delivery_date,
+                    order.discount_id,
+                    order.discount_applied
+                );
+                const orderRow = document.createElement('tr');
+
+                Object.entries(newOrder).forEach(([key, orderData]) => {
+                    const block = document.createElement('td');
+                    if (key === "price" || key === "subtotal" || key === "total") { //if key is price, we prepare the price cell for currency conversion
+                        block.classList.add("price-cell");
+                        block.dataset.eur = orderData; //this applies a data attribute on the cell, which will store the origina euro value         
+                        block.textContent = convertPrice(orderData);
+                    } else {
+                        block.innerHTML = orderData;
+                    }
+                    orderRow.append(block);
+                });
+
+                for (let i = 0; i < 3; i++) {
+                    const buttonBlock = document.createElement('td');
+                    const button = document.createElement('button');
+
+                    if (i === 0) {
+                        //HERE IS THE BUTTON TO SHOW ORDER LINES OF THAT ORDER
+                        button.classList.add('btn', 'btn-primary');
+                        button.id = 'orderLinesButton';
+                        button.innerHTML = 'Show Order Lines';
+                        button.addEventListener('click', () => {
+                            modal.style.display = 'flex';
+                            overlay.style.display = 'flex';
+                            showOrderLines(newOrder.getId());
+                        });
+
+                        closeBtn.addEventListener('click', () => {
+                            modal.style.display = 'none';
+                            overlay.style.display = 'none';
+                        });
+
+                        overlay.addEventListener('click', () => {
+                            modal.style.display = 'none';
+                            overlay.style.display = 'none';
+                        });
+
+                    } else if (i === 1) {
+                        button.classList.add('orderEditButton', 'btn', 'btn-secondary');
+                        button.innerHTML = 'Edit';
+                        button.addEventListener('click', () => {
+                            orderId.value = newOrder.getId();
+                            orderIdDisplay.innerHTML = newOrder.getId();
+                            orderUserId.value = newOrder.getUserId();
+                            orderCreatedAt.value = newOrder.getCreatedAt();
+                            orderAddress.value = newOrder.getAddress();
+                            if (newOrder.getDeliveryType() == 'pickup') orderPickupDeliveryType.selected = true;
+                            if (newOrder.getDeliveryType() == 'delivery') orderDeliveryDeliveryType.selected = true;
+                            orderSubtotal.value = newOrder.getSubtotal();
+                            orderTotal.value = newOrder.getTotal();
+                            orderDeliveryDate.value = newOrder.getDeliveryDate().replace(' ', 'T').slice(0, 16); //turn mysql datetime date into a datetime-local date
+                            orderDiscountId.value = newOrder.getDiscountId();
+                            orderDiscountAmount.value = newOrder.getDiscountApplied();
+                        });
+                    } else {
+                        button.classList.add('orderRemoveButton', 'btn', 'btn-danger');
+                        button.innerHTML = 'Delete';
+                        button.addEventListener('click', () => {
+                            let idRemoved = newOrder.getId();
+                            fetch(currentApiURL + "?controller=Order&action=deleteOrder", {
+                                method: DELETE,
+                                body: JSON.stringify({ id: idRemoved })
+                            }).then(setTimeout(showOrders(), 50));
+                        });
+                    }
+
+                    buttonBlock.append(button);
+                    orderRow.append(buttonBlock);
+                }
+
+                tbody.append(orderRow);
+            });
         });
-    });
 }
 
-showOrders();
 
 orderForm.addEventListener('submit', async f => {
     console.log(f);
@@ -263,6 +315,34 @@ orderForm.addEventListener('reset', () => {
     orderId.value = "";
 });
 
+function restoreOrderFilters() {
+    const stored = localStorage.getItem(savedFiltersKey);
+    if (!stored) {
+        showOrders();
+    } else {
+        const { filter, filterValue, sort, sortingOrder: orderDirection } = //object destructuring is amazing
+            JSON.parse(stored);
+
+        // Restore select values
+        orderFilter.value = filter || "";
+        orderSort.value = sort || "";
+        sortingOrder.value = orderDirection || "asc";
+
+        // Restore input visibility + value
+        filters.forEach(input => input.classList.remove('currentFilter'));
+
+        if (filter === "date") {
+            filterInputs[1].classList.add('currentFilter');
+            filterInputs[1].value = filterValue || "";
+        } else if (filter === "user" || filter === "price") {
+            filterInputs[0].classList.add('currentFilter');
+            filterInputs[0].value = filterValue || "";
+        }
+
+        showOrders(filter, sort, orderDirection);
+    }
+}
+
 class Order {
     constructor(id, user_id, created_at, address, delivery_type, subtotal, total, delivery_date, discount_id, discount_applied) {
         this.id = id;
@@ -277,35 +357,35 @@ class Order {
         this.discount_applied = discount_applied;
     }
 
-    getId() { 
-        return this.id; 
+    getId() {
+        return this.id;
     }
-    getUserId() { 
-        return this.user_id; 
+    getUserId() {
+        return this.user_id;
     }
-    getCreatedAt() { 
-        return this.created_at; 
+    getCreatedAt() {
+        return this.created_at;
     }
-    getAddress() { 
-        return this.address; 
+    getAddress() {
+        return this.address;
     }
-    getDeliveryType() { 
-        return this.delivery_type; 
+    getDeliveryType() {
+        return this.delivery_type;
     }
-    getSubtotal() { 
-        return this.subtotal; 
+    getSubtotal() {
+        return this.subtotal;
     }
-    getTotal() { 
-        return this.total; 
+    getTotal() {
+        return this.total;
     }
-    getDeliveryDate() { 
-        return this.delivery_date; 
+    getDeliveryDate() {
+        return this.delivery_date;
     }
-    getDiscountId() { 
-        return this.discount_id; 
+    getDiscountId() {
+        return this.discount_id;
     }
-    getDiscountApplied() { 
-        return this.discount_applied; 
+    getDiscountApplied() {
+        return this.discount_applied;
     }
 }
 
@@ -326,9 +406,10 @@ const orderLineIsEditing = document.getElementById('orderLineIsEditing');
 let orderIdForLines = null;
 /* FETCH & SHOW ORDER LINES */
 async function showOrderLines(orderId) {
-    
-    fetch(currentApiURL + "?controller=OrderLines&action=getOrderLinesByOrderId&order_id=" + orderId, { 
-        method: 'GET' })
+
+    fetch(currentApiURL + "?controller=OrderLines&action=getOrderLinesByOrderId&order_id=" + orderId, {
+        method: 'GET'
+    })
         .then(r => r.json())
         .then(r => {
             const tbody = document.getElementById('orderLinesTableBody');
@@ -353,10 +434,16 @@ async function showOrderLines(orderId) {
                 orderIdForLines = orderId; //store the order id for when resetting
                 const row = document.createElement('tr');
 
-                Object.entries(newLine).forEach(([key, value]) => {
-                    const td = document.createElement('td');
-                    td.innerHTML = value;
-                    row.append(td);
+                Object.entries(newLine).forEach(([key, orderLineData]) => {
+                    const block = document.createElement('td');
+                    if (key === "price") { //if key is price, we prepare the price cell for currency conversion
+                        block.classList.add("price-cell");
+                        block.dataset.eur = orderLineData; //this applies a data attribute on the cell, which will store the origina euro value         
+                        block.textContent = convertPrice(orderLineData);
+                    } else {
+                        block.innerHTML = orderLineData;
+                    }
+                    row.append(block);
                 });
 
                 // EDIT BUTTON
@@ -391,6 +478,7 @@ orderLinesForm.addEventListener('submit', async e => {
     const submitBtn = e.submitter;
     submitBtn.disabled = true;
 
+    const idValue = orderLineId.value;
     const lineNumValue = orderLineNumber.value;
     const orderIdValue = orderLineOrderId.value;
     const productIdValue = orderLineProductId.value;
@@ -402,7 +490,7 @@ orderLinesForm.addEventListener('submit', async e => {
         await fetch(currentApiURL + "?controller=OrderLines&action=editOrderLine", {
             method: PUT,
             body: JSON.stringify({
-                id: orderLineId.value,
+                id: idValue,
                 line_num: lineNumValue,
                 order_id: orderIdValue,
                 product_id: productIdValue,
@@ -415,7 +503,7 @@ orderLinesForm.addEventListener('submit', async e => {
         await fetch(currentApiURL + "?controller=OrderLines&action=saveOrderLine", {
             method: 'POST',
             body: JSON.stringify({
-                id: orderLineId.value,
+                id: idValue,
                 line_num: lineNumValue,
                 order_id: orderIdValue,
                 product_id: productIdValue,

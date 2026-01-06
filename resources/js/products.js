@@ -15,59 +15,65 @@ showProducts();
 
 //MAIN FUNCTION TO FETCH AND SHOW PRODUCTS
 async function showProducts() {
-    fetch(currentApiURL+"?controller=Product&action=getProducts", {
+    fetch(currentApiURL + "?controller=Product&action=getProducts", {
         method: 'GET'
     }).then(r => r.json())
-    .then(r => {
-        const tbody = document.getElementById('prodTableBody');
-        tbody.innerHTML = "";
-        r.forEach(prod => {
-            const newProduct = new Product(prod.id, prod.name, prod.description, prod.price, prod.created_at, prod.stock, prod.img, prod.premium, prod.discount_id) 
-            const prodRow = document.createElement('tr');
+        .then(r => {
+            const tbody = document.getElementById('prodTableBody');
+            tbody.innerHTML = "";
+            r.forEach(prod => {
+                const newProduct = new Product(prod.id, prod.name, prod.description, prod.price, prod.created_at, prod.stock, prod.img, prod.premium, prod.discount_id)
+                const prodRow = document.createElement('tr');
 
-            Object.entries(newProduct).forEach(([key, prodData]) => { 
-                const block = document.createElement('td');
-                block.innerHTML = prodData;
-                prodRow.append(block);
-            });
+                Object.entries(newProduct).forEach(([key, prodData]) => {
+                    const block = document.createElement('td');
+                    if (key === "price") { //if key is price, we prepare the price cell for currency conversion
+                        block.classList.add("price-cell");
+                        block.dataset.eur = prodData; //this applies a data attribute on the cell, which will store the origina euro value         
+                        block.textContent = convertPrice(prodData);
+                    } else {
+                        block.innerHTML = prodData;
+                    }
+                    prodRow.append(block);
+                });
 
-            for (let i = 0; i < 2; i++) {
-                const buttonBlock = document.createElement('td');
-                const button = document.createElement('button');
-                if (i == 0) {
-                    button.classList.add('prodEditButton', 'btn', 'btn-secondary');
-                    button.innerHTML = 'Edit';
-                    button.addEventListener('click', () => {
-                        productId.value = newProduct.getId();
-                        productIdDisplay.innerHTML = newProduct.getId();
-                        productName.value = newProduct.getName();
-                        productDescription.value = newProduct.getDescription();
-                        productPrice.value = newProduct.getPrice();
-                        productCreatedAt.value = newProduct.getCreated_at();
-                        productStock.value = newProduct.getStock();
-                        productImg.value = newProduct.getImg();
-                        productPremium.checked = newProduct.getPremium() == 1 ? true : false;
-                        productDiscountId.value = newProduct.getDiscount_id();
-                    })
-                } else {
-                    button.classList.add('prodRemoveButton', 'btn', 'btn-danger');
-                    button.innerHTML = 'Delete';
-                    button.addEventListener('click', () => {
-                        let idRemoved = newProduct.getId();
-                        fetch(currentApiURL+"?controller=Product&action=deleteProduct", {
-                            method: DELETE,
-                            body: JSON.stringify({
-                                id: idRemoved
-                            })
-                        }).then(setTimeout(showProducts(), 50));
-                    })
+                for (let i = 0; i < 2; i++) {
+                    const buttonBlock = document.createElement('td');
+                    const button = document.createElement('button');
+                    if (i == 0) {
+                        button.classList.add('prodEditButton', 'btn', 'btn-secondary');
+                        button.innerHTML = 'Edit';
+                        button.addEventListener('click', () => {
+                            productId.value = newProduct.getId();
+                            productIdDisplay.innerHTML = newProduct.getId();
+                            productName.value = newProduct.getName();
+                            productDescription.value = newProduct.getDescription();
+                            productPrice.value = newProduct.getPrice();
+                            productCreatedAt.value = newProduct.getCreated_at();
+                            productStock.value = newProduct.getStock();
+                            productImg.value = newProduct.getImg();
+                            productPremium.checked = newProduct.getPremium() == 1 ? true : false;
+                            productDiscountId.value = newProduct.getDiscount_id();
+                        })
+                    } else {
+                        button.classList.add('prodRemoveButton', 'btn', 'btn-danger');
+                        button.innerHTML = 'Delete';
+                        button.addEventListener('click', () => {
+                            let idRemoved = newProduct.getId();
+                            fetch(currentApiURL + "?controller=Product&action=deleteProduct", {
+                                method: DELETE,
+                                body: JSON.stringify({
+                                    id: idRemoved
+                                })
+                            }).then(setTimeout(showProducts(), 50));
+                        })
+                    }
+                    buttonBlock.append(button);
+                    prodRow.append(buttonBlock);
                 }
-                buttonBlock.append(button);
-                prodRow.append(buttonBlock);
-            }
-            tbody.append(prodRow);
+                tbody.append(prodRow);
+            })
         })
-    })
 }
 
 
@@ -88,7 +94,7 @@ productForm.addEventListener('submit', async f => {
 
     if (f.target[0].value.length != 0) {
         let idValue = f.target[0].value;
-        await fetch(currentApiURL+"?controller=Product&action=editProduct", {
+        await fetch(currentApiURL + "?controller=Product&action=editProduct", {
             method: PUT,
             body: JSON.stringify({
                 id: idValue,
@@ -99,12 +105,12 @@ productForm.addEventListener('submit', async f => {
                 stock: stockValue,
                 img: imgValue,
                 premium: premiumValue,
-                discount_id: discountIdValue != "" ? discountIdValue : null ,
+                discount_id: discountIdValue != "" ? discountIdValue : null,
                 deleted: 0
             })
         })
     } else {
-        await fetch(currentApiURL+"?controller=Product&action=saveProduct", {
+        await fetch(currentApiURL + "?controller=Product&action=saveProduct", {
             method: 'POST',
             body: JSON.stringify({
                 name: nameValue,
@@ -130,7 +136,7 @@ productForm.addEventListener('reset', f => {
 })
 
 class Product {
-    constructor(id, name, description, price, created_at, stock, img, premium, discount_id)  {
+    constructor(id, name, description, price, created_at, stock, img, premium, discount_id) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -142,31 +148,31 @@ class Product {
         this.discount_id = discount_id;
     }
 
-    getId() { 
-        return this.id; 
+    getId() {
+        return this.id;
     }
-    getName() { 
-        return this.name; 
+    getName() {
+        return this.name;
     }
-    getDescription() { 
-        return this.description; 
+    getDescription() {
+        return this.description;
     }
-    getPrice() { 
-        return this.price; 
+    getPrice() {
+        return this.price;
     }
-    getCreated_at() { 
-        return this.created_at; 
+    getCreated_at() {
+        return this.created_at;
     }
-    getStock() { 
-        return this.stock; 
+    getStock() {
+        return this.stock;
     }
-    getImg() { 
-        return this.img; 
+    getImg() {
+        return this.img;
     }
-    getPremium() { 
-        return this.premium; 
+    getPremium() {
+        return this.premium;
     }
-    getDiscount_id() { 
-        return this.discount_id; 
+    getDiscount_id() {
+        return this.discount_id;
     }
 }

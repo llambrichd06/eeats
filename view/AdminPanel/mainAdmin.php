@@ -41,6 +41,9 @@ if (!isset($_COOKIE['adminVerified'])) {
                 </ul>
             </div>
         </div>
+        <div class="d-flex w-100 justify-content-center align-items-center py-3" id="currencySelector">
+        <p class="m-0 pe-2">Currency selector</p>
+        </div>
     </nav>
 
     <!-------------- MAIN CONTENT ----------------->
@@ -100,6 +103,7 @@ if (!isset($_COOKIE['adminVerified'])) {
                     <option value="">Filter data by:</option>
                     <option value="user">User Id</option>
                     <option value="date">Delivery Date</option>
+                    <option value="no_date">No delivery date</option>
                     <option value="price">Higher than Price</option>
                 </select>
                 <input type="number" name="" id="" class="filterInput">
