@@ -24,7 +24,7 @@ $promoCode = $_SESSION['promoCode'] ?? null;
                 <div class="col-md-6 mb-5">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
-                        <label for="address">Address</label>
+                        <label for="address">Address *</label>
                     </div>
                 </div>
             <input type="hidden" name="subtotal" value="<?= $totalPrice ?>">
