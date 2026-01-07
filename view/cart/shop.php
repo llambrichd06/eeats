@@ -107,7 +107,7 @@
 
             <?php } ?>
             </div>
-            <b class="w-100 text-start ">Total: <?= $discountPercent != 0 ? "<s>$totalPrice</s> -> " . number_format(($totalPrice - ($totalPrice * ($discountPercent / 100))), 2) : number_format($totalPrice, 2) ?> €</b>
+            <b class="w-100 text-start mb-3">Total: <?= $discountPercent != 0 ? "<s>$totalPrice</s> -> " . number_format(($totalPrice - ($totalPrice * ($discountPercent / 100))), 2) : number_format($totalPrice, 2) ?> €</b>
             <form action="?controller=Cart&action=showCheckout" method="post" class="w-100">
                 <input type="hidden" name="totalPrice" value="<?= $totalPrice ?>">
                 <?php if ($discountPercent) { ?>
