@@ -1,5 +1,5 @@
 <section id="prodBanner" class="margin d-flex align-items-center justify-content-center flex-column"> 
-    <!--just set a background image or gif on it-->
+    
 </section>
 <div class="margin">
 <section class="container-fluid d-flex flex-column align-items-center text-center px-0" id="products"> 

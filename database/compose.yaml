@@ -1,9 +1,7 @@
-version: "3.9"
-
 services:
   mariadb:
     image: mariadb:10.4
-    container_name: mariadb-db
+    container_name: eeats-mariadb
     restart: unless-stopped
     ports:
       - "3320:3306"
@@ -15,3 +13,5 @@ services:
 
 volumes:
   db-data:
+    external: true
+

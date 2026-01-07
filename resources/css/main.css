@@ -282,6 +282,9 @@ button.btn-primary {
 /*PRODUCT PAGE*/
 #prodBanner {
     height: 10vw;
+    background-image: url('/resources/images/Product page banner.webp');
+    background-size: cover;
+
 }
 
 .cardProdHover {

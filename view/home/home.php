@@ -42,7 +42,7 @@
     <section class="container-fluid margin" id="premiumAd">
         <div class="py-5 d-flex flex-column gap-4">
             <div class="d-flex align-items-center gap-3">
-                <img src="/resources/images/EEPremium.png" alt="Electronic Eats pink logo">
+                <img src="/resources/images/EEPremium.svg" alt="Electronic Eats pink logo">
                 <h2>Premium</h2>
             </div>
             <div class="d-flex flex-column">
