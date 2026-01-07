@@ -113,7 +113,7 @@
                 <?php if ($discountPercent) { ?>
                     <input type="hidden" name="discountPercent" value="<?= $discountPercent ?>">
                 <?php } ?>
-                <button type="submit" class="btn btn-primary w-100 checkoutBtn">CHECKOUT</button>
+                <button type="submit" class="btn btn-primary w-100 checkoutBtn mb-3">CHECKOUT</button>
             </form>
             <?php } ?>
 
