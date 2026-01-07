@@ -11,12 +11,10 @@
     if (isset($_POST["logEmail"], $_POST["logPass"])) {
         $email = $_POST["logEmail"];
         $pass = $_POST["logPass"];
-        unset($_POST);
         $user = UserDAO::getUserByEmail($email);
         if ($user) {
-            if ($user->getPassword() == $pass) {
+            if (password_verify($pass, $user->getPassword())) {
                 $_SESSION["user"] = $user->toArray();
-                $_SESSION["user"]["password"] = "";
                 header("Location: $currentUrl?$homeGetParams");
                 exit;
             }

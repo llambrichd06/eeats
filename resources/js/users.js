@@ -28,6 +28,10 @@ async function showUsers() {
             Object.entries(newUser).forEach(([key, userData]) => { 
                 const block = document.createElement('td');
                 block.innerHTML = userData;
+                if (key === "password") {
+                    block.innerHTML = "Hidden";
+
+                }
                 userRow.append(block);
             });
 
@@ -43,7 +47,6 @@ async function showUsers() {
                         userName.value = newUser.getName();
                         userEmail.value = newUser.getEmail();
                         userProfile.value = newUser.getProfilePicture();
-                        userPassword.value = newUser.getPassword();
                         if (newUser.getRole() == 'user') userNormalRole.selected = true;
                         if (newUser.getRole() == 'admin') userAdminRole.selected = true;
                         userPremium.checked = newUser.getPremium() == 1 ? true : false;

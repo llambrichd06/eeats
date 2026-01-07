@@ -7,7 +7,7 @@
         unset($_POST);
         $user = UserDAO::getUserByEmail($email);
         if ($user) {
-            if ($user->getPassword() == $pass) {
+            if (password_verify($pass, $user->getPassword())) {
                 if ($user->getRole() == "admin") {
                     setcookie("adminVerified", true, time() + 600); //set a cookie to know that the admin is logged in for 5 minutes
                     $_SESSION['lastAdminLoginId'] = $user->getId(); //set a session variable to know the id of the last admin that logged in for the logs

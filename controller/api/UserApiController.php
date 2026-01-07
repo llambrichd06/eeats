@@ -25,7 +25,8 @@ class UserApiController {
         try {
             if (isset($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
             $user = new User();
-            $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium']);
+            $pass = password_hash($data['password'], PASSWORD_DEFAULT);
+            $user->setData($data['name'], $data['email'], $data['profile_picture'], $pass, $data['role'], $data['premium']);
             UserDAO::saveUser($user);
             echo json_encode([
                 'status' => 'Success',
@@ -49,7 +50,8 @@ class UserApiController {
         try {
             if (isset($data['id'], $data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'])) {
                 $user = new User();
-                $user->setData($data['name'], $data['email'], $data['profile_picture'], $data['password'], $data['role'], $data['premium'], $data['id']);
+                $pass = password_hash($data['password'], PASSWORD_DEFAULT);
+                $user->setData($data['name'], $data['email'], $data['profile_picture'], $pass, $data['role'], $data['premium'], $data['id']);
                 UserDAO::editUser($user);
                 echo json_encode([
                     'status' => 'Success',

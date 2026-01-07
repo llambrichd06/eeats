@@ -19,6 +19,7 @@
             $signUpResult = "The submitted email is already registered.";
         } else {
             $user = new User;
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
             $user->setData($name, $email, "Unset", $pass, 'user', 0);
             $return = UserDAO::saveUser($user);
             header("Location: $currentUrl?$loginGetParams");

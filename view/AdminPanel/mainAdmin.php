@@ -82,6 +82,7 @@ if (!isset($_COOKIE['adminVerified'])) {
                 <input type="text" name="" id="userPFP">
                 <br>
                 <label for="userPass">Password</label><br>
+                <p>Saved passwords will be encrypted when stored</p>
                 <input type="password" name="" id="userPass" required>
                 <br>
                 <label for="userRole">Role</label><br>
