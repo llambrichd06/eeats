@@ -27,7 +27,7 @@ if ($userLoggedIn && !isset($_SESSION['cart'])) {
 
                 <!-- Logo  -->
                 <a class="navbar-brand" href="?controller=Home&action=index">
-                    <img src="../resources/images/EENameLogo.png" alt="Logo and name of website, Electronic Eats" class="img-fluid logo">
+                    <img src="../resources/images/EELogoText.svg" alt="Logo and name of website, Electronic Eats" class="img-fluid logo">
                 </a>
 
                 <!-- Burger menu -->
