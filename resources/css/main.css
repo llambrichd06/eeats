@@ -325,6 +325,10 @@ button.btn-primary {
     font-size: calc(0.6vw + 0.4em);
 }
 
+.totalFontSize {
+    font-size: 2rem;
+}
+
 .checkoutBtn {
     padding: 0.3rem 1.5rem;
     font-size: calc(1vw + 0.5em);

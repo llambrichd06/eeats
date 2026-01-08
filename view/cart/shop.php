@@ -44,8 +44,15 @@
             </div>
 
             <?php foreach ($_SESSION['cart'] as $key =>$item) { 
-                $product = ProductDAO::getProductById($item['product_id']); 
-                $price = $product->getPrice()*$item['quantity'];
+                $product = ProductDAO::getProductById($item['product_id']);
+                $prodPrice = $product->getPrice();
+                $prodDiscPercent = ""; 
+                if ($product->getDiscountId()) {
+                    $prodDiscount = DiscountDAO::getDiscountById($product->getDiscountId());
+                    $prodDiscPercent = $prodDiscount->getPercent();
+                    $prodPrice = number_format(($prodPrice - ($prodPrice * ($prodDiscPercent / 100))), 2);
+                }
+                $price = $prodPrice*$item['quantity'];
                 $totalPrice += $price; ?>
 
             <div class="row w-100 align-items-center ">
@@ -63,10 +70,18 @@
 
                 <div class="col-4 shopDottedLine border-black px-0"></div>
 
-                <div class="col-2 d-flex justify-content-center gap-4 align-items-center">
-                    <b><?= $price ?> €</b>
+                <div class="col-2 d-flex justify-content-between align-items-center">
+                    <div class="text-start">
+                        <b><?= $price ?> €</b>
+                        <?php if ($prodDiscPercent !== "") { ?>
+                            <div class="small text-muted">-<?= $prodDiscPercent ?>%</div>
+                        <?php } ?>
+                    </div>
+                    
                     <form action="" method="post">
-                        <button type="submit" name="deletePos<?=$key?>" class="border-0 noBg"><img src="/resources/images/deleteIcon.svg" alt="Trash Bin Icon"></button>
+                        <button type="submit" name="deletePos<?=$key?>" class="border-0 noBg">
+                            <img src="/resources/images/deleteIcon.svg" alt="Trash Bin Icon">
+                        </button>
                     </form>
                 </div>
 
@@ -107,7 +122,7 @@
 
             <?php } ?>
             </div>
-            <b class="w-100 text-start mb-3">Total: <?= $discountPercent != 0 ? "<s>$totalPrice</s> -> " . number_format(($totalPrice - ($totalPrice * ($discountPercent / 100))), 2) : number_format($totalPrice, 2) ?> €</b>
+            <b class="w-100 text-start mb-3 totalFontSize">Total: <?= $discountPercent != 0 ? "<s>$totalPrice</s> -> " . number_format(($totalPrice - ($totalPrice * ($discountPercent / 100))), 2) : number_format($totalPrice, 2) ?> €</b>
             <form action="?controller=Cart&action=showCheckout" method="post" class="w-100">
                 <input type="hidden" name="totalPrice" value="<?= $totalPrice ?>">
                 <?php if ($discountPercent) { ?>

@@ -1,10 +1,17 @@
 <?php
 include_once 'view/authenticator.php';
 
+$price = $product->getPrice();
+$discountedPrice = "";
+$discountPercent = "";
+if ($discount) {
+    $discountPercent = $discount->getPercent();
+    $discountedPrice = number_format(($price - ($price * ($discountPercent / 100))), 2);
+}
 if (isset($_POST['addedProdId'], $_POST['quantity'])) {
     $prodId = $_POST['addedProdId'];
     $quantity = $_POST['quantity'];
-    $cartProduct = [ //NEED TO ADD INGREDIENTS HERE LATER ON
+    $cartProduct = [ 
         'product_id' => $prodId,
         'quantity' => $quantity,
         /*'ingredients' => [
@@ -16,6 +23,8 @@ if (isset($_POST['addedProdId'], $_POST['quantity'])) {
     unset($_POST);
 
 }
+
+
 ?>
 
 <section class="d-flex flex-column align-items-center margin pt-3 greyBg">
@@ -34,7 +43,7 @@ if (isset($_POST['addedProdId'], $_POST['quantity'])) {
                     <input class="form-control" type="number" name="quantity" id="quantity" min="1" max="99" value="1" required>
                     <label for="quantity">Quantity:</label>
                 </div>
-                <h2>Price:  <?= $product->getPrice() ?? 0?> €</h2>
+                <h2>Price:  <?= $discountedPrice == "" ? "$price €" : "<s>$price</s> -> "."$discountedPrice € (-$discountPercent %)" ?></h2>
                 <button type="submit" class="btn btn-primary">Add to cart</button>
             </form>
         </div>

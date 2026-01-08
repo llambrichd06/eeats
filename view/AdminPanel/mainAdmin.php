@@ -350,6 +350,7 @@ if (!isset($_COOKIE['adminVerified'])) {
                 <th>Product Id</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Discount Id</th>
                 <th>Edit</th>
             </thead>
             <tbody id="orderLinesTableBody">
@@ -384,6 +385,9 @@ if (!isset($_COOKIE['adminVerified'])) {
 
             <label for="orderLineQuantity">Quantity</label><br>
             <input type="number" id="orderLineQuantity" min="1" required>
+            <br>
+            <label for="orderLineDiscountId">Discount id</label><br>
+            <input type="number" id="orderLineDiscountId" min="1" >
             <br>
             <label for="orderLineIsEditing">Edit existing line?</label>
             <input type="checkbox" id="orderLineIsEditing">

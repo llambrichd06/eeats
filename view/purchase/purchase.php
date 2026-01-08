@@ -22,6 +22,7 @@
     echo '<br>';
     $orderId = OrderDAO::saveOrder($order);
     $orderLineId = 0;
+    
     foreach ($_SESSION['cart'] as $key => $item) {
         $product = ProductDAO::getProductById($item['product_id']);
         $orderLine = new OrderLines;
@@ -31,6 +32,7 @@
             $product->getId(),
             $product->getPrice(),
             $item['quantity'],
+            $product->getDiscountId() ? $product->getDiscountId() : null,
             $orderLineId != 0 ? $orderLineId : null
         );
         $orderLineId = OrderLinesDAO::saveOrderLines($orderLine);

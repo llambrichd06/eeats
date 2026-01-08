@@ -8,6 +8,7 @@ class OrderLines
     private $product_id;
     private $price;
     private $quantity;
+    private $discount_id;
 
     public function setData(
         $line_num = null,
@@ -15,6 +16,7 @@ class OrderLines
         $product_id = null,
         $price = null,
         $quantity = null,
+        $discount_id = null,
         $id = null
     ) {
         $this->line_num = $line_num;
@@ -22,6 +24,7 @@ class OrderLines
         $this->product_id = $product_id;
         $this->price = $price;
         $this->quantity = $quantity;
+        $this->discount_id = $discount_id;
         $this->id = $id;
     }
 
@@ -81,5 +84,17 @@ class OrderLines
     
     public function toArray() {
         return get_object_vars($this);
+    }
+
+    public function getDiscountId()
+    {
+        return $this->discount_id;
+    }
+
+    public function setDiscountId($discount_id)
+    {
+        $this->discount_id = $discount_id;
+
+        return $this;
     }
 }

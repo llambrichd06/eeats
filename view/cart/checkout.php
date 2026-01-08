@@ -39,7 +39,14 @@ $promoCode = $_SESSION['promoCode'] ?? null;
         <div class="greyBg px-3 checkoutProdsWidth mb-3">
             <?php foreach ($_SESSION['cart'] as $key => $value) {
                 $product = ProductDAO::getProductById($value['product_id']);
-                $price = $product->getPrice() * $value['quantity']; ?>
+                $prodPrice = $product->getPrice();
+                $prodDiscPercent = ""; 
+                if ($product->getDiscountId()) {
+                    $prodDiscount = DiscountDAO::getDiscountById($product->getDiscountId());
+                    $prodDiscPercent = $prodDiscount->getPercent();
+                    $prodPrice = number_format(($prodPrice - ($prodPrice * ($prodDiscPercent / 100))), 2);
+                }
+                $price = $prodPrice * $value['quantity']; ?>
                 <div class="d-flex justify-content-between py-3">
                     <b><?= $product->getName() ?></b>
                     <b><?= number_format($price, 2) ?> €</b>

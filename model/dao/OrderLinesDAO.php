@@ -36,7 +36,6 @@ class OrderLinesDAO implements DAO {
         $stmt->bind_param($types, ...$valuesArray); //three dots mean that we just put the array values like this: 'val1, val2, val3...', only when the values dont have actual keys
         $stmt->execute();
         $results = $stmt->get_result();
-        echo json_encode($valuesArray);
         $con->close();
         return $results;
     }
@@ -89,11 +88,11 @@ class OrderLinesDAO implements DAO {
         return $orderLineList;
     }
     public static function saveOrderLines(OrderLines $orderLines) {
-        $insertedId = OrderLinesDAO::insertObject($orderLines->toArray(), 'iiiiii');
+        $insertedId = OrderLinesDAO::insertObject($orderLines->toArray(), 'iiiiiii');
         return $insertedId;
     }
     public static function editOrderLines(OrderLines $orderLines) {
-        $result = OrderLinesDAO::UpdateObject($orderLines->toArray(), 'iiiiii');
+        $result = OrderLinesDAO::UpdateObject($orderLines->toArray(), 'iiiiiii');
     }
 }
     

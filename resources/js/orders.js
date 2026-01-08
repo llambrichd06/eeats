@@ -402,6 +402,7 @@ const orderLineOrderIdDisplay = document.getElementById('orderLineOrderIdDisplay
 const orderLineProductId = document.getElementById('orderLineProductId');
 const orderLinePrice = document.getElementById('orderLinePrice');
 const orderLineQuantity = document.getElementById('orderLineQuantity');
+const orderLineDiscountId = document.getElementById('orderLineDiscountId');
 const orderLineIsEditing = document.getElementById('orderLineIsEditing');
 
 let orderIdForLines = null;
@@ -428,7 +429,8 @@ async function showOrderLines(orderId) {
                     line.order_id,
                     line.product_id,
                     line.price,
-                    line.quantity
+                    line.quantity,
+                    line.discount_id
                 );
                 orderLineId.value = newLine.getId(); //set the order id in the input of the form
                 orderLineIdDisplay.innerHTML = newLine.getId(); //set the order id in the input of the form
@@ -462,6 +464,7 @@ async function showOrderLines(orderId) {
                     orderLineProductId.value = newLine.getProductId();
                     orderLinePrice.value = newLine.getPrice();
                     orderLineQuantity.value = newLine.getQuantity();
+                    orderLineDiscountId.value = newLine.getDiscountId();
                 });
 
                 editTd.append(editBtn);
@@ -472,7 +475,6 @@ async function showOrderLines(orderId) {
         });
 }
 
-/* FORM SUBMIT (CREATE / EDIT) */
 orderLinesForm.addEventListener('submit', async e => {
     e.preventDefault();
 
@@ -485,9 +487,9 @@ orderLinesForm.addEventListener('submit', async e => {
     const productIdValue = orderLineProductId.value;
     const priceValue = orderLinePrice.value;
     const quantityValue = orderLineQuantity.value;
+    const discountIdValue = orderLineDiscountId.value;
 
     if (orderLineIsEditing.checked) {
-        // EDIT
         await fetch(currentApiURL + "?controller=OrderLines&action=editOrderLine", {
             method: PUT,
             body: JSON.stringify({
@@ -496,11 +498,11 @@ orderLinesForm.addEventListener('submit', async e => {
                 order_id: orderIdValue,
                 product_id: productIdValue,
                 price: priceValue,
-                quantity: quantityValue
+                quantity: quantityValue,
+                discount_id: discountIdValue
             })
         });
     } else {
-        // CREATE
         await fetch(currentApiURL + "?controller=OrderLines&action=saveOrderLine", {
             method: 'POST',
             body: JSON.stringify({
@@ -509,7 +511,8 @@ orderLinesForm.addEventListener('submit', async e => {
                 order_id: orderIdValue,
                 product_id: productIdValue,
                 price: priceValue,
-                quantity: quantityValue
+                quantity: quantityValue,
+                discount_id: discountIdValue
             })
         });
     }
@@ -526,13 +529,14 @@ orderLinesForm.addEventListener('reset', (e) => {
 
 /* ORDER LINE CLASS */
 class OrderLine {
-    constructor(id, line_num, order_id, product_id, price, quantity) {
+    constructor(id, line_num, order_id, product_id, price, quantity, discount_id) {
         this.id = id;
         this.line_num = line_num;
         this.order_id = order_id;
         this.product_id = product_id;
         this.price = price;
         this.quantity = quantity;
+        this.discount_id = discount_id;
     }
 
     getId() { return this.id; }
@@ -541,5 +545,6 @@ class OrderLine {
     getProductId() { return this.product_id; }
     getPrice() { return this.price; }
     getQuantity() { return this.quantity; }
+    getDiscountId() { return this.discount_id; }
 }
 
