@@ -26,7 +26,7 @@ class OrderApiController
 
     public function saveOrder($data)
     {
-        if (isset($data['user_id'], $data['subtotal'], $data['total'], $data['delivery_type'],  $data['address'], $data['delivery_date'], $data['deleted'])) {
+        if (isset($data['user_id'], $data['subtotal'], $data['total'], $data['delivery_type'],  $data['address'], $data['deleted'])) {
 
             try {
                 $order = new Order();
@@ -51,7 +51,7 @@ class OrderApiController
 
     public function editOrder($data)
     {
-        if (isset($data['id'], $data['user_id'], $data['subtotal'], $data['total'], $data['delivery_type'], $data['address'], $data['delivery_date'], $data['created_at'], $data['deleted'])) {
+        if (isset($data['id'], $data['user_id'], $data['subtotal'], $data['total'], $data['address'], $data['delivery_date'], $data['created_at'], $data['deleted'])) {
             try {
                 $order = new Order();
                 $order->setData($data['user_id'], $data['subtotal'], $data['total'], $data['delivery_type'], $data['address'], $data['delivery_date'], $data['discount_id'], $data['discount_applied'], $data['created_at'], $data['deleted'], $data['id']);

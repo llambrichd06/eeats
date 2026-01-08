@@ -54,7 +54,7 @@ if ($userLoggedIn && !isset($_SESSION['cart'])) {
                         </li>
                     </ul>
 
-                    <!-- user icons -->
+                    <!-- user and cart icons -->
                     <div class="navbar-nav gap-3 text-center d-flex">
                         <a class="nav-link" href="<?= $userLoggedIn ? '?controller=User&action=showUserPage' : '?controller=Session&action=showLogin' ?>">
                             <img src="../resources/images/profileicon.svg" alt="Profile Icon" class="img-fluid icons">
@@ -80,11 +80,11 @@ if ($userLoggedIn && !isset($_SESSION['cart'])) {
     <footer class="container-fluid footerPad">
         <!-- TOP FOOTER -->
         <div class="margin">
-            <div class="row align-items-center">
+            <div class="row align-items-center align-items-md-start">
                 <!-- Navigation -->
                 <div class="col-12 col-md-6 footer-nav">
                     <nav>
-                        <ul class="d-flex flex-row align-items-center align-items-md-start gap-3 gap-md-4">
+                        <ul class="d-flex flex-row align-items-center gap-3 gap-md-4">
                             <li><a href="?controller=Home&action=index" class="footer-nav">Home</a></li>
                             <li><a href="?controller=Product&action=showProductPage" class="footer-nav">Foods</a></li>
                             <li><a href="?controller=Cart&action=showShop" class="footer-nav">Cart</a></li>

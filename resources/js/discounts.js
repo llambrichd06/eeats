@@ -15,6 +15,7 @@ showDiscounts();
 
 // MAIN FUNCTION TO FETCH AND SHOW DISCOUNTS
 async function showDiscounts() {
+    discountForm.reset();
     fetch(currentApiURL + "?controller=Discount&action=getDiscounts", { method: 'GET' })
         .then(r => r.json())
         .then(r => {

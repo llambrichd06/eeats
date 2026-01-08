@@ -95,6 +95,7 @@ restoreOrderFilters();
 
 //MAIN FUNCTION TO FETCH AND SHOW ORDERS
 async function showOrders(filter = null, sort = null, sortingOrder = null) {
+    orderForm.reset();
     fetch(currentApiURL + "?controller=Order&action=getOrders", {
         method: 'GET'
     })
@@ -239,7 +240,7 @@ async function showOrders(filter = null, sort = null, sortingOrder = null) {
                             fetch(currentApiURL + "?controller=Order&action=deleteOrder", {
                                 method: DELETE,
                                 body: JSON.stringify({ id: idRemoved })
-                            }).then(setTimeout(showOrders(), 50));
+                            }).then(setTimeout(showOrders, 50));
                         });
                     }
 
@@ -306,7 +307,7 @@ orderForm.addEventListener('submit', async f => {
         });
     }
 
-    await showOrders();
+    await restoreOrderFilters();
     button.disabled = false;
 });
 

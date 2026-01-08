@@ -15,6 +15,7 @@ showUsers();
 //MAIN FUNCTION TO FETCH AND SHOW USERS
 
 async function showUsers() {
+    userForm.reset();
     fetch(currentApiURL+"?controller=User&action=getUsers", {
         method: 'GET'
     }).then(r => r.json())
@@ -61,7 +62,7 @@ async function showUsers() {
                             body: JSON.stringify({
                                 id: idRemoved
                             })
-                        }).then(setTimeout(showUsers(), 50));
+                        }).then(setTimeout(showUsers, 50));
                     })
                 }
                 buttonBlock.append(button);

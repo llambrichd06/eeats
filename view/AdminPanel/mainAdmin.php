@@ -169,7 +169,7 @@ if (!isset($_COOKIE['adminVerified'])) {
                 <input type="number" name="" id="orderSubtotal" required>
                 <br>
                 <label for="orderTotal">Total</label><br>
-                <input type="number" name="" id="orderTotal">
+                <input type="number" name="" id="orderTotal" required>
                 <br>
                 <label for="orderDeliveryDate">Delivery Date</label><br>
                 <input type="datetime-local" name="" id="orderDeliveryDate" required>

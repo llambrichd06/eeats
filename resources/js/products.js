@@ -15,6 +15,7 @@ showProducts();
 
 //MAIN FUNCTION TO FETCH AND SHOW PRODUCTS
 async function showProducts() {
+    productForm.reset();
     fetch(currentApiURL + "?controller=Product&action=getProducts", {
         method: 'GET'
     }).then(r => r.json())
@@ -65,7 +66,7 @@ async function showProducts() {
                                 body: JSON.stringify({
                                     id: idRemoved
                                 })
-                            }).then(setTimeout(showProducts(), 50));
+                            }).then(setTimeout(showProducts, 50));
                         })
                     }
                     buttonBlock.append(button);
