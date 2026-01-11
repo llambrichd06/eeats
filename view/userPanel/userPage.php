@@ -1,13 +1,3 @@
-<?php
-    include_once 'view/authenticator.php';
-    $user = $_SESSION['user'];
-    if (isset($_POST['logout'])) {
-        session_unset();
-        session_destroy();
-        header("Location: $currentUrl?$loginGetParams");
-    }
-?>
-
 <section class="margin my-5">
     <h1 class="mb-4">Welcome back, <?= htmlspecialchars($user['name']) ?> 👋</h1>
 

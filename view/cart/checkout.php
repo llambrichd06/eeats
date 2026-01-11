@@ -1,13 +1,3 @@
-<?php
-include_once 'view/authenticator.php';
-
-$totalPrice = $_POST['totalPrice'];
-$discountPercent = $_POST['discountPercent'] ?? null;
-if (isset($discountPercent)) {
-    $discountedPrice = number_format(($totalPrice - ($totalPrice * $discountPercent / 100)), 2);
-}
-$promoCode = $_SESSION['promoCode'] ?? null;
-?>
 <section class="margin">
     <div class="d-flex align-items-center">
         <a href="?controller=Cart&action=showShop">Shop</a>

@@ -1,30 +1,3 @@
-<?php
-    include_once 'view/authenticator.php';
-    foreach ($_SESSION['cart'] as $key => $value) {
-        if (isset($_POST['deletePos'.$key])) {
-            unset($_SESSION['cart'][$key]);
-            $_SESSION['cart'] = array_values($_SESSION['cart']);
-            unset($_POST['deletePos'.$key]);
-        }
-    }
-    if (isset($_POST['unApplyCode'])) {
-        unset($_POST['promoCode']);
-        unset($_SESSION['promoCode']);
-    }
-    $totalPrice = 0;
-    $discountPercent = 0;
-    if (isset($_POST['promoCode']) || isset($_SESSION['promoCode'])) {
-        $discount = DiscountDAO::getDiscountByCode($_POST['promoCode'] ?? $_SESSION['promoCode']);
-        if ($discount) {
-            $discountPercent = $discount->getPercent();
-            $_SESSION['promoCode'] = $_POST['promoCode'] ?? $_SESSION['promoCode'];
-            $_POST['promoCode'] = $_SESSION['promoCode'] ?? $_POST['promoCode'];
-        } else {
-            $_POST['promoCode'] = 'notFound';
-        }
-            
-    }
-?>
 <section class="margin">
     <h1>Shop</h1>
     <div class="d-flex flex-column align-items-center greyBg mb-3 px-3">

@@ -1,27 +1,3 @@
-<?php
-    $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
-    $homeGetParams = http_build_query([ //turn an object into get parameters, in this case this returns "controller=Home&action=index"
-        'controller' => 'Home',
-        'action' => 'index'
-    ]);
-    if ($userLoggedIn) {
-        header("Location: $currentUrl?$homeGetParams");
-    }
-    $loginResult = "";
-    if (isset($_POST["logEmail"], $_POST["logPass"])) {
-        $email = $_POST["logEmail"];
-        $pass = $_POST["logPass"];
-        $user = UserDAO::getUserByEmail($email);
-        if ($user) {
-            if (password_verify($pass, $user->getPassword())) {
-                $_SESSION["user"] = $user->toArray();
-                header("Location: $currentUrl?$homeGetParams");
-                exit;
-            }
-        }
-        $loginResult = "The submitted email or password is incorrect.";
-    }
-?>
 <div class="d-flex flex-column align-items-center gap-5 justify-content-center">
     <h1>User Login</h1>
 

@@ -1,32 +1,3 @@
-<?php
-    $currentUrl = $_SERVER['PHP_SELF']; //grab the current url we are in, without get parameters
-    $loginGetParams = http_build_query([ //turn an object into get parameters, in this case this returns "controller=Session&action=showLogin"
-        'controller' => 'Session',
-        'action' => 'showLogin'
-    ]);
-    if ($userLoggedIn) {
-        header("Location: $currentUrl?$loginGetParams");
-    }
-    $signUpResult = "";
-    if (isset($_POST["signEmail"], $_POST["signPass"], $_POST["signName"])) {
-        $email = $_POST["signEmail"];
-        $pass = $_POST["signPass"];
-        $name = $_POST["signName"];
-        
-        unset($_POST);
-        $userExist = UserDAO::getUserByEmail($email);
-        if ($userExist) {
-            $signUpResult = "The submitted email is already registered.";
-        } else {
-            $user = new User;
-            $pass = password_hash($pass, PASSWORD_DEFAULT);
-            $user->setData($name, $email, "Unset", $pass, 'user', 0);
-            $return = UserDAO::saveUser($user);
-            header("Location: $currentUrl?$loginGetParams");
-
-        }
-    }
-?>
 <div class="d-flex flex-column align-items-center gap-5 justify-content-center">
     <h1>User Sign Up</h1>
 
